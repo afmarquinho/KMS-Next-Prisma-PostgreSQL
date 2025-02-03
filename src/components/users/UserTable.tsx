@@ -1,4 +1,5 @@
 "use client";
+
 import { useUserStore } from "@/store/userStore";
 import { FilePenLine, Search } from "lucide-react";
 
@@ -7,7 +8,6 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { UserModal } from "./UserModal";
 
-
 // import { userStore } from "../../utils/userStore";
 // import { EditUserModal } from "./EditUserModal";
 // import { UserType } from "@/src/types";
@@ -15,6 +15,7 @@ import { UserModal } from "./UserModal";
 export const UsersTable = () => {
   const { users, userModalOpen, setUser, toggleUsersModal, cleanUser } =
     useUserStore();
+
   const router = useRouter();
   //   const { users, editUserModalOpen, setEditUserModal, setUser, cleanUser } =
   //     userStore();
@@ -48,12 +49,12 @@ export const UsersTable = () => {
 
   return (
     <>
-      <div className="overflow-auto my-5 bg-white p-5 dark:bg-slate-900">
+      <div className="overflow-auto my-5 bg-white p-5 dark:bg-slate-900 rounded">
         <table
-          className={`w-full rounded-lg border-collapse text-left overflow-hidden shadow-md`}
+          className={`w-full rounded border-collapse text-left overflow-hidden shadow-md`}
         >
           <thead
-            className={`bg-indigo-900 dark:bg-indigo-900 text-slate-200 border-b-8 border-b-blue-600 dark:border-b-blue-800`}
+            className={`bg-indigo-900 text-slate-200 border-b-8 border-b-blue-600 dark:border-b-blue-800`}
           >
             <tr>
               <th className={`py-3 px-2`}>Item</th>
@@ -69,7 +70,7 @@ export const UsersTable = () => {
             {users.map((user, i) => (
               <tr
                 key={user.User_code}
-                className={` dark:border-slate-600 hover:bg-gray-300 dark:hover:bg-yellow-900 py-5 ${
+                className={`dark:border-slate-600 hover:bg-gray-300 dark:hover:bg-teal-900 py-5 ${
                   i % 2 === 0 && "bg-slate-100 dark:bg-slate-800"
                 }`}
               >
@@ -97,7 +98,7 @@ export const UsersTable = () => {
                 <td className={`py-2 px-1`}>
                   {/* //*Watch button */}
                   <button
-                    className={`bg-gradient-to-b from-green-600 to-green-700 w-8 h-full flex justify-center items-center shadow-lg`}
+                    className={`bg-gradient-to-b from-rose-500 to-rose-700 hover:from-red-800 hover:to-red-800 transition-colors duration-300 ease-linear rounded-full w-8 h-6 p-1 flex justify-center items-center shadow`}
                     onClick={() => handleViewUser(user)}
                   >
                     <Search className={`text-white w-5`} />
@@ -106,7 +107,7 @@ export const UsersTable = () => {
                 <td className={`py-2 px-1`}>
                   {/* //*Edit button */}
                   <button
-                    className={`bg-gradient-to-b from-indigo-600 to-indigo-700 w-8 h-full flex justify-center items-center shadow-md rounded-sm ${
+                    className={`bg-gradient-to-b from-indigo-500 to-indigo-700 hover:from-blue-800 hover:to-blue-800 transition-colors duration-300 ease-linear w-8 h-6 p-1 flex justify-center items-center shadow-md rounded ${
                       !user.User_active && "hidden"
                     }`}
                     onClick={() => handleEdit(user)}
