@@ -17,6 +17,5 @@ export * from './users/UserContainer';
 export * from './users/UserDetails';
 export * from './users/UserForm';
 export * from './users/UserListButton';
-export * from './users/UserModal';
 export * from './users/UserTable';
 export * from './users/UserViewManager';

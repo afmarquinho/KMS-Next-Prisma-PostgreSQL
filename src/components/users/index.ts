@@ -6,6 +6,5 @@ export * from './UserContainer';
 export * from './UserDetails';
 export * from './UserForm';
 export * from './UserListButton';
-export * from './UserModal';
 export * from './UserTable';
 export * from './UserViewManager';

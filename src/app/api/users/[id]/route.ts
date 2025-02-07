@@ -1,12 +1,22 @@
 import { prisma } from "@/lib/db";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function PUT(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
+export async function PUT(req: NextRequest) {
   try {
-    const userId = parseInt(params.id, 10);
+    // const id = req.url.split("/").pop() Extracción directa de la url, tambien es posible.
+   
+    const url = new URL(req.url);
+    const id = url.pathname.split("/").pop();
+
+   if (!id) {
+      return NextResponse.json(
+        { ok: false, data: null, message: "ID no proporcionado." },
+        { status: 400 }
+      );
+    }
+
+    const userId = parseInt(id, 10);
+
     if (isNaN(userId)) {
       return NextResponse.json(
         { ok: false, data: null, message: "ID inválido." },
