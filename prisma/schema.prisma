@@ -60,7 +60,7 @@ model User {
   User_surname          String
   User_email            String      @unique
   User_password         String
-  User_phoneNumber      String
+  User_phoneNumber      String      @unique
   User_address          String
   User_active           Boolean     @default(true)
   User_registrationDate DateTime    @default(now())
@@ -74,6 +74,8 @@ model User {
   PurchaseNote     PurchaseNote[]
   ProvisionRequest ProvisionRequest[]
   StockMovement    StockMovement[]
+
+  @@index([User_email, User_phoneNumber, User_dni])
 }
 
 model Customer {

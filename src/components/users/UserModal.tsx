@@ -4,7 +4,7 @@ import { useUserStore } from "@/store/userStore";
 import { UserForm } from "./UserForm";
 
 export const UserModal = () => {
-  const { toggleUsersModal, cleanUser } = useUserStore();
+  const { toggleUsersModal, clearUser: cleanUser } = useUserStore();
 
   const handleUser = () => {
     toggleUsersModal();

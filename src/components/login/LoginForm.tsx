@@ -13,18 +13,18 @@ export const LoginForm = () => {
 
   return (
     <form
-    className={`bg-gray-500 px-6 pb-6 pt-16 w-11/12 max-w-[350px]`}
+    className={`bg-gray-400 px-6 pb-6 pt-16 w-11/12 max-w-[350px] rounded`}
     onSubmit={handleSubmit}
   >
-    <h2 className={`text-center text-white font-light text-xl mb-2`}>
+    <h2 className={`text-center text-black text-xl mb-2`}>
       Mi cuenta
     </h2>
-    <div className={`text-base p-6 bg-blue-300 rounded-md`}>
+    <div className={`text-base p-6 bg-slate-700 rounded-md`}>
       <h3 className={`text-red-600 font-bold text-center`}>Login</h3>
       <div className={`mb-4`}>
         <div className={`flex gap-1 justify-start items-center mb-2`}>
           <AtSignIcon className={`text-red-600`} />
-          <label className={`text-slate-800 dark:text-slate-800`}>
+          <label className={`text-slate-300 dark:text-slate-800`}>
             Correo
           </label>
         </div>
@@ -36,7 +36,7 @@ export const LoginForm = () => {
       <div className={`mb-5`}>
         <div className={`flex gap-1 justify-start items-center mb-2`}>
           <KeyRoundIcon className={`text-red-600`} />
-          <label className={`text-slate-800 dark:text-slate-800`}>
+          <label className={`text-slate-300 dark:text-slate-800`}>
             Contraseña
           </label>
         </div>

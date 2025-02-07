@@ -1,54 +1,57 @@
 "use client";
 
 import { useUserStore } from "@/store/userStore";
-import { FilePenLine, Search } from "lucide-react";
+import { FilePenLineIcon, SearchIcon } from "lucide-react";
 
 import { User } from "@prisma/client";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { UserModal } from "./UserModal";
+// import { useEffect } from "react";
+// import { UserModal } from "./UserModal";
+import { GetUsersButton } from "./GetUsersButton";
 
 // import { userStore } from "../../utils/userStore";
 // import { EditUserModal } from "./EditUserModal";
 // import { UserType } from "@/src/types";
 
 export const UsersTable = () => {
-  const { users, userModalOpen, setUser, toggleUsersModal, cleanUser } =
-    useUserStore();
+  const { users, setUser, setUserDetails, toggleCurrentView } = useUserStore();
 
-  const router = useRouter();
+ 
   //   const { users, editUserModalOpen, setEditUserModal, setUser, cleanUser } =
   //     userStore();
 
   const handleEdit = (user: User) => {
     setUser(user);
-    toggleUsersModal();
+    toggleCurrentView("form");
   };
 
   const handleViewUser = (user: User) => {
-    setUser(user);
-    router.push(
-      `/users/user-details/${user.User_name}-${user.User_code}-${user.User_surname}`
-    );
+    setUserDetails(user);
+    // router.push(
+    //   `/users/user-details/${user.User_name}-${user.User_code}-${user.User_surname}`
+    // );
   };
 
-  useEffect(() => {
-    cleanUser();
-  }, [cleanUser]);
+  // useEffect(() => {
+  //   clearUser();
+  // }, [clearUser]);
 
   if (!users || users.length === 0) {
+    const message = !users
+      ? 'No hay Usuarios para visualizar, presiona el botón "Mostrar Usuarios".'
+      : "No hay usuarios en la base de datos.";
+
     return (
       <>
-        <div className={`italic font-medium text-base`}>
-          No hay Usuarios para vizualizar
-        </div>
-        {userModalOpen && <UserModal />}
+        <GetUsersButton />
+        <div className="italic font-medium text-base">{message}</div>
+        {/* {userModalOpen && <UserModal />} */}
       </>
     );
   }
 
   return (
     <>
+      <GetUsersButton />
       <div className="overflow-auto my-5 bg-white p-5 dark:bg-slate-900 rounded">
         <table
           className={`w-full rounded border-collapse text-left overflow-hidden shadow-md`}
@@ -101,7 +104,7 @@ export const UsersTable = () => {
                     className={`bg-gradient-to-b from-rose-500 to-rose-700 hover:from-red-800 hover:to-red-800 transition-colors duration-300 ease-linear rounded-full w-8 h-6 p-1 flex justify-center items-center shadow`}
                     onClick={() => handleViewUser(user)}
                   >
-                    <Search className={`text-white w-5`} />
+                    <SearchIcon className={`text-white w-5`} />
                   </button>
                 </td>
                 <td className={`py-2 px-1`}>
@@ -112,7 +115,7 @@ export const UsersTable = () => {
                     }`}
                     onClick={() => handleEdit(user)}
                   >
-                    <FilePenLine className={`text-white w-5`} />
+                    <FilePenLineIcon className={`text-white w-5`} />
                   </button>
                 </td>
               </tr>
@@ -120,7 +123,7 @@ export const UsersTable = () => {
           </tbody>
         </table>
       </div>
-      {userModalOpen && <UserModal />}
+      {/* {userModalOpen && <UserModal />} */}
     </>
   );
 };

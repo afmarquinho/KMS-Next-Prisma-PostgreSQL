@@ -66,6 +66,8 @@ async function main() {
 
     // 2.9 Insertar movimientos de inventario (dependen de lotes de inventario, productos y usuarios)
     await prisma.stockMovement.createMany({ data: StockMovement });
+
+    
   } catch (error) {
     console.error("Error during seeding:", error);
   } 

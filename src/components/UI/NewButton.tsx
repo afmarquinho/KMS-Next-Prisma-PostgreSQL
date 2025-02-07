@@ -51,7 +51,7 @@ export const NewButton = ({ name, module }: Props) => {
 
   return (
     <button
-      className={`bg-white hover:bg-indigo-900 dark:bg-transparent hover:dark:bg-slate-900 border-white dark:border-slate-300 hover:text-slate-200 backdrop:w-36 md:w-40 md:px-0 h-10 flex justify-center items-center gap-1 text-xs shadow-md p-2 border-2 transition-all duration-300 rounded`}
+      className={`bg-white hover:bg-indigo-900 dark:bg-transparent hover:dark:bg-slate-900 border-white dark:border-slate-300 hover:text-slate-200 w-36 md:w-40 md:px-0 h-10 flex justify-center items-center gap-1 text-xs shadow-md p-2 border-2 transition-all duration-300 rounded`}
       //   onClick={onNew}
       onClick={() => {}}
     >
