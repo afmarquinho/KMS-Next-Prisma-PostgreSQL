@@ -36,7 +36,7 @@ export async function GET() {
 
 //TODO: Hacer el hash de la contraseña
 
-export async function POST(req: request) {
+export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
@@ -143,5 +143,4 @@ export async function POST(req: request) {
     );
   }
 }
-
 

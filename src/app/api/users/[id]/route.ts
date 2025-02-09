@@ -101,7 +101,7 @@ export async function PUT(req: NextRequest) {
   } catch (error) {
     const errorMessage =
       error instanceof Error ? error.message : JSON.stringify(error);
-    console.error("Error al actualizar usuario:", errorMessage);
+    console.error("Error al actualizar el usuario:", errorMessage);
 
     return NextResponse.json(
       { ok: false, data: null, message: "Error en el servidor." },

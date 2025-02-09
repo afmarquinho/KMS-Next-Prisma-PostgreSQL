@@ -8,6 +8,8 @@ import { UserDetails } from "./UserDetails";
 
 export const UserContainer = () => {
   const { userDetails } = useUserStore();
+
+  
   return (
     <>
       {userDetails ? (

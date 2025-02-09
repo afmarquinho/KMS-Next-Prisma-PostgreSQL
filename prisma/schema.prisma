@@ -86,7 +86,7 @@ model Customer {
   Customer_email            String   @unique
   Customer_phoneNumber      String
   Customer_address          String
-  Customer_habeasData       Boolean  @default(false)
+  Customer_habeasData       Boolean  @default(true)
   Customer_registrationDate DateTime @default(now())
   Sales                     Sale[]
   Customer_userId           Int

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { LoadingSpinner } from "../UI/LoadingSpinner";
 import { useUserStore } from "@/store";
 import { useUsers } from "@/hooks";
+import { toast } from "react-toastify";
 
 export const GetUsersButton = () => {
   const { users, setUsers } = useUserStore();
@@ -22,7 +23,7 @@ export const GetUsersButton = () => {
       if (ok) {
         setUsers(data);
       } else {
-        console.error("Error al obtener los usuarios");
+        toast.error("Error al obtener los usuarios");
       }
     } catch (error) {
       console.error("Error de red:", error);

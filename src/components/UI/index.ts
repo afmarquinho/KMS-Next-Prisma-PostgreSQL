@@ -1,6 +1,7 @@
 export * from './BackButton';
 export * from './Footer';
 export * from './LoadingSpinner';
+export * from './LoadingSpinner2';
 export * from './MenuButton';
 export * from './NewButton';
 export * from './Sidebar';

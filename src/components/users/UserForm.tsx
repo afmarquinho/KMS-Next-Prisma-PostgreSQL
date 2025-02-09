@@ -1,4 +1,5 @@
 "use client";
+
 import { useUserStore } from "@/store";
 import { z } from "zod";
 import { LoadingSpinner } from "../UI/LoadingSpinner";
@@ -55,7 +56,7 @@ export const UserForm = () => {
     } else {
       //? Se crea un nuevo usuario
       try {
-        const { ok, data: newUser, message } = await createUser(data); //* Renombro la data como message para no generar conflicto con data del hookForm
+        const { ok, data: newUser, message } = await createUser(data); //* Renombro la data como newUser para no generar conflicto con data del hookForm
         if (ok && newUser) {
           updateUsers("add", newUser); // Agregar usuario
           toast.success("Usuario creado con éxito"); // Notificación de éxito

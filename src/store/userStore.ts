@@ -5,7 +5,7 @@ import { create } from "zustand";
 type States = {
   user: User | null; //* Usuario para visualizar o llenar el formulario para editar.
   users: User[] | null; //*Almacena todos los usuarios que vienen que la bd para visulizar en la página principal.
-  userDetails: User | null;
+  userDetails: User | null; //* Estado para visualizar un usuario en detalle.
   currentView: CurrentView; //* El tipo de vista actual, puede ser 'list' o 'form'.
   activeUserModal: boolean; //* Modal para activar o desactivar usuario.
 };

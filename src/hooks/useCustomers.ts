@@ -1,12 +1,10 @@
-// import { ProductData } from "@/interfaces";
-import { UserPost } from "@/interface";
-import { User } from "@prisma/client";
+import { CustomerPost } from "@/interface";
 import axios from "axios";
 
-const API = axios.create({ baseURL: "/api/users" });
+const API = axios.create({ baseURL: "/api/customers" });
 
-export const useUsers = () => {
-  const getAllUsers = async () => {
+export const useCustomers = () => {
+  const getAllCustomers = async () => {
     try {
       const { data } = await API.get("/");
       return { ok: data.ok, data: data.data, message: data.message };
@@ -19,15 +17,15 @@ export const useUsers = () => {
           ? error.response.data.message
           : error instanceof Error
           ? error.message
-          : "Error al obtener los usuarios.";
+          : "Error al obtener los clientes.";
 
       return { ok: false, data: null, message: errorMessage };
     }
   };
 
-  const createUser = async (userPost: UserPost) => {
+  const createCustomer = async (newCustomer: CustomerPost) => {
     try {
-      const { data } = await API.post("/", userPost);
+      const { data } = await API.post("/", newCustomer);
       return { ok: data.ok, data: data.data, message: data.message };
     } catch (error: unknown) {
       console.error("Error al procesar la solicitud:", error);
@@ -38,26 +36,15 @@ export const useUsers = () => {
           ? error.response.data.message
           : error instanceof Error
           ? error.message
-          : "Error al crear el usuario.";
+          : "Error al crear el cliente.";
 
       return { ok: false, data: null, message: errorMessage };
     }
   };
 
-  const updateUser = async (
-    dataForm: UserPost,
-    userId: number,
-    status: boolean
-  ) => {
+  const updateCustomer = async (dataForm: CustomerPost, customerId: number) => {
     try {
-      const { data } = await API.put(`/${userId}`, {
-        User_address: dataForm.User_address,
-        User_phoneNumber: dataForm.User_phoneNumber,
-        User_role: dataForm.User_role,
-        User_depId: dataForm.User_depId,
-        User_email: dataForm.User_email,
-        User_active: status,
-      });
+      const { data } = await API.put(`/${customerId}`, dataForm);
       return { ok: data.ok, data: data.data, message: data.message };
     } catch (error: unknown) {
       console.error("Error al procesar la solicitud:", error);
@@ -68,25 +55,18 @@ export const useUsers = () => {
           ? error.response.data.message
           : error instanceof Error
           ? error.message
-          : "Error al actualizar el usuario";
+          : "Error al actualizar el cliente";
 
       return { ok: false, data: null, message: errorMessage };
     }
   };
-  
-  const activeUser = async (userDetails: User) => {
+
+  const getCustomerById = async (id: number) => {
     try {
-      const { data } = await API.put(`/${userDetails.User_id}`, {
-        User_address: userDetails.User_address,
-        User_phoneNumber: userDetails.User_phoneNumber,
-        User_role: userDetails.User_role,
-        User_depId: userDetails.User_depId,
-        User_email: userDetails.User_email,
-        User_active: !userDetails.User_active,
-      });
+      const { data } = await API.get(`/${id}`);
       return { ok: data.ok, data: data.data, message: data.message };
     } catch (error: unknown) {
-      console.error("Error al procesar la solicitud:", error);
+      console.error("Error al procesesar la solicitud:", error);
 
       //* Verifica si el error es una instancia de axios o solo un error
       const errorMessage =
@@ -94,11 +74,11 @@ export const useUsers = () => {
           ? error.response.data.message
           : error instanceof Error
           ? error.message
-          : "Error al actualizar el usuario";
+          : "Error al obtener el cliente.";
 
       return { ok: false, data: null, message: errorMessage };
     }
   };
 
-  return { getAllUsers, createUser, updateUser, activeUser };
+  return { getAllCustomers, createCustomer, updateCustomer, getCustomerById };
 };
