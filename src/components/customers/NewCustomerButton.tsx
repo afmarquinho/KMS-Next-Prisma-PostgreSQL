@@ -1,7 +1,7 @@
 "use client";
 
 import { useCustomerStore } from "@/store";
-import { UserRoundPlusIcon } from "lucide-react";
+import { ShoppingBagIcon } from "lucide-react";
 
 export const NewCustomerButton = () => {
 
@@ -20,7 +20,7 @@ const { toggleCurrentView, currentView, customer } = useCustomerStore();
       } `}
       onClick={handleView}
     >
-      <UserRoundPlusIcon className={`w-5`} />
+      <ShoppingBagIcon className={`w-5`} />
       {customer ? "Editar Cliente": "Nuevo Cliente"}
     </button>
   )

@@ -1,7 +1,7 @@
 "use client";
 
 import {
-  RefreshCcw,
+  RefreshCcwIcon,
   ShoppingCartIcon,
   SlidersHorizontalIcon,
 } from "lucide-react";
@@ -16,7 +16,7 @@ export const GetCustomersButton = () => {
   const { setCustomers, customers } = useCustomerStore();
   const [loading, setLoading] = useState<boolean>(false);
 
-  const handleGetSuppliers = async () => {
+  const handleGetCustomers = async () => {
     setLoading(true);
     try {
       const { ok, data, message } = await getAllCustomers();
@@ -40,7 +40,7 @@ export const GetCustomersButton = () => {
       </button>
       <button
         className={`bg-white dark:bg-transparent hover:bg-teal-900 hover:dark:bg-slate-900 border-white dark:border-slate-300 hover:text-slate-200 w-28 md:w-32 md:px-0 h-10 flex justify-center items-center gap-1 text-xs shadow-md p-2 border-2 transition-all duration-300 rounded`}
-        onClick={handleGetSuppliers}
+        onClick={handleGetCustomers}
         disabled={loading || customers?.length === 0}
       >
         {loading ? (
@@ -50,7 +50,7 @@ export const GetCustomersButton = () => {
             {!customers ? (
               <ShoppingCartIcon className={`w-5`} />
             ) : customers.length > 1 ? (
-              <RefreshCcw className={`w-5`} />
+              <RefreshCcwIcon className={`w-5`} />
             ) : (
               <ShoppingCartIcon className={`w-5`} />
             )}

@@ -1,14 +1,14 @@
 "use client";
 
-import { useCustomerStore } from "@/store";
+import { useSupplierStore } from "@/store";
 import { ListCheckIcon } from "lucide-react";
 
-export const CustomerListButton = () => {
-  const { currentView, toggleCurrentView, clearCustomer } = useCustomerStore();
+export const SupplierListButton = () => {
+  const { currentView, toggleCurrentView, clearSupplier } = useSupplierStore();
 
   const handleView = () => {
     toggleCurrentView("list");
-    clearCustomer();
+    clearSupplier();
   };
 
   return (
@@ -21,7 +21,7 @@ export const CustomerListButton = () => {
       onClick={handleView}
     >
       <ListCheckIcon className={`w-5`} />
-      Ver Clientes
+      Ver Proveedores
     </button>
   );
 };

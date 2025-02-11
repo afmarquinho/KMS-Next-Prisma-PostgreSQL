@@ -11,7 +11,6 @@ type States = {
   customerDetails: CustomerDetails | null; //* Estado para visualizar un usuario en detalle.
   detailManager: boolean; //* Maneja la vista para el customer details
   loadingDetails: boolean; //* Muestra un cargando o spinner mienstras se carga la respuesta la api para monstrar el detalle del cliente.
-
 };
 
 type Actions = {
@@ -80,6 +79,7 @@ export const useCustomerStore = create<States & Actions>((set, get) => ({
       console.error("Acción no reconocida");
     }
   },
+
   setCustomerDetails: (customer) => {
     set({ customerDetails: customer });
   },
@@ -87,9 +87,9 @@ export const useCustomerStore = create<States & Actions>((set, get) => ({
     set({ customerDetails: null });
   },
   setDetailManager: (status) => {
-set({detailManager: status})
+    set({ detailManager: status });
   },
   setLoadingdetails: (status) => {
-set({loadingDetails: status})
-  }
+    set({ loadingDetails: status });
+  },
 }));

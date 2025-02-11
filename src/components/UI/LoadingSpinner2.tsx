@@ -5,7 +5,7 @@ export const LoadingSpinner2 = () => {
       role="status"
       className="flex items-center space-x-2"
     >
-      <svg className="h-20 w-20 animate-spin stroke-slate-700 dark:stroke-slate-200" viewBox="0 0 256 256">
+      <svg className="h-8 w-8 animate-spin stroke-slate-700 dark:stroke-slate-200" viewBox="0 0 256 256">
         <line
           x1="128"
           y1="32"
@@ -79,7 +79,7 @@ export const LoadingSpinner2 = () => {
           strokeWidth="24"
         ></line>
       </svg>
-      <span className="text-4xl font-medium text-slate-700 dark:text-slate-200">Cargando...</span>
+      <span className="text-xl font-medium text-slate-700 dark:text-slate-200">Cargando...</span>
     </div>
   );
 };
