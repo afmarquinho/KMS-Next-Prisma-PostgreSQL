@@ -37,7 +37,7 @@ export const SupplierForm = () => {
           ok,
           data: updatedSupplier,
           message,
-        } = await updateSupplier(supplier.Supplier_id, data);
+        } = await updateSupplier(supplier.Supp_id, data);
         if (ok && updatedSupplier) {
           updateSuppliers("update", updatedSupplier); //Actualiza el usuario en el estado
           toast.success("Usuario actualizado.");
@@ -93,13 +93,13 @@ export const SupplierForm = () => {
           <div className={`flex flex-col md:flex-row w-full gap-4`}>
             <div className={`flex flex-col w-full md:w-1/2`}>
               <label>Nit</label>
-              {errors.Supplier_nit && (
+              {errors.Supp_nit && (
                 <div
                   className={`text-xs text-red-600 my-0 font-medium ${
                     supplier === null ? "" : "text-gray-500"
                   }`}
                 >
-                  {errors.Supplier_nit.message}
+                  {errors.Supp_nit.message}
                 </div>
               )}
 
@@ -108,23 +108,23 @@ export const SupplierForm = () => {
                 className={`bg-slate-300 dark:bg-slate-700 p-2 focus:outline-none text-base rounded-md ${
                   supplier === null ? "" : "text-gray-500"
                 }`}
-                {...register("Supplier_nit", { valueAsNumber: true })}
-                defaultValue={supplier ? supplier.Supplier_nit : ""}
+                {...register("Supp_nit", { valueAsNumber: true })}
+                defaultValue={supplier ? supplier.Supp_nit : ""}
                 readOnly={supplier !== null}
               />
             </div>
             <div className={`flex flex-col w-full md:w-1/2`}>
               <label>Razón Social</label>
-              {errors.Supplier_name && (
+              {errors.Supp_name && (
                 <div className={`text-xs text-red-600 my-0 font-medium`}>
-                  {errors.Supplier_name.message}
+                  {errors.Supp_name.message}
                 </div>
               )}
               <input
                 type="text"
                 className={`bg-slate-300 dark:bg-slate-700 p-2 focus:outline-none text-base rounded-md`}
-                {...register("Supplier_name")}
-                defaultValue={supplier ? supplier.Supplier_name : ""}
+                {...register("Supp_name")}
+                defaultValue={supplier ? supplier.Supp_name : ""}
               />
             </div>
           </div>
@@ -133,30 +133,30 @@ export const SupplierForm = () => {
           <div className={`flex flex-col md:flex-row w-full gap-4`}>
             <div className={`flex flex-col w-full md:w-1/2`}>
               <label>Nombre de contacto</label>
-              {errors.Supplier_contactInfo && (
+              {errors.Supp_contactInfo && (
                 <div className={`text-xs text-red-600 my-0 font-medium`}>
-                  {errors.Supplier_contactInfo.message}
+                  {errors.Supp_contactInfo.message}
                 </div>
               )}
               <input
                 type="text"
                 className={`bg-slate-300 dark:bg-slate-700 p-2 focus:outline-none text-base rounded-md`}
-                {...register("Supplier_contactInfo")}
-                defaultValue={supplier ? supplier.Supplier_contactInfo : ""}
+                {...register("Supp_contactInfo")}
+                defaultValue={supplier ? supplier.Supp_contactInfo : ""}
               />
             </div>
             <div className={`flex flex-col w-full md:w-1/2`}>
               <label>Correo Electrónico</label>
-              {errors.Supplier_email && (
+              {errors.Supp_email && (
                 <div className={`text-xs text-red-600 my-0 font-medium`}>
-                  {errors.Supplier_email.message}
+                  {errors.Supp_email.message}
                 </div>
               )}
               <input
                 type="text"
                 className={`bg-slate-300 dark:bg-slate-700 p-2 focus:outline-none text-base rounded-md`}
-                {...register("Supplier_email")}
-                defaultValue={supplier ? supplier.Supplier_email : ""}
+                {...register("Supp_email")}
+                defaultValue={supplier ? supplier.Supp_email : ""}
               />
             </div>
           </div>
@@ -165,30 +165,30 @@ export const SupplierForm = () => {
           <div className={`flex flex-col md:flex-row w-full gap-4`}>
             <div className={`flex flex-col w-full md:w-1/2`}>
               <label>Teléfono</label>
-              {errors.Supplier_phoneNumber && (
+              {errors.Supp_phoneNumber && (
                 <div className={`text-xs text-red-600 my-0 font-medium`}>
-                  {errors.Supplier_phoneNumber.message}
+                  {errors.Supp_phoneNumber.message}
                 </div>
               )}
               <input
                 type="text"
                 className={`bg-slate-300 dark:bg-slate-700 p-2 focus:outline-none text-base rounded-md`}
-                {...register("Supplier_phoneNumber")}
-                defaultValue={supplier ? supplier.Supplier_phoneNumber : ""}
+                {...register("Supp_phoneNumber")}
+                defaultValue={supplier ? supplier.Supp_phoneNumber : ""}
               />
             </div>
             <div className={`flex flex-col w-full md:w-1/2`}>
               <label>Ciudad</label>
-              {errors.Supplier_city && (
+              {errors.Supp_city && (
                 <div className={`text-xs text-red-600 my-0 font-medium`}>
-                  {errors.Supplier_city.message}
+                  {errors.Supp_city.message}
                 </div>
               )}
               <input
                 type="text"
                 className={`bg-slate-300 dark:bg-slate-700 p-2 focus:outline-none text-base rounded-md`}
-                {...register("Supplier_city")}
-                defaultValue={supplier ? supplier.Supplier_city : ""}
+                {...register("Supp_city")}
+                defaultValue={supplier ? supplier.Supp_city : ""}
               />
             </div>
           </div>
@@ -197,16 +197,16 @@ export const SupplierForm = () => {
           <div className={`flex flex-col md:flex-row w-full gap-4`}>
             <div className={`flex flex-col w-full md:w-1/2`}>
               <label>Dirección</label>
-              {errors.Supplier_address && (
+              {errors.Supp_address && (
                 <div className={`text-xs text-red-600 my-0 font-medium`}>
-                  {errors.Supplier_address.message}
+                  {errors.Supp_address.message}
                 </div>
               )}
               <input
                 type="text"
                 className={`bg-slate-300 dark:bg-slate-700 p-2 focus:outline-none text-base rounded-md`}
-                {...register("Supplier_address")}
-                defaultValue={supplier ? supplier.Supplier_address : ""}
+                {...register("Supp_address")}
+                defaultValue={supplier ? supplier.Supp_address : ""}
               />
             </div>
             <div className={`flex flex-col w-full md:w-1/2`}></div>

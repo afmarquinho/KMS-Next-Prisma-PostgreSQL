@@ -12,7 +12,7 @@ export default function PurchaseLayout({
 }>) {
   return (
     <>
-      <main>{children}</main>
+      <main className={`space-y-3`}>{children}</main>
     </>
   );
 }

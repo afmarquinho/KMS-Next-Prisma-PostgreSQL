@@ -73,7 +73,7 @@ export const Sidebar = () => {
       />
       <SidebarLink
         path="Órdenes de Compra"
-        href="/purchase"
+        href="/procurements"
         icon={ShoppingBag}
         subtitle="Administrar órdenes"
       />

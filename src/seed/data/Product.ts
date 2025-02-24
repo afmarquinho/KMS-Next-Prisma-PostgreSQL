@@ -7,6 +7,7 @@ export const Product = [
     createdAt: "2024-12-29T04:08:14.177Z",
     Product_ref: "LP-001",
     Product_categoryId: 1,
+    Product_itemId: 1,
   },
   {
     Product_id: 2,
@@ -16,6 +17,7 @@ export const Product = [
     createdAt: "2024-12-29T04:08:14.177Z",
     Product_ref: "MN-001",
     Product_categoryId: 1,
+    Product_itemId: 2,
   },
   {
     Product_id: 3,
@@ -25,6 +27,7 @@ export const Product = [
     createdAt: "2024-12-29T04:08:14.177Z",
     Product_ref: "CB-001",
     Product_categoryId: 1,
+    Product_itemId: 3,
   },
   {
     Product_id: 4,
@@ -34,6 +37,7 @@ export const Product = [
     createdAt: "2024-12-29T04:08:14.177Z",
     Product_ref: "MN-002",
     Product_categoryId: 2,
+    Product_itemId: 4,
   },
   {
     Product_id: 5,
@@ -43,6 +47,7 @@ export const Product = [
     createdAt: "2024-12-29T04:08:14.177Z",
     Product_ref: "PD-001",
     Product_categoryId: 2,
+    Product_itemId: 5,
   },
   {
     Product_id: 6,
@@ -52,6 +57,7 @@ export const Product = [
     createdAt: "2024-12-29T04:08:14.177Z",
     Product_ref: "TK-001",
     Product_categoryId: 3,
+    Product_itemId: 6,
   },
   {
     Product_id: 7,
@@ -61,6 +67,7 @@ export const Product = [
     createdAt: "2024-12-29T04:08:14.177Z",
     Product_ref: "MS-001",
     Product_categoryId: 3,
+    Product_itemId: 7,
   },
   {
     Product_id: 8,
@@ -70,6 +77,7 @@ export const Product = [
     createdAt: "2024-12-29T04:08:14.177Z",
     Product_ref: "SH-001",
     Product_categoryId: 4,
+    Product_itemId: 8,
   },
   {
     Product_id: 9,
@@ -79,6 +87,7 @@ export const Product = [
     createdAt: "2024-12-29T04:08:14.177Z",
     Product_ref: "DS-001",
     Product_categoryId: 4,
+    Product_itemId: 9,
   },
   {
     Product_id: 10,
@@ -88,6 +97,7 @@ export const Product = [
     createdAt: "2024-12-29T04:08:14.177Z",
     Product_ref: "PA-001",
     Product_categoryId: 5,
+    Product_itemId: 10,
   },
   {
     Product_id: 11,
@@ -97,5 +107,6 @@ export const Product = [
     createdAt: "2024-12-29T04:08:14.177Z",
     Product_ref: "CL-001",
     Product_categoryId: 5,
+    Product_itemId: 11,
   },
 ];

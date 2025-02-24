@@ -20,7 +20,7 @@ type Actions = {
   updateCustomers: (action: string, customer: Customer) => void; //* Actualiza (crea o edita) el array de clientes.
   toggleCurrentView: (view: CurrentViewCustomerPage) => void; //* Alterna entre 'list' y 'form'.
 
-  setCustomerDetails: (userDetails: CustomerDetails) => void; //* Estado para mostrar el cliente en detalle.
+  setCustomerDetails: (details: CustomerDetails) => void; //* Estado para mostrar el cliente en detalle.
   clearCustomerDetails: () => void; //* Estado para limpiar el detalle del cliente.
 
   setDetailManager: (status: boolean) => void; //* Maneja el estado del detailmanager
@@ -64,7 +64,7 @@ export const useCustomerStore = create<States & Actions>((set, get) => ({
         customers: !customers ? [customer] : [...customers, customer],
       }));
     } else if (action === "update") {
-      if (typeof customer.Customer_id !== "number") {
+      if (typeof customer.Cust_id !== "number") {
         console.error("Id del Cliente inválido");
         return;
       }
@@ -72,7 +72,7 @@ export const useCustomerStore = create<States & Actions>((set, get) => ({
       if (!customers) return;
       set(() => ({
         customers: customers.map((item) =>
-          item.Customer_id === customer.Customer_id ? customer : item
+          item.Cust_id === customer.Cust_id ? customer : item
         ),
       }));
     } else {

@@ -5,7 +5,6 @@ import axios from "axios";
 const API = axios.create({ baseURL: "/api/suppliers" });
 
 export const useSuppliers = () => {
-  
   const getAllSuppliers = async () => {
     try {
       const { data } = await API.get("/");
@@ -82,7 +81,10 @@ export const useSuppliers = () => {
     }
   };
 
-  const updateSupplier = async (id: number, updatedSupplier: FormValuesSupplierType) => {
+  const updateSupplier = async (
+    id: number,
+    updatedSupplier: FormValuesSupplierType
+  ) => {
     try {
       const { data } = await API.put(`/update/${id}`, updatedSupplier);
       return { ok: data.ok, data: data.data, message: data.message };
@@ -101,5 +103,31 @@ export const useSuppliers = () => {
     }
   };
 
-  return { getAllSuppliers, getSupplierById, activeStatus , createSupplier, updateSupplier};
+  const getSupplierList = async () => {
+    try {
+      const { data } = await API.get("/list");
+      return { ok: data.ok, data: data.data, message: data.message };
+    } catch (error: unknown) {
+      console.error("Error al procesesar la solicitud:", error);
+
+      //* Verifica si el error es una instancia de axios o solo un error
+      const errorMessage =
+        axios.isAxiosError(error) && error.response?.data?.message
+          ? error.response.data.message
+          : error instanceof Error
+          ? error.message
+          : "Error al obtener los proveedores.";
+
+      return { ok: false, data: null, message: errorMessage };
+    }
+  };
+
+  return {
+    getAllSuppliers,
+    getSupplierById,
+    activeStatus,
+    createSupplier,
+    updateSupplier,
+    getSupplierList,
+  };
 };

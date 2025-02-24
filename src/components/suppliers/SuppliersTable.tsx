@@ -56,9 +56,9 @@ export const SuppliersTable = () => {
   return (
     <>
       <GetSuppliersButton />
-      <div className="overflow-auto my-5 bg-white p-5 dark:bg-slate-900">
+      <div className="overflow-auto my-5 bg-white p-5 dark:bg-slate-900 rounded">
         <table
-          className={`w-full rounded-lg border-collapse text-left overflow-hidden shadow-md`}
+          className={`w-full rounded border-collapse text-left overflow-hidden shadow-md`}
         >
           <thead
             className={`bg-indigo-900 dark:bg-indigo-900 text-slate-200 border-b-8 border-b-blue-600 dark:border-b-blue-800`}

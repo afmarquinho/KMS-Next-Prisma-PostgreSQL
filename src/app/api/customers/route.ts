@@ -5,7 +5,7 @@ export async function GET() {
   try {
     const customers = await prisma.customer.findMany({
       orderBy: {
-        Customer_surname: "asc",
+        Cust_surname: "asc",
       },
     });
 
@@ -41,21 +41,21 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
 
     const {
-      Customer_dni,
-      Customer_name,
-      Customer_surname,
-      Customer_email,
-      Customer_phoneNumber,
-      Customer_address,
+      Cust_dni,
+      Cust_name,
+      Cust_surname,
+      Cust_email,
+      Cust_phoneNumber,
+      Cust_address,
     } = body;
     // Validación de campos requeridos
     if (
-      !Customer_dni ||
-      !Customer_name ||
-      !Customer_surname ||
-      !Customer_email ||
-      !Customer_phoneNumber ||
-      !Customer_address
+      !Cust_dni ||
+      !Cust_name ||
+      !Cust_surname ||
+      !Cust_email ||
+      !Cust_phoneNumber ||
+      !Cust_address
     ) {
       return NextResponse.json(
         {
@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
 
     // Validación de email
     const existingEmail = await prisma.customer.findUnique({
-      where: { Customer_email },
+      where: { Cust_email },
     });
 
     if (existingEmail) {
@@ -81,7 +81,7 @@ export async function POST(req: NextRequest) {
 
     // Validación de DNI único
     const existingUser = await prisma.customer.findUnique({
-      where: { Customer_dni },
+      where: { Cust_dni },
     });
 
     if (existingUser) {
@@ -93,13 +93,13 @@ export async function POST(req: NextRequest) {
     // TODO: Cambiar el userId
     const newCustomer = await prisma.customer.create({
       data: {
-        Customer_dni,
-        Customer_name,
-        Customer_surname,
-        Customer_email,
-        Customer_phoneNumber,
-        Customer_address,
-        Customer_userId: 2       
+        Cust_dni,
+        Cust_name,
+        Cust_surname,
+        Cust_email,
+        Cust_phoneNumber,
+        Cust_address,
+        Cust_userId: 2       
       },
     })
     return NextResponse.json(

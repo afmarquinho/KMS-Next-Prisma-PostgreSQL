@@ -37,7 +37,7 @@ export const CustomerForm = () => {
          ok,
          data: updatedCustomer,
          message,
-       } = await updateCustomer(data, customer.Customer_id);
+       } = await updateCustomer(data, customer.Cust_id);
        if (ok && updatedCustomer) {
          updateCustomers("update", updatedCustomer);  //Actualiza el usuario en el estado
          toast.success("Usuario actualizado.");  
@@ -91,13 +91,13 @@ export const CustomerForm = () => {
           <div className={`flex flex-col md:flex-row w-full gap-4`}>
             <div className={`flex flex-col w-full md:w-1/2`}>
               <label>Cédula</label>
-              {errors.Customer_dni && (
+              {errors.Cust_dni && (
                 <div
                   className={`text-xs text-red-600 my-0 font-medium ${
                     customer === null ? "" : "text-gray-500"
                   }`}
                 >
-                  {errors.Customer_dni.message}
+                  {errors.Cust_dni.message}
                 </div>
               )}
 
@@ -106,16 +106,16 @@ export const CustomerForm = () => {
                 className={`bg-slate-300 dark:bg-slate-700 p-2 focus:outline-none text-base rounded-md ${
                   customer === null ? "" : "text-gray-500"
                 }`}
-                {...register("Customer_dni", { valueAsNumber: true })}
-                defaultValue={customer ? customer.Customer_dni : ""}
+                {...register("Cust_dni", { valueAsNumber: true })}
+                defaultValue={customer ? customer.Cust_dni : ""}
                 readOnly={customer !== null}
               />
             </div>
             <div className={`flex flex-col w-full md:w-1/2`}>
               <label>Nombre</label>
-              {errors.Customer_name && (
+              {errors.Cust_name && (
                 <div className={`text-xs text-red-600 my-0 font-medium`}>
-                  {errors.Customer_name.message}
+                  {errors.Cust_name.message}
                 </div>
               )}
               <input
@@ -123,8 +123,8 @@ export const CustomerForm = () => {
                 className={`bg-slate-300 dark:bg-slate-700 p-2 focus:outline-none text-base rounded-md ${
                   customer === null ? "" : "text-gray-500"
                 }`}
-                {...register("Customer_name")}
-                defaultValue={customer ? customer.Customer_name : ""}
+                {...register("Cust_name")}
+                defaultValue={customer ? customer.Cust_name : ""}
                 readOnly={customer !== null}
               />
             </div>
@@ -134,9 +134,9 @@ export const CustomerForm = () => {
           <div className={`flex flex-col md:flex-row w-full gap-4`}>
             <div className={`flex flex-col w-full md:w-1/2`}>
               <label>Apellido</label>
-              {errors.Customer_surname && (
+              {errors.Cust_surname && (
                 <div className={`text-xs text-red-600 my-0 font-medium`}>
-                  {errors.Customer_surname.message}
+                  {errors.Cust_surname.message}
                 </div>
               )}
               <input
@@ -144,23 +144,23 @@ export const CustomerForm = () => {
                 className={`bg-slate-300 dark:bg-slate-700 p-2 focus:outline-none text-base rounded-md ${
                   customer === null ? "" : "text-gray-500"
                 }`}
-                {...register("Customer_surname")}
-                defaultValue={customer ? customer.Customer_surname : ""}
+                {...register("Cust_surname")}
+                defaultValue={customer ? customer.Cust_surname : ""}
                 readOnly={customer !== null}
               />
             </div>
             <div className={`flex flex-col w-full md:w-1/2`}>
               <label>Correo Electrónico</label>
-              {errors.Customer_email && (
+              {errors.Cust_email && (
                 <div className={`text-xs text-red-600 my-0 font-medium`}>
-                  {errors.Customer_email.message}
+                  {errors.Cust_email.message}
                 </div>
               )}
               <input
                 type="text"
                 className={`bg-slate-300 dark:bg-slate-700 p-2 focus:outline-none text-base rounded-md`}
-                {...register("Customer_email")}
-                defaultValue={customer ? customer.Customer_email : ""}
+                {...register("Cust_email")}
+                defaultValue={customer ? customer.Cust_email : ""}
               />
             </div>
           </div>
@@ -169,47 +169,47 @@ export const CustomerForm = () => {
           <div className={`flex flex-col md:flex-row w-full gap-4`}>
             <div className={`flex flex-col w-full md:w-1/2`}>
               <label>Teléfono</label>
-              {errors.Customer_phoneNumber && (
+              {errors.Cust_phoneNumber && (
                 <div className={`text-xs text-red-600 my-0 font-medium`}>
-                  {errors.Customer_phoneNumber.message}
+                  {errors.Cust_phoneNumber.message}
                 </div>
               )}
               <input
                 type="text"
                 className={`bg-slate-300 dark:bg-slate-700 p-2 focus:outline-none text-base rounded-md`}
-                {...register("Customer_phoneNumber")}
-                defaultValue={customer ? customer.Customer_phoneNumber : ""}
+                {...register("Cust_phoneNumber")}
+                defaultValue={customer ? customer.Cust_phoneNumber : ""}
               />
             </div>
             <div className={`flex flex-col w-full md:w-1/2`}>
               <label>Dirección</label>
-              {errors.Customer_address && (
+              {errors.Cust_address && (
                 <div className={`text-xs text-red-600 my-0 font-medium`}>
-                  {errors.Customer_address.message}
+                  {errors.Cust_address.message}
                 </div>
               )}
               <input
                 type="text"
                 className={`bg-slate-300 dark:bg-slate-700 p-2 focus:outline-none text-base rounded-md`}
-                {...register("Customer_address")}
-                defaultValue={customer ? customer.Customer_address : ""}
+                {...register("Cust_address")}
+                defaultValue={customer ? customer.Cust_address : ""}
               />
             </div>
           </div>
 
           {/* //* HABEAS DATA*/}
           <div className={`flex flex-col w-full gap-4`}>
-            {errors.Customer_habeasData && (
+            {errors.Cust_habeasData && (
               <div className={`text-xs text-red-600 my-0 font-medium`}>
-                {errors.Customer_habeasData.message}
+                {errors.Cust_habeasData.message}
               </div>
             )}
 
             <label className={`w-full flex justify-start items-start gap-5`}>
               <input
                 type="checkbox"
-                {...register("Customer_habeasData")}
-                defaultChecked={customer?.Customer_habeasData}
+                {...register("Cust_habeasData")}
+                defaultChecked={customer?.Cust_habeasData}
               />
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit
               laborum laudantium repellat dignissimos ex ipsum cum perspiciatis

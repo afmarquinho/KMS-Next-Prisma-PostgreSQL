@@ -85,9 +85,7 @@ export const UserForm = () => {
         <form
           action=""
           className={`w-full max-w-[600px] mx-auto py-2 space-y-4`}
-          onSubmit={handleSubmit(onSubmit, (errors) =>
-            console.log("Errores de validación:", errors)
-          )}
+          onSubmit={handleSubmit(onSubmit)}
         >
           {/* NAME AND SURENAME */}
           <div className={`flex flex-col md:flex-row w-full gap-4`}>

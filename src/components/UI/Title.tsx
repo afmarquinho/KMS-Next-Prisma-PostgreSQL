@@ -6,7 +6,7 @@ export const Title = () => {
 
   const titles: Record<string, string> = {
     "/dashboard": "Análisis",
-    "/purchase": "Módulo de Compras",
+    "/procurements": "Módulo de Compras",
     "/inventory": "Módulo de Inventarios",
     "/masters": "Módulo de Terceros: Proveedores - Clientes",
     "/users": "Módulo de Usuarios",

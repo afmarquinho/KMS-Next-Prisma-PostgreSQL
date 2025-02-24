@@ -1,42 +1,42 @@
 export const Category = [
   {
-    Category_id: 1,
-    Category_name: "Tecnología",
+   Cat_id: 1,
+   Cat_name: "Tecnología",
   },
   {
-    Category_id: 2,
-    Category_name: "Electrónica",
+   Cat_id: 2,
+   Cat_name: "Electrónica",
   },
   {
-    Category_id: 3,
-    Category_name: "Accesorios de Computación",
+   Cat_id: 3,
+   Cat_name: "Accesorios de Computación",
   },
   {
-    Category_id: 4,
-    Category_name: "Muebles de Oficina",
+   Cat_id: 4,
+   Cat_name: "Muebles de Oficina",
   },
   {
-    Category_id: 5,
-    Category_name: "Papel y Útiles de Oficina",
+   Cat_id: 5,
+   Cat_name: "Papel y Útiles de Oficina",
   },
   {
-    Category_id: 6,
-    Category_name: "Limpieza y Aseo",
+   Cat_id: 6,
+   Cat_name: "Limpieza y Aseo",
   },
   {
-    Category_id: 7,
-    Category_name: "Productos Sanitarios",
+   Cat_id: 7,
+   Cat_name: "Productos Sanitarios",
   },
   {
-    Category_id: 8,
-    Category_name: "Materiales de Construcción",
+   Cat_id: 8,
+   Cat_name: "Materiales de Construcción",
   },
   {
-    Category_id: 9,
-    Category_name: "Herramientas de Construcción",
+   Cat_id: 9,
+   Cat_name: "Herramientas de Construcción",
   },
   {
-    Category_id: 10,
-    Category_name: "Equipos de Seguridad",
+   Cat_id: 10,
+   Cat_name: "Equipos de Seguridad",
   },
 ];

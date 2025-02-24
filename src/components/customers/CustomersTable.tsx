@@ -24,7 +24,7 @@ export const CustomersTable = () => {
     toggleCurrentView("form");
   };
 
-  const handleViewCustomer = async (id: number) => {
+  const handleView = async (id: number) => {
     try {
       setDetailManager(true);
       setLoadingdetails(true);
@@ -58,9 +58,9 @@ export const CustomersTable = () => {
   return (
     <>
       <GetCustomersButton />
-      <div className="overflow-auto my-5 bg-white p-5 dark:bg-slate-900">
+      <div className="overflow-auto my-5 bg-white p-5 dark:bg-slate-900 rounded">
         <table
-          className={`w-full rounded-lg border-collapse text-left overflow-hidden shadow-md`}
+          className={`w-full rounded border-collapse text-left overflow-hidden shadow-md`}
         >
           <thead
             className={`bg-indigo-900 dark:bg-indigo-900 text-slate-200 border-b-8 border-b-blue-600 dark:border-b-blue-800`}
@@ -92,7 +92,7 @@ export const CustomersTable = () => {
                   {/* //*Watch button */}
                   <button
                     className={`bg-gradient-to-b from-rose-500 to-rose-700 hover:from-red-800 hover:to-red-800 transition-colors duration-300 ease-linear rounded-full w-8 h-6 p-1 flex justify-center items-center shadow`}
-                    onClick={() => handleViewCustomer(customer.Customer_id)}
+                    onClick={() => handleView(customer.Customer_id)}
                   >
                     <SearchIcon className={`text-white w-5`} />
                   </button>

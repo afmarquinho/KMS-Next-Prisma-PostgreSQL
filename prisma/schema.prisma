@@ -45,10 +45,9 @@ datasource db {
 // }
 
 model Departments {
-  Dep_id            Int                 @id @default(autoincrement())
-  Dep_name          String              @unique
-  User              User[]
-  InventoryRequests InventoryRequests[]
+  Dep_id   Int    @id @default(autoincrement())
+  Dep_name String @unique
+  User     User[]
 }
 
 model User {
@@ -67,250 +66,84 @@ model User {
   User_depId            Int
   Departments           Departments @relation(fields: [User_depId], references: [Dep_id])
 
-  Sales            Sale[]
-  Purchase         Purchase[]
-  Supplier         Supplier[]
-  Customer         Customer[]
-  PurchaseNote     PurchaseNote[]
-  ProvisionRequest ProvisionRequest[]
-  StockMovement    StockMovement[]
+  Supplier    Supplier[]
+  Customer    Customer[]
+  Procurement Procurement[]
 
   @@index([User_email, User_phoneNumber, User_dni])
 }
 
 model Customer {
-  Customer_id               Int      @id @default(autoincrement())
-  Customer_dni              Int      @unique
-  Customer_name             String
-  Customer_surname          String
-  Customer_email            String   @unique
-  Customer_phoneNumber      String
-  Customer_address          String
-  Customer_habeasData       Boolean  @default(true)
-  Customer_registrationDate DateTime @default(now())
-  Sales                     Sale[]
-  Customer_userId           Int
-  User                      User     @relation(fields: [Customer_userId], references: [User_id])
+  Cust_id               Int      @id @default(autoincrement())
+  Cust_dni              Int      @unique
+  Cust_name             String
+  Cust_surname          String
+  Cust_email            String   @unique
+  Cust_phoneNumber      String
+  Cust_address          String
+  Cust_habeasData       Boolean  @default(true)
+  Cust_registrationDate DateTime @default(now())
+  Cust_userId           Int
+  User                  User     @relation(fields: [Cust_userId], references: [User_id])
 }
 
 model Supplier {
-  Supplier_id               Int        @id @default(autoincrement())
-  Supplier_nit              Int        @unique
-  Supplier_name             String
-  Supplier_contactInfo      String
-  Supplier_email            String     @unique
-  Supplier_phoneNumber      String
-  Supplier_city             String
-  Supplier_address          String
-  Supplier_active           Boolean    @default(true)
-  Supplier_registrationDate DateTime   @default(now())
-  Supplier_userId           Int
-  Purchase                  Purchase[]
-  User                      User       @relation(fields: [Supplier_userId], references: [User_id])
+  Supp_id               Int      @id @default(autoincrement())
+  Supp_nit              Int      @unique
+  Supp_name             String
+  Supp_contactInfo      String
+  Supp_email            String   @unique
+  Supp_phoneNumber      String
+  Supp_city             String
+  Supp_address          String
+  Supp_active           Boolean  @default(true)
+  Supp_registrationDate DateTime @default(now())
+
+  Supp_userId Int
+  User        User          @relation(fields: [Supp_userId], references: [User_id])
+  Procurement Procurement[]
 }
 
 model Category {
-  Category_id   Int            @id @default(autoincrement())
-  Category_name String         @unique
-  PurchaseItem  PurchaseItem[]
-  Product       Product[]
+  Cat_id   Int    @id @default(autoincrement())
+  Cat_name String @unique
+  Item     Item[]
 }
 
-model Purchase {
-  Purchase_id            Int             @id @default(autoincrement())
-  Purchase_description   String
-  Purchase_date          DateTime        @default(now())
-  Purchase_totalAmount   Decimal         @default(0)
-  Purchase_userId        Int
-  Purchase_supplierId    Int
-  Purchase_paymentMethod String
-  Purchase_dueDate       DateTime
-  Purchase_close         Boolean         @default(false)
-  User                   User            @relation(fields: [Purchase_userId], references: [User_id])
-  Supplier               Supplier        @relation(fields: [Purchase_supplierId], references: [Supplier_id])
-  ExpenseSummary         ExpenseSummary?
-  PurchaseItem           PurchaseItem[]
-  Purchase_processed     Boolean         @default(false)
-  PurchaseNote           PurchaseNote[]
+model Procurement {
+  Pro_id            Int      @id @default(autoincrement())
+  Pro_desc          String
+  Pro_date          DateTime @default(now())
+  Pro_totalAmount   Decimal  @default(0)
+  Pro_paymentMethod String
+  Pro_dueDate       DateTime
+  Pro_close         Boolean  @default(false)
+  Pro_processed     Boolean  @default(false)
+
+  Pro_userId Int
+  User       User     @relation(fields: [Pro_userId], references: [User_id])
+  Pro_suppId Int
+  Supplier   Supplier @relation(fields: [Pro_suppId], references: [Supp_id])
+  Item       Item[]
 }
 
-// TODO: COMO PURCJASEITEM SE RELACIONA CON PORDUCT, LO MEJOR ES CREAR EL LISTADO DEL PRODUCTO ANTES DE CREAR AL ORDEN Y SELECCIONARLO EN EL FORMULARIO, ASI CONSERVA LA REFERNCIA
-
-model PurchaseItem {
-  Item_id          Int           @id @default(autoincrement())
-  Item_ref         String
+model Item {
+  Item_id          Int     @id @default(autoincrement())
+  Item_ref         String?
   Item_name        String
-  Item_description String
+  Item_desc        String
   Item_unitCost    Decimal
   Item_qtyOrdered  Int
   Item_totalAmount Decimal
-  Item_qtyReceived Int
-  Item_location    String        @default("UNRECEIVED")
-  Item_status      String        @default("ORDERED")
-  Item_purchaseId  Int
-  SaleDetails      SaleDetails[]
-  Purchase         Purchase      @relation(fields: [Item_purchaseId], references: [Purchase_id])
-  Item_categoryId  Int
-  Category         Category      @relation(fields: [Item_categoryId], references: [Category_id])
+  Item_qtyReceived Int     @default(0)
+  Item_location    String  @default("UNRECEIVED")
+  Item_status      String  @default("ORDERED")
   Item_unitMeasure String
 
-  Item_productId Int
-  Product        Product?        @relation(fields: [Item_productId], references: [Product_id])
-  BatchInventory BatchInventory?
+  Item_proId  Int
+  Procurement Procurement @relation(fields: [Item_proId], references: [Pro_id])
+  Item_catId  Int
+  Category    Category    @relation(fields: [Item_catId], references: [Cat_id])
 
   @@index([Item_ref])
-}
-
-model Product {
-  Product_id           Int                @id @default(autoincrement())
-  Product_name         String             @unique
-  Product_ref          String             @unique
-  Product_reorderPoint Int                @default(0)
-  Product_active       Boolean            @default(true)
-  Product_stockQty     Int                @default(0)
-  PurchaseItem         PurchaseItem[]
-  Product_categoryId   Int
-  ProvisionRequest     ProvisionRequest[]
-  createdAt            DateTime           @default(now())
-
-  Category          Category            @relation(fields: [Product_categoryId], references: [Category_id])
-  StockMovement     StockMovement[]
-  InventoryRequests InventoryRequests[]
-}
-
-model PurchaseNote {
-  Note_id        Int      @id @default(autoincrement())
-  Note_content   String
-  Note_createdAt DateTime @default(now())
-  Note_userId    Int
-  User           User     @relation(fields: [Note_userId], references: [User_id])
-
-  Note_purchaseId Int
-  Purchase        Purchase @relation(fields: [Note_purchaseId], references: [Purchase_id])
-}
-
-model BatchInventory {
-  Batch_id       Int    @id @default(autoincrement())
-  Batch_code     String @unique
-  Batch_stockQty Int    @default(0)
-  Batch_location String @default("Bodega")
-  Batch_userId   Int
-  Batch_itemId   Int    @unique
-
-  PurchaseItem PurchaseItem @relation(fields: [Batch_itemId], references: [Item_id])
-
-  StockMovement StockMovement[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-
-  @@index([Batch_itemId])
-}
-
-model ProvisionRequest {
-  Prov_id          Int     @id @default(autoincrement())
-  Prov_productId   Int
-  Product          Product @relation(fields: [Prov_productId], references: [Product_id])
-  Prov_quantity    Int
-  Prov_status      String  @default("pending")
-  Prov_desc        String
-  Prov_requestedBy Int
-
-  createdAt DateTime @default(now())
-
-  User User @relation(fields: [Prov_requestedBy], references: [User_id])
-}
-
-model StockMovement {
-  Movement_id          Int      @id @default(autoincrement())
-  Movement_type        String // "entrada", "salida"
-  Movement_qty         Int
-  Movement_reason      String // Razón del movimiento (e.g., "venta", "compra", "ajuste")
-  Movement_productId   Int
-  Movement_destination String   @default("bodega") // (e.g., ventas, garantías, ...)
-  Movement_userId      Int
-  Movement_relatedId   Int? // ID relacionado (e.g., Sale_id o Purchase_id)
-  Movement_batchId     Int
-  createdAt            DateTime @default(now())
-
-  BatchInventory BatchInventory @relation(fields: [Movement_batchId], references: [Batch_id])
-  Product        Product        @relation(fields: [Movement_productId], references: [Product_id])
-  User           User           @relation(fields: [Movement_userId], references: [User_id])
-
-  @@index([Movement_productId, Movement_destination])
-}
-
-model InventoryRequests {
-  Req_id     Int     @id @default(autoincrement())
-  Req_prodId Int
-  Req_depId  Int
-  Req_desc   String
-  Req_qty    Int
-  Req_close  Boolean @default(false)
-
-  Product    Product     @relation(fields: [Req_prodId], references: [Product_id])
-  Department Departments @relation(fields: [Req_depId], references: [Dep_id])
-
-  @@index([Req_prodId])
-}
-
-model Sale {
-  Sale_id          Int           @id @default(autoincrement())
-  Sale_date        DateTime      @default(now())
-  Sale_code        String?       @unique
-  Sale_customerId  Int
-  Customer         Customer      @relation(fields: [Sale_customerId], references: [Customer_id], onDelete: Cascade)
-  Sale_totalAmount Decimal
-  Sale_userId      Int
-  SaleSummary      SalesSummary?
-  SaleDetails      SaleDetails[]
-  User             User          @relation(fields: [Sale_userId], references: [User_id])
-}
-
-model SaleDetails {
-  SaleDetail_id        Int           @id @default(autoincrement())
-  SaleDetail_saleId    Int
-  Sales                Sale          @relation(fields: [SaleDetail_saleId], references: [Sale_id])
-  SaleDetail_productId Int
-  SaleDetail_quantity  Int
-  SaleDetail_unitPrice Decimal
-  SaleDetail_total     Decimal
-  Warranty             Warranty[]
-  Devolution           Devolution[]
-  PurchaseItem         PurchaseItem? @relation(fields: [purchaseItemItem_id], references: [Item_id])
-  purchaseItemItem_id  Int?
-}
-
-model Warranty {
-  Warranty_id           Int         @id @default(autoincrement())
-  Warranty_description  String
-  Warranty_date         DateTime    @default(now())
-  Warranty_saleDetailId Int
-  SaleDetail            SaleDetails @relation(fields: [Warranty_saleDetailId], references: [SaleDetail_id])
-}
-
-model SalesSummary {
-  SalesSumm_id          Int      @id @default(autoincrement())
-  SalesSumm_saleId      Int      @unique
-  Sale                  Sale     @relation(fields: [SalesSumm_saleId], references: [Sale_id])
-  SalesSumm_totalAmount Decimal
-  SalesSumm_date        DateTime
-}
-
-model ExpenseSummary {
-  ExpSumm_id            Int      @id @default(autoincrement())
-  ExpSumm_purchaseId    Int      @unique
-  ExpSumm_totalExpenses Decimal
-  ExpSumm_date          DateTime
-  Purchase              Purchase @relation(fields: [ExpSumm_purchaseId], references: [Purchase_id])
-}
-
-model Devolution {
-  Dev_id            Int         @id @default(autoincrement())
-  Dev_description   String
-  Dev_saleDetailsId Int
-  Dev_quantity      Int
-  Dev_unitPrice     Decimal
-  Dev_date          DateTime    @default(now())
-  SaleDetails       SaleDetails @relation(fields: [Dev_saleDetailsId], references: [SaleDetail_id])
 }

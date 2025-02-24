@@ -1,5 +1,5 @@
 // import { SupplierList } from "@/interfaces";
-import { CurrentViewSupplierPage } from "@/interface";
+import { CurrentViewSupplierPage, SupplierListType } from "@/interface";
 import { Supplier } from "@prisma/client";
 import { create } from "zustand";
 
@@ -11,7 +11,9 @@ type States = {
   supplierDetails: Supplier | null; //* Estado para visualizar un proveedor en detalle.
   detailManager: boolean; //* Maneja la vista para el supplier details.
   loadingDetails: boolean; //* Muestra un cargando o spinner mienstras se carga la respuesta la api para monstrar el detalle del proveedor.
-  isActiveModalOpen: boolean //* Muestra u oculta el modal para activar o desactivar proveedor.
+  isActiveModalOpen: boolean; //* Muestra u oculta el modal para activar o desactivar proveedor.
+
+  supplierList: SupplierListType[] | null; //* Almacena la lista de proveedores para mostrar en el formulario
 };
 
 type Actions = {
@@ -28,7 +30,10 @@ type Actions = {
   setDetailManager: (status: boolean) => void; //* Maneja el estado del detailmanager
   setLoadingdetails: (status: boolean) => void; //* Maneja el esstado del loadingDetail.
 
-  toggleActiveModal: ()=> void; //* Maneja el estado del isActivEModal.
+  toggleActiveModal: () => void; //* Maneja el estado del isActivEModal.
+
+  setSupplierList: (supplierList: SupplierListType[]) => void; //* Maneja el estado de supplierList.
+  cleanSupplierList: () => void; //* Limpia el estado del supplierList.
 };
 
 export const useSupplierStore = create<States & Actions>((set, get) => ({
@@ -39,6 +44,7 @@ export const useSupplierStore = create<States & Actions>((set, get) => ({
   detailManager: false,
   loadingDetails: false,
   isActiveModalOpen: false,
+  supplierList: null,
 
   setSuppliers: (suppliers) => {
     set({ suppliers });
@@ -69,14 +75,14 @@ export const useSupplierStore = create<States & Actions>((set, get) => ({
         suppliers: !suppliers ? [supplier] : [...suppliers, supplier],
       }));
     } else if (action === "update") {
-      if (typeof supplier.Supplier_id !== "number") {
+      if (typeof supplier.Supp_id !== "number") {
         console.error("Id del proveedor inválido");
         return;
       }
       if (!suppliers) return;
       set(() => ({
         suppliers: suppliers.map((item) =>
-          item.Supplier_id === supplier.Supplier_id ? supplier : item
+          item.Supp_id === supplier.Supp_id ? supplier : item
         ),
       }));
     } else {
@@ -84,7 +90,7 @@ export const useSupplierStore = create<States & Actions>((set, get) => ({
     }
   },
   setSupplierDetails: (supplier) => {
-    set({supplierDetails: supplier})
+    set({ supplierDetails: supplier });
   },
   clearSupplierDetails: () => {
     set({ supplierDetails: null });
@@ -95,9 +101,15 @@ export const useSupplierStore = create<States & Actions>((set, get) => ({
   setLoadingdetails: (status) => {
     set({ loadingDetails: status });
   },
-  toggleActiveModal: ()=>{
-    const { isActiveModalOpen} = get();
+  toggleActiveModal: () => {
+    const { isActiveModalOpen } = get();
     document.documentElement.classList.toggle("overflow-hidden");
     set({ isActiveModalOpen: !isActiveModalOpen });
-  }
+  },
+  setSupplierList: (supplierList) => {
+    set({ supplierList });
+  },
+  cleanSupplierList: () => {
+    set({ supplierList: null });
+  },
 }));
