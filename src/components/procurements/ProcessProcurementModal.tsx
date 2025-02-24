@@ -86,7 +86,7 @@ export const ProcessProcurementModal = () => {
             </p>
 
             <button
-              className={`flex gap-1 justify-center items-center  rounded text-white mx-auto mt-5 uppercase font-semibold shadow-md bg-teal-700 hover:bg-teal-600 dark:bg-teal-800 dark:hover:bg-teal-600 transition-all duration-700 w-28 md:w-32`}
+              className={`flex gap-1 justify-center items-center  rounded text-white mx-auto mt-5 uppercase font-semibold shadow-md bg-teal-700 hover:bg-teal-600 dark:bg-teal-800 dark:hover:bg-teal-600 transition-all duration-700 w-40 h-8 md:h-10`}
               onClick={handleProcess}
             >
               {loading ? (
