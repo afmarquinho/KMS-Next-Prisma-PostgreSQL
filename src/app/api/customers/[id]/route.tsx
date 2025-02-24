@@ -26,22 +26,22 @@ export async function PUT(req: NextRequest) {
 
     const body = await req.json();
     const {
-      Customer_dni,
-      Customer_name,
-      Customer_surname,
-      Customer_email,
-      Customer_phoneNumber,
-      Customer_address,
+      Cust_dni,
+      Cust_name,
+      Cust_surname,
+      Cust_email,
+      Cust_phoneNumber,
+      Cust_address,
     } = body;
 
     //* Validación de campos obligatorios
     if (
-      !Customer_dni ||
-      !Customer_name ||
-      !Customer_surname ||
-      !Customer_email ||
-      !Customer_phoneNumber ||
-      !Customer_address
+      !Cust_dni ||
+      !Cust_name ||
+      !Cust_surname ||
+      !Cust_email ||
+      !Cust_phoneNumber ||
+      !Cust_address
     ) {
       return NextResponse.json(
         {
@@ -55,7 +55,7 @@ export async function PUT(req: NextRequest) {
 
     // Verificar si el cliente ya existe.
     const existingCustomer = await prisma.customer.findUnique({
-      where: { Customer_id: customerId },
+      where: { Cust_id: customerId },
     });
 
     if (!existingCustomer) {
@@ -67,10 +67,10 @@ export async function PUT(req: NextRequest) {
 
     // Verificar si el email ya está en uso por otro usuario
     const existingEmail = await prisma.customer.findUnique({
-      where: { Customer_email },
+      where: { Cust_email },
     });
 
-    if (existingEmail && existingEmail.Customer_id !== customerId) {
+    if (existingEmail && existingEmail.Cust_id !== customerId) {
       return NextResponse.json(
         { ok: false, data: null, message: "Email ya está en uso." },
         { status: 400 }
@@ -79,15 +79,15 @@ export async function PUT(req: NextRequest) {
     // TODO: Manejar el userId
     // Actualizar cliente
     const updatedCustomer = await prisma.customer.update({
-      where: { Customer_id: customerId },
+      where: { Cust_id: customerId },
       data: {
-        Customer_dni,
-        Customer_name,
-        Customer_surname,
-        Customer_email,
-        Customer_phoneNumber,
-        Customer_address,
-        Customer_userId: 5,
+        Cust_dni,
+        Cust_name,
+        Cust_surname,
+        Cust_email,
+        Cust_phoneNumber,
+        Cust_address,
+        Cust_userId: 5,
       },
     });
 
@@ -136,19 +136,19 @@ export async function GET(req: NextRequest) {
     // TODO: Manejar el userId
     // Actualizar cliente
     const customer = await prisma.customer.findUnique({
-      where: { Customer_id: customerId },
+      where: { Cust_id: customerId },
       select: {
-        Customer_id: true,
-        Customer_address: true,
-        Customer_dni: true,
-        Customer_email: true,
-        Customer_habeasData: true,
-        Customer_name: true,
-        Customer_surname: true,
-        Customer_phoneNumber: true,
-        Customer_registrationDate: true,
-        Customer_userId: true,
-        Sales: true,
+        Cust_id: true,
+        Cust_address: true,
+        Cust_dni: true,
+        Cust_email: true,
+        Cust_habeasData: true,
+        Cust_name: true,
+        Cust_surname: true,
+        Cust_phoneNumber: true,
+        Cust_registrationDate: true,
+        Cust_userId: true,
+        
       },
     });
 

@@ -76,30 +76,30 @@ export const SuppliersTable = () => {
           <tbody className={`px-10`}>
             {suppliers?.map((supplier, i) => (
               <tr
-                key={supplier.Supplier_id}
+                key={supplier.Supp_id}
                 className={` dark:border-slate-600 hover:bg-gray-300 dark:hover:bg-yellow-900 py-5 ${
                   i % 2 === 0 && "bg-slate-100 dark:bg-slate-800"
                 }`}
               >
                 <td className={`py-2 px-2`}>{i + 1}</td>
-                <td className={`py-2 px-1`}>{supplier.Supplier_nit}</td>
-                <td className={`py-2 px-1`}>{supplier.Supplier_name}</td>
-                <td className={`py-2 px-1`}>{supplier.Supplier_contactInfo}</td>
+                <td className={`py-2 px-1`}>{supplier.Supp_nit}</td>
+                <td className={`py-2 px-1`}>{supplier.Supp_name}</td>
+                <td className={`py-2 px-1`}>{supplier.Supp_contactInfo}</td>
                 <td className={`py-2 px-1`}>
                   <div className={`flex gap-1 items-center`}>
                     <div
                       className={`w-2 h-2 rounded-full ${
-                        supplier.Supplier_active ? "bg-green-500" : "bg-red-600"
+                        supplier.Supp_active ? "bg-green-500" : "bg-red-600"
                       }`}
                     ></div>{" "}
-                    {supplier.Supplier_active ? "Activo" : "No Activo"}
+                    {supplier.Supp_active ? "Activo" : "No Activo"}
                   </div>
                 </td>
                 <td className={`py-2 px-1`}>
                   {/* //*Watch button */}
                   <button
                     className={`bg-gradient-to-b from-rose-500 to-rose-700 hover:from-red-800 hover:to-red-800 transition-colors duration-300 ease-linear rounded-full w-8 h-6 p-1 flex justify-center items-center shadow`}
-                    onClick={() => handleViewSupplier(supplier.Supplier_id)}
+                    onClick={() => handleViewSupplier(supplier.Supp_id)}
                   >
                     <SearchIcon className={`text-white w-5`} />
                   </button>

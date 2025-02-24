@@ -27,7 +27,7 @@ export async function GET(req: NextRequest) {
     // TODO: Manejar el userId
     // Actualizar cliente
     const customer = await prisma.supplier.findUnique({
-      where: { Supplier_id: supplierId },
+      where: { Supp_id: supplierId },
     });
 
     return NextResponse.json(
@@ -77,8 +77,8 @@ export async function PUT(req: NextRequest) {
 
     // Buscar el proveedor
     const supplier = await prisma.supplier.findUnique({
-      where: { Supplier_id: supplierId },
-      select: { Supplier_active: true },
+      where: { Supp_id: supplierId },
+      select: { Supp_active: true },
     });
 
     if (!supplier) {
@@ -92,10 +92,10 @@ export async function PUT(req: NextRequest) {
       );
     }
 
-    // Invertir el estado de Supplier_active
+    // Invertir el estado de Supp_active
     const updatedSupplier = await prisma.supplier.update({
-      where: { Supplier_id: supplierId },
-      data: { Supplier_active: !supplier.Supplier_active },
+      where: { Supp_id: supplierId },
+      data: { Supp_active: !supplier.Supp_active },
     });
 
     return NextResponse.json(

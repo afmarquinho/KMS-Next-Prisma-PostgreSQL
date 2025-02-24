@@ -5,7 +5,7 @@ export async function GET() {
   try {
     const suppliers = await prisma.supplier.findMany({
       orderBy: {
-        Supplier_name: "asc",
+        Supp_name: "asc",
       },
     });
 
@@ -41,24 +41,24 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
 
     const {
-      Supplier_nit,
-      Supplier_name,
-      Supplier_contactInfo,
-      Supplier_email,
-      Supplier_phoneNumber,
-      Supplier_city,
-      Supplier_address,
+      Supp_nit,
+      Supp_name,
+      Supp_contactInfo,
+      Supp_email,
+      Supp_phoneNumber,
+      Supp_city,
+      Supp_address,
     } = body;
 
     // Validar que los campos requeridos estén presentes
     if (
-      !Supplier_nit ||
-      !Supplier_name ||
-      !Supplier_contactInfo ||
-      !Supplier_email ||
-      !Supplier_phoneNumber ||
-      !Supplier_city ||
-      !Supplier_address
+      !Supp_nit ||
+      !Supp_name ||
+      !Supp_contactInfo ||
+      !Supp_email ||
+      !Supp_phoneNumber ||
+      !Supp_city ||
+      !Supp_address
     ) {
       return NextResponse.json(
         {
@@ -73,14 +73,14 @@ export async function POST(req: NextRequest) {
     // Crear nuevo proveedor
     const newSupplier = await prisma.supplier.create({
       data: {
-        Supplier_nit,
-        Supplier_name,
-        Supplier_contactInfo,
-        Supplier_email,
-        Supplier_phoneNumber,
-        Supplier_city,
-        Supplier_address,
-        Supplier_userId: 1,
+        Supp_nit,
+        Supp_name,
+        Supp_contactInfo,
+        Supp_email,
+        Supp_phoneNumber,
+        Supp_city,
+        Supp_address,
+        Supp_userId: 1,
       },
     });
 

@@ -23,7 +23,7 @@ export const ActiveSupplierModal = () => {
     try {
       if (!supplierDetails) return;
       const { ok, data, message } = await activeStatus(
-        supplierDetails?.Supplier_id
+        supplierDetails?.Supp_id
       );
       if (ok && data) {
         setSupplierDetails(data);
@@ -53,7 +53,7 @@ export const ActiveSupplierModal = () => {
           />
           <button
             className={`absolute top-2 right-2 ${
-              supplierDetails?.Supplier_active
+              supplierDetails?.Supp_active
                 ? "bg-red-800 hover:bg-red-950"
                 : "bg-green-800 hover:bg-green-950"
             }`}
@@ -63,7 +63,7 @@ export const ActiveSupplierModal = () => {
           </button>
           <h2
             className={`bg-gradient-to-b  text-center text-white uppercase font-bold py-3 ${
-              supplierDetails?.Supplier_active
+              supplierDetails?.Supp_active
                 ? "from-red-600 to-red-700 hover:from-red-700 hover:to-red-800"
                 : "from-green-600 to-green-700 hover:from-green-700 hover:to-green-800"
             }`}
@@ -74,16 +74,16 @@ export const ActiveSupplierModal = () => {
         <div className={`p-4`}>
           <p className={`text-center`}>
             ¿Realmente deseas{" "}
-            {supplierDetails?.Supplier_active ? "Desactivar" : "Activar"} al
+            {supplierDetails?.Supp_active ? "Desactivar" : "Activar"} al
             proveedor{" "}
             <span className={`font-bold`}>
-              {supplierDetails?.Supplier_name}
+              {supplierDetails?.Supp_name}
             </span>
           </p>
 
           <button
             className={`w-32 h-8 flex gap-1 justify-center items-center  rounded text-white transition-all mx-auto mt-5 uppercase font-semibold shadow-md bg-gradient-to-b ${
-              supplierDetails?.Supplier_active
+              supplierDetails?.Supp_active
                 ? "from-red-600 to-red-700 hover:from-red-700 hover:to-red-800"
                 : "from-green-600 to-green-700 hover:from-green-700 hover:to-green-800"
             }`}
@@ -96,7 +96,7 @@ export const ActiveSupplierModal = () => {
               <>
                 <CirclePower className={`w-5`} />
 
-                {supplierDetails?.Supplier_active ? "Desactivar" : "Activar"}
+                {supplierDetails?.Supp_active ? "Desactivar" : "Activar"}
               </>
             )}
           </button>

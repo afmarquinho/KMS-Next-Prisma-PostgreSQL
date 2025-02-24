@@ -29,22 +29,22 @@ export async function PUT(req: NextRequest) {
     const body = await req.json();
 
     const {
-      Supplier_name,
-      Supplier_contactInfo,
-      Supplier_email,
-      Supplier_phoneNumber,
-      Supplier_city,
-      Supplier_address,
+      Supp_name,
+      Supp_contactInfo,
+      Supp_email,
+      Supp_phoneNumber,
+      Supp_city,
+      Supp_address,
     } = body;
 
     // Validar que los campos requeridos estén presentes
     if (
-      !Supplier_name ||
-      !Supplier_contactInfo ||
-      !Supplier_email ||
-      !Supplier_phoneNumber ||
-      !Supplier_city ||
-      !Supplier_address
+      !Supp_name ||
+      !Supp_contactInfo ||
+      !Supp_email ||
+      !Supp_phoneNumber ||
+      !Supp_city ||
+      !Supp_address
     ) {
       return NextResponse.json(
         {
@@ -58,7 +58,7 @@ export async function PUT(req: NextRequest) {
 
     // Verificar si el cliente ya existe.
     const existingSupplier = await prisma.supplier.findUnique({
-      where: { Supplier_id: supplierId },
+      where: { Supp_id: supplierId },
     });
 
     if (!existingSupplier) {
@@ -71,15 +71,15 @@ export async function PUT(req: NextRequest) {
     // TODO: Manejar el userId
     // Actualizar cliente
     const updatedSupplier = await prisma.supplier.update({
-      where: { Supplier_id: supplierId },
+      where: { Supp_id: supplierId },
       data: {
-        Supplier_name,
-        Supplier_contactInfo,
-        Supplier_email,
-        Supplier_phoneNumber,
-        Supplier_city,
-        Supplier_address,
-        Supplier_userId: 2,
+        Supp_name,
+        Supp_contactInfo,
+        Supp_email,
+        Supp_phoneNumber,
+        Supp_city,
+        Supp_address,
+        Supp_userId: 2,
       },
     });
 

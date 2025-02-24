@@ -41,40 +41,40 @@ export const CustomerDetails = () => {
             <tbody className={`text-left`}>
               <tr>
                 <th className={`italic`}>Cédula</th>
-                <td className={`p-3`}>{customerDetails?.Customer_dni}</td>
+                <td className={`p-3`}>{customerDetails?.Cust_dni}</td>
               </tr>
               <tr>
                 <th className={`italic`}>Nombre</th>
-                <td className={`p-3`}>{customerDetails?.Customer_name}</td>
+                <td className={`p-3`}>{customerDetails?.Cust_name}</td>
               </tr>
               <tr>
                 <th className={`italic`}>Apellido</th>
-                <td className={`p-3`}>{customerDetails?.Customer_surname}</td>
+                <td className={`p-3`}>{customerDetails?.Cust_surname}</td>
               </tr>
               <tr>
                 <th className={`italic`}>Correo Electrónico</th>
-                <td className={`p-3`}>{customerDetails?.Customer_email}</td>
+                <td className={`p-3`}>{customerDetails?.Cust_email}</td>
               </tr>
               <tr>
                 <th className={`italic`}>Teléfono</th>
                 <td className={`p-3`}>
-                  {customerDetails?.Customer_phoneNumber}
+                  {customerDetails?.Cust_phoneNumber}
                 </td>
               </tr>
               <tr>
                 <th className={`italic`}>Dirección</th>
-                <td className={`p-3`}>{customerDetails?.Customer_address}</td>
+                <td className={`p-3`}>{customerDetails?.Cust_address}</td>
               </tr>
               <tr>
                 <th className={`italic`}>Tratamiento de datos personales</th>
                 <td className={`p-3`}>
-                  {customerDetails?.Customer_habeasData ? "Sí" : "No"}
+                  {customerDetails?.Cust_habeasData ? "Sí" : "No"}
                 </td>
               </tr>
 
               <tr>
                 <th className={`italic`}>Editado por</th>
-                <td className={`p-3`}>{customerDetails?.Customer_userId}</td>
+                <td className={`p-3`}>{customerDetails?.Cust_userId}</td>
               </tr>
             </tbody>
           </table>
