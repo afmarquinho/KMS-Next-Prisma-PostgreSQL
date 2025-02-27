@@ -1,14 +1,14 @@
 "use client";
 import {
-  ClipboardPen,
+  ClipboardPenIcon,
   // CircleDollarSign,
   // CircleUserRound,
   // ClipboardPen,
   // NotebookText,
   PanelsTopLeft,
-  ShoppingBag,
-  UserRoundCog,
-  Warehouse,
+  ShoppingBagIcon,
+  UserRoundCogIcon,
+  WarehouseIcon,
   // Wrench,
   X,
 } from "lucide-react";
@@ -28,7 +28,9 @@ export const Sidebar = () => {
     ${isSidebarCollapsed ? "w-0 md:w-14" : "w-56"}
     `}
     >
-      <div className={`flex items-center justify-between p-3 border-b-2 border-slate-200 dark:border-slate-700`}>
+      <div
+        className={`flex items-center justify-between p-3 border-b-2 border-slate-200 dark:border-slate-700`}
+      >
         {/* DIV TO WRAP LOGO AND NAME */}
         <div className={`flex justify-start items-center gap-1`}>
           <div
@@ -74,25 +76,25 @@ export const Sidebar = () => {
       <SidebarLink
         path="Órdenes de Compra"
         href="/procurements"
-        icon={ShoppingBag}
+        icon={ShoppingBagIcon}
         subtitle="Administrar órdenes"
       />
       <SidebarLink
         path="Inventarios"
-        href="/inventory"
-        icon={Warehouse}
+        href="/inventory-manager"
+        icon={WarehouseIcon}
         subtitle="Gestión de stock"
       />
       <SidebarLink
         path="Terceros"
         href="/masters"
-        icon={ClipboardPen}
+        icon={ClipboardPenIcon}
         subtitle="Proveedores y clientes"
       />
       <SidebarLink
         path="Gestor de Usuarios"
         href="/users"
-        icon={UserRoundCog}
+        icon={UserRoundCogIcon}
         subtitle="Administrar usuarios"
       />
     </div>

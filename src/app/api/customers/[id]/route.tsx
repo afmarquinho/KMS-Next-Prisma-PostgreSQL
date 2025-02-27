@@ -110,6 +110,7 @@ export async function PUT(req: NextRequest) {
     );
   }
 }
+
 export async function GET(req: NextRequest) {
   try {
     // const id = req.url.split("/").pop() Extracción directa de la url, tambien es posible.
