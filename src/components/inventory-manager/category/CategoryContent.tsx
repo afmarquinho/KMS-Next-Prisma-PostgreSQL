@@ -5,7 +5,7 @@ import { useCategoryStore } from "@/store";
 import { PencilIcon, TrashIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { Subtitle } from "../ui/Subtitle";
+import { Subtitle } from "../../UI/Subtitle";
 import { LoadingSpinner2 } from "@/components/UI";
 import { NewCategoryModal } from "./NewCategoryModal";
 import { Category } from "@prisma/client";

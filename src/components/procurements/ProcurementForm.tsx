@@ -155,7 +155,7 @@ export const ProcurementForm = () => {
             <input
               type="date"
               className="bg-slate-300 dark:bg-slate-700 p-2 focus:outline-none text-base rounded"
-              {...register("Pro_dueDate")}
+              {...register("Pro_dueDate", {valueAsDate: true})}
               defaultValue={
                 procurement ? formatDateForInput(procurement.Pro_dueDate) : ""
               }

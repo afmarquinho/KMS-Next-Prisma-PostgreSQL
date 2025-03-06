@@ -11,14 +11,15 @@ const procurementSchema = z.object({
   Pro_paymentMethod: z.string().min(1, "Digite el medio de pago"),
 
   Pro_dueDate: z
-    .string()
-    .refine((date) => new Date(date).toString() !== "Invalid Date", {
-      message: "La fecha es requerida",
-    })
-    .transform((date) => new Date(date))
-    .refine((date) => date > new Date(), {
-      message: "La fecha debe ser futura",
-    }),
+    // .string()
+    // .refine((date) => new Date(date).toString() !== "Invalid Date", {
+    //   message: "La fecha es requerida",
+    // })
+    // .transform((date) => new Date(date))
+    // .refine((date) => date > new Date(), {
+    //   message: "La fecha debe ser futura",
+    // }),
+    .date(),
 
   Pro_suppId: z.preprocess(
     (value) => {

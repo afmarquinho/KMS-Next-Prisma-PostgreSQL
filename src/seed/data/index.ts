@@ -1,4 +1,3 @@
-export * from './BatchInventory';
 export * from './Category';
 export * from './Customer';
 export * from './Departments';
@@ -7,9 +6,9 @@ export * from './ExpenseSummary';
 export * from './InvetoryRequests';
 export * from './Item';
 export * from './Procurement';
+export * from './ProcurementNote';
 export * from './Product';
 export * from './ProvisionRequest';
-export * from './PurchaseNote';
 export * from './Sale';
 export * from './StockMovement';
 export * from './Supplier';

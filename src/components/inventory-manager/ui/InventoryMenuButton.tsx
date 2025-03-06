@@ -1,7 +1,6 @@
 import { useInventoryStore } from "@/store";
 import { ArchiveIcon, PackageOpenIcon, TagIcon, TruckIcon } from "lucide-react";
 
-
 type Props = {
   label: keyof typeof icons; // Restringe label a las claves de icons
 };
@@ -16,21 +15,21 @@ const icons = {
 export const InventoryMenuButton = ({ label }: Props) => {
   const {
     toggleCategoryModal,
-    togglePurchaseModal,
+    toggleProcurementModal,
     toggleInventoryModal,
-    toggleRequestsModal: toggleRequirementModal,
+    toggleRequestsModal,
     categoryModalOpen,
-    purchaseModalOpen,
+    procurementModalOpen,
     inventoryModalOpen,
-    requestsModalOpen: requirementModalOpen,
+    requestsModalOpen,
   } = useInventoryStore();
 
   // Configuración de modales y estados
   const modalConfig = {
-    Compras: { isOpen: purchaseModalOpen, toggle: togglePurchaseModal },
+    Compras: { isOpen: procurementModalOpen, toggle: toggleProcurementModal },
     Inventario: { isOpen: inventoryModalOpen, toggle: toggleInventoryModal },
     Categoría: { isOpen: categoryModalOpen, toggle: toggleCategoryModal },
-    Solicitudes: { isOpen: requirementModalOpen, toggle: toggleRequirementModal },
+    Solicitudes: { isOpen: requestsModalOpen, toggle: toggleRequestsModal },
   };
 
   // Clases dinámicas basadas en el estado del modal

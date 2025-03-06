@@ -18,10 +18,11 @@ export const Title = () => {
 
   return (
     <>
-      {/* <Head>
-        <title>{title}</title>
-      </Head>  */}
-      <h1 className={`italic font-bold uppercase text-blue-900 dark:text-yellow-500`}>{title}</h1>
+      <h1
+        className={`italic font-black uppercase text-blue-900 dark:text-yellow-500`}
+      >
+        {title}
+      </h1>
     </>
   );
 };

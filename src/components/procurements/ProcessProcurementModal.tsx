@@ -39,6 +39,7 @@ export const ProcessProcurementModal = () => {
         toggleProcessProcurementModal();
         clearProId();
         setDetailManager(false);
+        //TODO: AL PROCESAR LA COMPRA NO QUIERO QUE VAYA A LA PÁGINA DE INICIO
       } else {
         toast.error(message);
       }

@@ -1,47 +1,55 @@
 // import { InventoryTable, Purchases } from "@/interfaces";
+import { ProcurementType } from "@/interface";
 import { create } from "zustand";
 
 type States = {
-  processedPurchases: any | null;
+  processedProcurement: ProcurementType[] | null;
+
   categoryModalOpen: boolean;
-  purchaseModalOpen: boolean;
+  procurementModalOpen: boolean;
   inventoryModalOpen: boolean;
-  products: any | null;
-  productModalOpen: boolean;
   requestsModalOpen: boolean;
+  
+  productModalOpen: boolean;
+  // products: any | null;
+  loadingDetails: boolean; // LOading que maneja el spinner de la pagina de detalles de compras
+  
 };
 
 type Actions = {
-  setProcessedPurchases: (purchases: any) => void;
-  togglePurchaseModal: (isOpen: boolean) => void;
+  setProcessedProcurements: (procurement: ProcurementType[]) => void;
+  toggleProcurementModal: (isOpen: boolean) => void;
   toggleCategoryModal: (isOpen: boolean) => void;
   toggleInventoryModal: (isOpen: boolean) => void;
   toggleRequestsModal: (isOpen: boolean) => void;
   toggleProductModal: () => void;
-  setProducts: (products: any) => void;
+  // setProducts: (products: any) => void;
+  setLoadingDetails: () => void;
 };
 
 // Crear el store
 export const useInventoryStore = create<States & Actions>((set, get) => ({
   // Estados iniciales
-  processedPurchases: null,
-  purchaseModalOpen: true, // Inicia mostrando la tabla de compras en el módulo de inventarios.
+  processedProcurement: null,
+
+  procurementModalOpen: true, // Inicia mostrando la tabla de compras en el módulo de inventarios.
   categoryModalOpen: false,
   inventoryModalOpen: false,
 
   newCategoryModal: false,
-  products: null,
+  // products: null,
   productModalOpen: false,
   requestsModalOpen: false,
+  loadingDetails: false,
 
   // Acciones para actualizar el estado
-  setProcessedPurchases: (purchases) => {
-    set({ processedPurchases: purchases });
+  setProcessedProcurements: (purchases) => {
+    set({ processedProcurement: purchases });
   },
-  togglePurchaseModal: (isOpen) => {
+  toggleProcurementModal: (isOpen) => {
     if (isOpen) {
       set({
-        purchaseModalOpen: isOpen,
+        procurementModalOpen: isOpen,
         categoryModalOpen: !isOpen,
         inventoryModalOpen: !isOpen,
         requestsModalOpen: !isOpen,
@@ -52,7 +60,7 @@ export const useInventoryStore = create<States & Actions>((set, get) => ({
   toggleCategoryModal: (isOpen) => {
     if (isOpen) {
       set({
-        purchaseModalOpen: !isOpen,
+        procurementModalOpen: !isOpen,
         categoryModalOpen: isOpen,
         inventoryModalOpen: !isOpen,
         requestsModalOpen: !isOpen,
@@ -63,7 +71,7 @@ export const useInventoryStore = create<States & Actions>((set, get) => ({
   toggleInventoryModal: (isOpen) => {
     if (isOpen) {
       set({
-        purchaseModalOpen: !isOpen,
+        procurementModalOpen: !isOpen,
         categoryModalOpen: !isOpen,
         inventoryModalOpen: isOpen,
         requestsModalOpen: !isOpen,
@@ -75,7 +83,7 @@ export const useInventoryStore = create<States & Actions>((set, get) => ({
   toggleRequestsModal: (isOpen) => {
     if (isOpen) {
       set({
-        purchaseModalOpen: !isOpen,
+        procurementModalOpen: !isOpen,
         categoryModalOpen: !isOpen,
         inventoryModalOpen: !isOpen,
         requestsModalOpen: isOpen,
@@ -84,14 +92,18 @@ export const useInventoryStore = create<States & Actions>((set, get) => ({
     return;
   },
 
-
   toggleProductModal: () => {
     const { productModalOpen } = get();
     document.documentElement.classList.toggle("overflow-hidden");
     set({ productModalOpen: !productModalOpen });
   },
 
-  setProducts: (products) => {
-    set({ products });
+  // setProducts: (products) => {
+  //   set({ products });
+  // },
+
+  setLoadingDetails: () => {
+    const { loadingDetails } = get();
+    set({ loadingDetails: !loadingDetails });
   },
 }));

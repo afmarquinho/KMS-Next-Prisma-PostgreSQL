@@ -6,19 +6,17 @@ import { InventoryContent } from "../inventory/InventoryContent";
 import { ProcurementContent } from "../procurement/ProcurementContent";
 import { DispatchRequests } from "../inventory/DispatchRequests";
 
-
-
 export const InventoryContainer = () => {
   const {
     categoryModalOpen,
-    purchaseModalOpen,
+    procurementModalOpen,
     inventoryModalOpen,
     requestsModalOpen,
   } = useInventoryStore();
 
   return (
     <>
-      {purchaseModalOpen && <ProcurementContent />}
+      {procurementModalOpen && <ProcurementContent />}
       {inventoryModalOpen && <InventoryContent />}
       {requestsModalOpen && <DispatchRequests />}
       {categoryModalOpen && <CategoryContent />}
