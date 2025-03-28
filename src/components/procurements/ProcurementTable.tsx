@@ -85,29 +85,29 @@ export const ProcurementTable = () => {
           <tbody>
             {procurements.map((procurement, i) => (
               <tr
-                key={procurement.Pro_id}
+                key={procurement.Proc_id}
                 className={`hover:bg-gray-300 dark:hover:bg-yellow-900 py-5 ${
                   i % 2 === 0 ? "bg-slate-100 dark:bg-slate-800" : ""
                 }`}
               >
                 <td className="py-2 px-2">{i + 1}</td>
-                <td className="py-2 ps-1 pe-5">{procurement.Pro_desc}</td>
+                <td className="py-2 ps-1 pe-5">{procurement.Proc_desc}</td>
                 <td className="py-2 px-1">{procurement.Supplier.Supp_name}</td>
                 <td className="py-2 px-1">
-                  {formatISOToDate(procurement.Pro_date)}
+                  {formatISOToDate(procurement.Proc_date)}
                 </td>
                 <td className="py-2 px-1">
-                  {formatISOToDate(procurement.Pro_dueDate)}
+                  {formatISOToDate(procurement.Proc_dueDate)}
                 </td>
-                <td className="py-2 px-1">{procurement.Pro_paymentMethod}</td>
+                <td className="py-2 px-1">{procurement.Proc_paymentMethod}</td>
                 <td className="py-2 px-1">
-                  {formatToCurrency(procurement.Pro_totalAmount)}
+                  {formatToCurrency(procurement.Proc_totalAmount)}
                 </td>
 
                 <td className="py-2 px-1">
                   <button
                     className={`bg-gradient-to-b from-rose-500 to-rose-700 hover:from-red-800 hover:to-red-800 transition-colors duration-300 ease-linear rounded-full w-8 h-6 p-1 flex justify-center items-center shadow`}
-                    onClick={() => handleView(procurement.Pro_id)}
+                    onClick={() => handleView(procurement.Proc_id)}
                   >
                     <SearchIcon className="text-white w-5" />
                   </button>
@@ -115,7 +115,7 @@ export const ProcurementTable = () => {
                 <td className="py-2 px-1">
                   <button
                     className={`bg-gradient-to-b from-indigo-500 to-indigo-700 hover:from-blue-800 hover:to-blue-800 transition-colors duration-300 ease-linear w-8 h-6 p-1 flex justify-center items-center shadow-md rounded ${
-                      procurement.Pro_processed && "hidden"
+                      procurement.Proc_processed && "hidden"
                     }`}
                     onClick={() => handleEdit(procurement)}
                   >

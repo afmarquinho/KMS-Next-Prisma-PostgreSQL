@@ -7,7 +7,7 @@ import { EllipsisIcon } from "lucide-react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-export const GetCategoriesButton = () => {
+export const GetCategoryListButton = () => {
   const { setCategories } = useCategoryStore();
   const { getCategories } = useCategories();
   const [loading, setLoading] = useState<boolean>(false);

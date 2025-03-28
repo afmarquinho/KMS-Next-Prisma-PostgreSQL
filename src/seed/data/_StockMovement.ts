@@ -9,7 +9,7 @@ export const StockMovement = [
     Mov_userId: 3,
     Mov_proId: 3,
     Mov_saleId: null,
-    createdAt: "2025-03-06T23:25:09.915Z",
+    createdAt: "2025-03-07T04:25:09.915Z",
   },
   {
     Mov_id: 2,
@@ -21,7 +21,7 @@ export const StockMovement = [
     Mov_userId: 3,
     Mov_proId: 3,
     Mov_saleId: null,
-    createdAt: "2025-03-06T23:25:32.317Z",
+    createdAt: "2025-03-07T04:25:32.317Z",
   },
   {
     Mov_id: 3,
@@ -33,7 +33,7 @@ export const StockMovement = [
     Mov_userId: 3,
     Mov_proId: 2,
     Mov_saleId: null,
-    createdAt: "2025-03-06T23:27:52.620Z",
+    createdAt: "2025-03-07T04:27:52.620Z",
   },
   {
     Mov_id: 4,
@@ -45,7 +45,7 @@ export const StockMovement = [
     Mov_userId: 3,
     Mov_proId: 2,
     Mov_saleId: null,
-    createdAt: "2025-03-06T23:28:11.646Z",
+    createdAt: "2025-03-07T04:28:11.646Z",
   },
   {
     Mov_id: 5,
@@ -57,7 +57,7 @@ export const StockMovement = [
     Mov_userId: 3,
     Mov_proId: 2,
     Mov_saleId: null,
-    createdAt: "2025-03-06T23:28:34.413Z",
+    createdAt: "2025-03-07T04:28:34.413Z",
   },
   {
     Mov_id: 6,
@@ -69,7 +69,7 @@ export const StockMovement = [
     Mov_userId: 3,
     Mov_proId: 22,
     Mov_saleId: null,
-    createdAt: "2025-03-06T23:32:06.310Z",
+    createdAt: "2025-03-07T04:32:06.310Z",
   },
   {
     Mov_id: 7,
@@ -81,7 +81,7 @@ export const StockMovement = [
     Mov_userId: 3,
     Mov_proId: 22,
     Mov_saleId: null,
-    createdAt: "2025-03-06T23:32:37.942Z",
+    createdAt: "2025-03-07T04:32:37.942Z",
   },
   {
     Mov_id: 8,
@@ -93,7 +93,7 @@ export const StockMovement = [
     Mov_userId: 3,
     Mov_proId: 22,
     Mov_saleId: null,
-    createdAt: "2025-03-06T23:32:57.258Z",
+    createdAt: "2025-03-07T04:32:57.258Z",
   },
   {
     Mov_id: 9,
@@ -105,7 +105,7 @@ export const StockMovement = [
     Mov_userId: 3,
     Mov_proId: 3,
     Mov_saleId: null,
-    createdAt: "2025-03-06T23:33:24.773Z",
+    createdAt: "2025-03-07T04:33:24.773Z",
   },
   {
     Mov_id: 10,
@@ -117,7 +117,7 @@ export const StockMovement = [
     Mov_userId: 3,
     Mov_proId: 21,
     Mov_saleId: null,
-    createdAt: "2025-03-06T23:33:56.409Z",
+    createdAt: "2025-03-07T04:33:56.409Z",
   },
   {
     Mov_id: 11,
@@ -129,7 +129,7 @@ export const StockMovement = [
     Mov_userId: 3,
     Mov_proId: 21,
     Mov_saleId: null,
-    createdAt: "2025-03-06T23:34:26.298Z",
+    createdAt: "2025-03-07T04:34:26.298Z",
   },
   {
     Mov_id: 12,
@@ -141,7 +141,7 @@ export const StockMovement = [
     Mov_userId: 3,
     Mov_proId: 21,
     Mov_saleId: null,
-    createdAt: "2025-03-06T23:34:42.958Z",
+    createdAt: "2025-03-07T04:34:42.958Z",
   },
   {
     Mov_id: 13,
@@ -153,7 +153,7 @@ export const StockMovement = [
     Mov_userId: 3,
     Mov_proId: 21,
     Mov_saleId: null,
-    createdAt: "2025-03-06T23:35:04.873Z",
+    createdAt: "2025-03-07T04:35:04.873Z",
   },
   {
     Mov_id: 14,
@@ -165,7 +165,7 @@ export const StockMovement = [
     Mov_userId: 3,
     Mov_proId: 21,
     Mov_saleId: null,
-    createdAt: "2025-03-06T23:35:23.314Z",
+    createdAt: "2025-03-07T04:35:23.314Z",
   },
   {
     Mov_id: 15,
@@ -177,7 +177,7 @@ export const StockMovement = [
     Mov_userId: 3,
     Mov_proId: 1,
     Mov_saleId: null,
-    createdAt: "2025-03-06T23:35:51.223Z",
+    createdAt: "2025-03-07T04:35:51.223Z",
   },
   {
     Mov_id: 16,
@@ -189,7 +189,7 @@ export const StockMovement = [
     Mov_userId: 3,
     Mov_proId: 1,
     Mov_saleId: null,
-    createdAt: "2025-03-06T23:36:05.732Z",
+    createdAt: "2025-03-07T04:36:05.732Z",
   },
   {
     Mov_id: 17,
@@ -201,7 +201,7 @@ export const StockMovement = [
     Mov_userId: 3,
     Mov_proId: 1,
     Mov_saleId: null,
-    createdAt: "2025-03-06T23:36:24.960Z",
+    createdAt: "2025-03-07T04:36:24.960Z",
   },
   {
     Mov_id: 18,
@@ -213,7 +213,7 @@ export const StockMovement = [
     Mov_userId: 3,
     Mov_proId: 1,
     Mov_saleId: null,
-    createdAt: "2025-03-06T23:36:44.086Z",
+    createdAt: "2025-03-07T04:36:44.086Z",
   },
   {
     Mov_id: 19,
@@ -225,7 +225,7 @@ export const StockMovement = [
     Mov_userId: 3,
     Mov_proId: 1,
     Mov_saleId: null,
-    createdAt: "2025-03-06T23:37:04.424Z",
+    createdAt: "2025-03-07T04:37:04.424Z",
   },
   {
     Mov_id: 20,
@@ -237,7 +237,7 @@ export const StockMovement = [
     Mov_userId: 3,
     Mov_proId: 21,
     Mov_saleId: null,
-    createdAt: "2025-03-06T23:37:33.907Z",
+    createdAt: "2025-03-07T04:37:33.907Z",
   },
   {
     Mov_id: 21,
@@ -249,7 +249,7 @@ export const StockMovement = [
     Mov_userId: 3,
     Mov_proId: 23,
     Mov_saleId: null,
-    createdAt: "2025-03-06T23:46:49.157Z",
+    createdAt: "2025-03-07T04:46:49.157Z",
   },
   {
     Mov_id: 22,
@@ -261,7 +261,7 @@ export const StockMovement = [
     Mov_userId: 3,
     Mov_proId: 23,
     Mov_saleId: null,
-    createdAt: "2025-03-06T23:47:15.136Z",
+    createdAt: "2025-03-07T04:47:15.136Z",
   },
   {
     Mov_id: 23,
@@ -273,7 +273,7 @@ export const StockMovement = [
     Mov_userId: 3,
     Mov_proId: 23,
     Mov_saleId: null,
-    createdAt: "2025-03-06T23:47:35.495Z",
+    createdAt: "2025-03-07T04:47:35.495Z",
   },
   {
     Mov_id: 24,
@@ -285,7 +285,7 @@ export const StockMovement = [
     Mov_userId: 3,
     Mov_proId: 23,
     Mov_saleId: null,
-    createdAt: "2025-03-06T23:47:56.741Z",
+    createdAt: "2025-03-07T04:47:56.741Z",
   },
   {
     Mov_id: 25,
@@ -297,7 +297,7 @@ export const StockMovement = [
     Mov_userId: 3,
     Mov_proId: 23,
     Mov_saleId: null,
-    createdAt: "2025-03-06T23:48:16.378Z",
+    createdAt: "2025-03-07T04:48:16.378Z",
   },
   {
     Mov_id: 26,
@@ -309,7 +309,7 @@ export const StockMovement = [
     Mov_userId: 3,
     Mov_proId: 23,
     Mov_saleId: null,
-    createdAt: "2025-03-06T23:48:28.690Z",
+    createdAt: "2025-03-07T04:48:28.690Z",
   },
   {
     Mov_id: 27,
@@ -321,6 +321,6 @@ export const StockMovement = [
     Mov_userId: 3,
     Mov_proId: 23,
     Mov_saleId: null,
-    createdAt: "2025-03-06T23:51:28.895Z",
+    createdAt: "2025-03-07T04:51:28.895Z",
   },
 ];

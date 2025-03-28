@@ -1,4 +1,5 @@
 import { Prisma } from "@prisma/client";
+import { Decimal } from "@prisma/client/runtime/client";
 
 export type InvTableType = Prisma.ProductGetPayload<{
   select: {
@@ -114,4 +115,27 @@ export type InvrProductDataType = {
   Prod_catId: number;
   Item_id: number;
   reason: string;
+};
+
+//? Respuesta de la consulta a la api para visualizar el inventario
+export type InvProductType = {
+  Prod_id: number;
+  Prod_name: string;
+  Prod_ref: string;
+  Prod_stock: number;
+  Prod_batch: string;
+  Prod_procurementEnabled: boolean;
+  Prod_saleEnabled: boolean;
+  Prod_margin: Decimal;
+  Item: {
+    Item_unitCost: Decimal;
+    Category: {
+      Cat_name: string;
+    };
+    Procurement: {
+      Supplier: {
+        Supp_name: true;
+      };
+    };
+  };
 };

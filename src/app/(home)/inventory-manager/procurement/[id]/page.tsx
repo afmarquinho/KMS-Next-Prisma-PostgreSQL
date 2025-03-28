@@ -99,7 +99,7 @@ const InventoryItemsManagementPage = async ({ params }: PageProps) => {
 
       <SectionTitle label="Anotaciones" />
       <div className="flex flex-col md:flex-row gap-5 w-full mb-5 ps-1">
-        <AddNoteForm proId={data.Pro_id} />
+        <AddNoteForm proId={data.Proc_id} />
 
         {/* //*Línea divisoria adaptable */}
         <div className="relative">
@@ -111,7 +111,7 @@ const InventoryItemsManagementPage = async ({ params }: PageProps) => {
 
         <CommentsSection notes={data.ProcurementNote} />
       </div>
-      {!data.Pro_close && (
+      {!data.Proc_close && (
         <button
           type="button"
           className={`shadow-lg rounded p-2 flex gap-2 text-xs text-white items-center justify-center my-5 bg-rose-600 hover:bg-rose-700 dark:bg-rose-700 dark:hover:bg-rose-600 transition-colors duration-300`}

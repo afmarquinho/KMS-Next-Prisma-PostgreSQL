@@ -6,6 +6,7 @@ import { LockIcon, TriangleAlertIcon, XIcon } from "lucide-react";
 import { useProcurementStore } from "@/store";
 import { useProcurement } from "@/hooks/useProcurement";
 import { toast } from "react-toastify";
+import { Button } from "../UI/Button";
 
 export const ProcessProcurementModal = () => {
   const {
@@ -53,7 +54,7 @@ export const ProcessProcurementModal = () => {
   return (
     <>
       <div
-        className={`fixed inset-[-100px] bg-black bg-opacity-60 dark:bg-opacity-80 z-20 flex justify-center items-center backdrop-blur-[1px]`}
+        className={`fixed  inset-0 !m-0 bg-black bg-opacity-60 dark:bg-opacity-80 z-20 flex justify-center items-center backdrop-blur-[1px]`}
       >
         <div
           className={`w-full max-w-96 bg-white dark:bg-slate-700 rounded overflow-hidden`}
@@ -73,31 +74,31 @@ export const ProcessProcurementModal = () => {
               />
             </button>
             <h2
-              className={`bg-teal-700  dark:bg-teal-800  text-center text-white uppercase font-bold py-3 `}
+              className={`bg-blue-600 text-center text-white uppercase font-bold py-3`}
             >
               Alerta
             </h2>
           </div>
           <div className={`p-4`}>
             <p className={`text-center font-medium`}>
-              ¿Realmente deseas cerrar la compra?
+              ¿Realmente deseas procesar esta compra?
             </p>
-            <p className={`text-center`}>
-              Recuerda que una vez cerrada ya no la podrás editar o actualizar{" "}
+            <p className={`text-center mb-2`}>
+              Recuerda que una vez procesada ya no la podrás editar o actualizar{" "}
             </p>
 
-            <button
-              className={`flex gap-1 justify-center items-center  rounded text-white mx-auto mt-5 uppercase font-semibold shadow-md bg-teal-700 hover:bg-teal-600 dark:bg-teal-800 dark:hover:bg-teal-600 transition-all duration-700 w-40 h-8 md:h-10`}
+            <Button
+              className={`w-40 h-8 md:h-10 mx-auto`}
               onClick={handleProcess}
             >
               {loading ? (
                 <LoadingSpinner />
               ) : (
                 <>
-                  <LockIcon className={`w-5`} /> Cerrar Compra
+                  <LockIcon className={`w-5`} /> Procesar compra
                 </>
               )}
-            </button>
+            </Button>
           </div>
         </div>
       </div>

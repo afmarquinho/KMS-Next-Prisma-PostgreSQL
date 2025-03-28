@@ -1,9 +1,10 @@
 "use client";
 
 import { LoadingSpinner } from "@/components/UI";
+import { Button } from "@/components/UI/Button";
 import { useItem } from "@/hooks/useItem";
 import { useItemStore, useProcurementStore } from "@/store";
-import { TriangleAlertIcon, XIcon } from "lucide-react";
+import { Trash2Icon, TriangleAlertIcon, XIcon } from "lucide-react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -11,11 +12,11 @@ export const DeleteItemModal = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const { toggleDeleteItemModal, item, setItems, clearItem } = useItemStore();
   const { deleteItem } = useItem();
-  const { setProcurementDetails, updateAmount} = useProcurementStore()
+  const { setProcurementDetails } = useProcurementStore();
 
   const handleCancel = () => {
     toggleDeleteItemModal();
-    clearItem()
+    clearItem();
   };
 
   const handleDelete = async () => {
@@ -28,7 +29,8 @@ export const DeleteItemModal = () => {
         const { Item, ...procurement } = data;
         setProcurementDetails(procurement);
         setItems(Item);
-        updateAmount(procurement.Pro_id, procurement.Pro_totalAmount);
+
+        
         toggleDeleteItemModal();
         toast.success("Producto eliminado.");
       } else {
@@ -45,9 +47,11 @@ export const DeleteItemModal = () => {
   return (
     <>
       <div
-        className={`fixed inset-[-100px] bg-black bg-opacity-60 dark:bg-opacity-80 z-20 flex justify-center items-center backdrop-blur-[1px]`}
+        className={`fixed  inset-0 !m-0 bg-black bg-opacity-60 dark:bg-opacity-80 z-20 flex justify-center items-center backdrop-blur-[1px]`}
       >
-        <div className={`w-full max-w-96 bg-white dark:bg-slate-700 rounded overflow-hidden`}>
+        <div
+          className={`w-full max-w-96 bg-white dark:bg-slate-700 rounded overflow-hidden`}
+        >
           <div className={`relative`}>
             <TriangleAlertIcon
               className={`absolute top-2 left-2 text-yellow-400`}
@@ -71,17 +75,23 @@ export const DeleteItemModal = () => {
           </div>
 
           <div className={`p-4`}>
-            <p className={`text-center`}>
+            <p className={`text-center mb-1`}>
               ¿Realmente deseas eliminar este producto:{" "}
-              <span className={`font-medium`}>{item?.Item_name}</span>?
+              <span className={`font-medium`}>{item?.Product.Prod_name}</span>?
             </p>
-
-            <button
-              className={`flex gap-1 justify-center items-center  rounded text-white transition-all mx-auto mt-5 uppercase font-semibold shadow-md bg-gradient-to-b from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 w-28 md:w-32 h-8 md:h-10`}
+            <Button
+              variant="danger"
               onClick={handleDelete}
+              className={`mx-auto`}
             >
-              {loading ? <LoadingSpinner /> : "Eliminar"}
-            </button>
+              {loading ? (
+                <LoadingSpinner />
+              ) : (
+                <>
+                  <Trash2Icon className={`w-5 h-5`} /> Eliminar
+                </>
+              )}
+            </Button>
           </div>
         </div>
       </div>

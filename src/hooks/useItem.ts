@@ -1,15 +1,12 @@
-import itemSchema from "@/validations/ItemSchema";
+import { ItemCreateType } from "@/interface";
+
 import axios from "axios";
-import { z } from "zod";
 
 const API = axios.create({ baseURL: "/api/procurements/items" });
 
 export const useItem = () => {
-  const createItem = async (
-    proId: number,
-    item: z.infer<typeof itemSchema>
-  ) => {
-    const { data } = await API.post(`/${proId}`, item);
+  const createItem = async (procId: number, item: ItemCreateType[]) => {
+    const { data } = await API.post(`/${procId}`, item);
 
     try {
       return { ok: data.ok, data: data.data, message: data.message };
@@ -21,19 +18,19 @@ export const useItem = () => {
         axios.isAxiosError(error) && error.response?.data?.message
           ? error.response.data.message
           : error instanceof Error
-          ? error.message
-          : "Error al crear el ítem.";
+          ? "Error al crear el ítem."
+          : "Error desconocido";
 
       return { ok: false, data: null, message: errorMessage };
     }
   };
 
   const updateItem = async (
-    proId: number,
-    Item_id: number,
-    item: z.infer<typeof itemSchema>
+    procurementId: number,
+    item: ItemCreateType,
+    Item_id: number
   ) => {
-    const { data } = await API.put(`/${proId}`, { ...item, Item_id });
+    const { data } = await API.put(`/${procurementId}`, { ...item, Item_id });
 
     try {
       return { ok: data.ok, data: data.data, message: data.message };
@@ -52,9 +49,7 @@ export const useItem = () => {
     }
   };
 
-  const deleteItem = async (
-    itemId: number
-  ) => {
+  const deleteItem = async (itemId: number) => {
     const { data } = await API.delete(`/${itemId}`);
 
     try {
@@ -73,6 +68,6 @@ export const useItem = () => {
       return { ok: false, data: null, message: errorMessage };
     }
   };
-  
-  return { createItem, updateItem , deleteItem};
+
+  return { createItem, updateItem, deleteItem };
 };

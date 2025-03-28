@@ -53,21 +53,11 @@ export const PUT = async (
         { status: 404 }
       );
     }
-    console.log("Item encontrado: ", item);
+    
 
     const result = await prisma.$transaction(async (tx) => {
-      const dataEntry = {
-        Prod_name: data.Prod_name.trim(),
-        Prod_ref: data.Prod_ref.trim().toUpperCase(),
-        Prod_stock: data.Prod_qtyReceive,
-        Prod_itemId: data.Item_id,
-        Prod_catId: data.Prod_catId,
-        Prod_batch: data.Prod_batchCode.trim().toLocaleUpperCase(),
-        Prod_batchDueDate: data.Prod_batchDate,
-        Prod_userId: userId,
-      };
-
-      console.log("Datos de entrada: ", dataEntry);
+     
+      // Crear producto
       const product = await tx.product.create({
         data: {
           Prod_name: data.Prod_name.trim(),
@@ -81,12 +71,12 @@ export const PUT = async (
         },
       });
 
-      console.log("Prodcuto creado: ", product);
+  
 
       // Todo: Revisar el por qué no coge el valor por defecto en location
 
       // Registrar movimiento de inventario
-      const mov = await tx.stockMovement.create({
+      await tx.stockMovement.create({
         data: {
           Mov_type: "entrada",
           Mov_qty: data.Prod_qtyReceive || 0,
@@ -97,7 +87,6 @@ export const PUT = async (
         },
       });
 
-      console.log("Movimiento creado: ", mov);
 
       // Actualizar el ítem de compra
       const upItem = await tx.item.update({

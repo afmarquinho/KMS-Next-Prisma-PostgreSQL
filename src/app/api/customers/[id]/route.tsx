@@ -87,7 +87,7 @@ export async function PUT(req: NextRequest) {
         Cust_email,
         Cust_phoneNumber,
         Cust_address,
-        Cust_userId: 5,
+       createdBy: 5,
       },
     });
 
@@ -148,7 +148,7 @@ export async function GET(req: NextRequest) {
         Cust_surname: true,
         Cust_phoneNumber: true,
         Cust_registrationDate: true,
-        Cust_userId: true,
+       createdBy:true,
         
       },
     });

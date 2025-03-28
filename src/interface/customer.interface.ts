@@ -22,7 +22,7 @@ export type CustomerDetails = Prisma.CustomerGetPayload<{
     Cust_surname: true;
     Cust_phoneNumber: true;
     Cust_registrationDate: true;
-    Cust_userId: true;
+   createdBy: true;
     Sales: true;
   };
 }>;

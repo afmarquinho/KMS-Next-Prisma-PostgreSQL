@@ -4,7 +4,7 @@ import { formatISOToDate, formatToCurrency } from "@/utils";
 export const getProcurementInventoryById = async (id: number) => {
   try {
     const procurement = await prisma.procurement.findUnique({
-      where: { Pro_id: id },
+      where: { Proc_id: id },
       include: {
         Supplier: {
           select: {
@@ -23,15 +23,15 @@ export const getProcurementInventoryById = async (id: number) => {
             Item_id: "asc",
           },
           include: {
-            Category: {
+            Product: {
               select: {
-                Cat_id: true,
-                Cat_name: true,
+                Prod_id: true,
+                Prod_name: true,
               },
             },
           },
         },
-        ProcurementNote: {
+        ProcurementNotes: {
           orderBy: {
             Note_createdAt: "desc",
           },
@@ -69,10 +69,10 @@ export const getProcurementInventoryById = async (id: number) => {
 
     const res = {
       ...procurement,
-      Pro_totalAmount: formatToCurrency(procurement.Pro_totalAmount),
-      Pro_date: formatISOToDate(procurement.Pro_date),
-      Pro_dueDate: formatISOToDate(procurement.Pro_dueDate),
-      ProcurementNote: procurement.ProcurementNote.map((note) => ({
+      Proc_totalAmount: formatToCurrency(procurement.Proc_totalAmount),
+      Proc_date: formatISOToDate(procurement.Proc_date),
+      Proc_dueDate: formatISOToDate(procurement.Proc_dueDate),
+      ProcurementNote: procurement.ProcurementNotes.map((note) => ({
         ...note,
         Note_createdAt: formatISOToDate(note.Note_createdAt),
       })),

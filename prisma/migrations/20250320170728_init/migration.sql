@@ -36,7 +36,7 @@ CREATE TABLE "Customer" (
     "Cust_address" TEXT NOT NULL,
     "Cust_habeasData" BOOLEAN NOT NULL DEFAULT true,
     "Cust_registrationDate" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "Cust_userId" INTEGER NOT NULL,
+    "createdBy" INTEGER NOT NULL,
 
     CONSTRAINT "Customer_pkey" PRIMARY KEY ("Cust_id")
 );
@@ -53,7 +53,7 @@ CREATE TABLE "Supplier" (
     "Supp_address" TEXT NOT NULL,
     "Supp_active" BOOLEAN NOT NULL DEFAULT true,
     "Supp_registrationDate" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "Supp_userId" INTEGER NOT NULL,
+    "createdBy" INTEGER NOT NULL,
 
     CONSTRAINT "Supplier_pkey" PRIMARY KEY ("Supp_id")
 );
@@ -62,42 +62,39 @@ CREATE TABLE "Supplier" (
 CREATE TABLE "Category" (
     "Cat_id" SERIAL NOT NULL,
     "Cat_name" TEXT NOT NULL,
-    "Cat_createdBy" INTEGER NOT NULL,
+    "createdBy" INTEGER NOT NULL,
 
     CONSTRAINT "Category_pkey" PRIMARY KEY ("Cat_id")
 );
 
 -- CreateTable
 CREATE TABLE "Procurement" (
-    "Pro_id" SERIAL NOT NULL,
-    "Pro_desc" TEXT NOT NULL,
-    "Pro_date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "Pro_totalAmount" DECIMAL(65,30) NOT NULL DEFAULT 0,
-    "Pro_paymentMethod" TEXT NOT NULL,
-    "Pro_dueDate" TIMESTAMP(3) NOT NULL,
-    "Pro_close" BOOLEAN NOT NULL DEFAULT false,
-    "Pro_processed" BOOLEAN NOT NULL DEFAULT false,
-    "Pro_userId" INTEGER NOT NULL,
-    "Pro_suppId" INTEGER NOT NULL,
+    "Proc_id" SERIAL NOT NULL,
+    "Proc_desc" TEXT NOT NULL,
+    "Proc_date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "Proc_totalAmount" DECIMAL(65,30) NOT NULL DEFAULT 0,
+    "Proc_paymentMethod" TEXT NOT NULL,
+    "Proc_dueDate" TIMESTAMP(3) NOT NULL,
+    "Proc_close" BOOLEAN NOT NULL DEFAULT false,
+    "Proc_processed" BOOLEAN NOT NULL DEFAULT false,
+    "createdBy" INTEGER NOT NULL,
+    "Proc_suppId" INTEGER NOT NULL,
 
-    CONSTRAINT "Procurement_pkey" PRIMARY KEY ("Pro_id")
+    CONSTRAINT "Procurement_pkey" PRIMARY KEY ("Proc_id")
 );
 
 -- CreateTable
 CREATE TABLE "Item" (
     "Item_id" SERIAL NOT NULL,
-    "Item_ref" TEXT,
-    "Item_name" TEXT NOT NULL,
-    "Item_desc" TEXT NOT NULL,
     "Item_unitCost" DECIMAL(65,30) NOT NULL,
     "Item_qtyOrdered" INTEGER NOT NULL,
     "Item_totalAmount" DECIMAL(65,30) NOT NULL,
     "Item_qtyReceived" INTEGER NOT NULL DEFAULT 0,
     "Item_location" TEXT NOT NULL DEFAULT 'UNRECEIVED',
     "Item_status" TEXT NOT NULL DEFAULT 'ORDERED',
-    "Item_unitMeasure" TEXT NOT NULL,
-    "Item_proId" INTEGER NOT NULL,
-    "Item_catId" INTEGER NOT NULL,
+    "Item_prodId" INTEGER NOT NULL,
+    "Item_procId" INTEGER NOT NULL,
+    "createdBy" INTEGER NOT NULL,
 
     CONSTRAINT "Item_pkey" PRIMARY KEY ("Item_id")
 );
@@ -107,17 +104,33 @@ CREATE TABLE "Product" (
     "Prod_id" SERIAL NOT NULL,
     "Prod_name" TEXT NOT NULL,
     "Prod_ref" TEXT NOT NULL,
-    "Prod_reorderPoint" INTEGER NOT NULL DEFAULT 0,
-    "Prod_stock" INTEGER NOT NULL,
-    "Prod_active" BOOLEAN NOT NULL DEFAULT true,
-    "Prod_location" TEXT NOT NULL DEFAULT 'Bodega',
-    "Prod_itemId" INTEGER NOT NULL,
+    "Prod_desc" TEXT NOT NULL,
     "Prod_catId" INTEGER NOT NULL,
-    "Prod_batch" TEXT NOT NULL,
-    "Prod_batchDueDate" TIMESTAMP(3) NOT NULL,
+    "Prod_procurementEnabled" BOOLEAN NOT NULL DEFAULT true,
+    "Prod_brand" TEXT,
+    "Prod_unitMeasure" TEXT NOT NULL,
+    "createdBy" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Product_pkey" PRIMARY KEY ("Prod_id")
+);
+
+-- CreateTable
+CREATE TABLE "Inventory" (
+    "Inv_id" SERIAL NOT NULL,
+    "Inv_prodId" INTEGER NOT NULL,
+    "Inv_stock" INTEGER NOT NULL,
+    "Inv_saleEnabled" BOOLEAN NOT NULL DEFAULT true,
+    "Inv_location" TEXT NOT NULL DEFAULT 'Bodega',
+    "Inv_itemId" INTEGER NOT NULL,
+    "Inv_batch" TEXT NOT NULL,
+    "Inv_batchDueDate" TIMESTAMP(3) NOT NULL,
+    "Inv_margin" DECIMAL(65,30) NOT NULL DEFAULT 0.15,
+    "Inv_marginValidity" TIMESTAMP(3),
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "createdBy" INTEGER NOT NULL,
+
+    CONSTRAINT "Inventory_pkey" PRIMARY KEY ("Inv_id")
 );
 
 -- CreateTable
@@ -126,7 +139,7 @@ CREATE TABLE "ProcurementNote" (
     "Note_content" TEXT NOT NULL,
     "Note_createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "Note_userId" INTEGER NOT NULL,
-    "Note_proId" INTEGER NOT NULL,
+    "Note_procId" INTEGER NOT NULL,
 
     CONSTRAINT "ProcurementNote_pkey" PRIMARY KEY ("Note_id")
 );
@@ -153,8 +166,10 @@ CREATE TABLE "StockMovement" (
     "Mov_prodId" INTEGER NOT NULL,
     "Mov_dest" TEXT NOT NULL DEFAULT 'bodega',
     "Mov_userId" INTEGER NOT NULL,
-    "Mov_relatedId" INTEGER,
+    "Mov_procId" INTEGER,
+    "Mov_saleId" INTEGER,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "InventoryInv_id" INTEGER,
 
     CONSTRAINT "StockMovement_pkey" PRIMARY KEY ("Mov_id")
 );
@@ -272,13 +287,13 @@ CREATE UNIQUE INDEX "Supplier_Supp_email_key" ON "Supplier"("Supp_email");
 CREATE UNIQUE INDEX "Category_Cat_name_key" ON "Category"("Cat_name");
 
 -- CreateIndex
-CREATE INDEX "Item_Item_ref_idx" ON "Item"("Item_ref");
+CREATE UNIQUE INDEX "Product_Prod_name_key" ON "Product"("Prod_name");
 
 -- CreateIndex
-CREATE INDEX "Product_Prod_ref_idx" ON "Product"("Prod_ref");
+CREATE UNIQUE INDEX "Product_Prod_ref_key" ON "Product"("Prod_ref");
 
 -- CreateIndex
-CREATE INDEX "ProcurementNote_Note_proId_idx" ON "ProcurementNote"("Note_proId");
+CREATE INDEX "ProcurementNote_Note_procId_idx" ON "ProcurementNote"("Note_procId");
 
 -- CreateIndex
 CREATE INDEX "StockMovement_Mov_prodId_Mov_dest_Mov_type_idx" ON "StockMovement"("Mov_prodId", "Mov_dest", "Mov_type");
@@ -299,37 +314,49 @@ CREATE UNIQUE INDEX "ExpenseSummary_ExpSumm_purchaseId_key" ON "ExpenseSummary"(
 ALTER TABLE "User" ADD CONSTRAINT "User_User_depId_fkey" FOREIGN KEY ("User_depId") REFERENCES "Departments"("Dep_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Customer" ADD CONSTRAINT "Customer_Cust_userId_fkey" FOREIGN KEY ("Cust_userId") REFERENCES "User"("User_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Customer" ADD CONSTRAINT "Customer_createdBy_fkey" FOREIGN KEY ("createdBy") REFERENCES "User"("User_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Supplier" ADD CONSTRAINT "Supplier_Supp_userId_fkey" FOREIGN KEY ("Supp_userId") REFERENCES "User"("User_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Supplier" ADD CONSTRAINT "Supplier_createdBy_fkey" FOREIGN KEY ("createdBy") REFERENCES "User"("User_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Category" ADD CONSTRAINT "Category_Cat_createdBy_fkey" FOREIGN KEY ("Cat_createdBy") REFERENCES "User"("User_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Category" ADD CONSTRAINT "Category_createdBy_fkey" FOREIGN KEY ("createdBy") REFERENCES "User"("User_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Procurement" ADD CONSTRAINT "Procurement_Pro_userId_fkey" FOREIGN KEY ("Pro_userId") REFERENCES "User"("User_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Procurement" ADD CONSTRAINT "Procurement_createdBy_fkey" FOREIGN KEY ("createdBy") REFERENCES "User"("User_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Procurement" ADD CONSTRAINT "Procurement_Pro_suppId_fkey" FOREIGN KEY ("Pro_suppId") REFERENCES "Supplier"("Supp_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Procurement" ADD CONSTRAINT "Procurement_Proc_suppId_fkey" FOREIGN KEY ("Proc_suppId") REFERENCES "Supplier"("Supp_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Item" ADD CONSTRAINT "Item_Item_proId_fkey" FOREIGN KEY ("Item_proId") REFERENCES "Procurement"("Pro_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Item" ADD CONSTRAINT "Item_Item_procId_fkey" FOREIGN KEY ("Item_procId") REFERENCES "Procurement"("Proc_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Item" ADD CONSTRAINT "Item_Item_catId_fkey" FOREIGN KEY ("Item_catId") REFERENCES "Category"("Cat_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Item" ADD CONSTRAINT "Item_Item_prodId_fkey" FOREIGN KEY ("Item_prodId") REFERENCES "Product"("Prod_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Item" ADD CONSTRAINT "Item_createdBy_fkey" FOREIGN KEY ("createdBy") REFERENCES "User"("User_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Product" ADD CONSTRAINT "Product_Prod_catId_fkey" FOREIGN KEY ("Prod_catId") REFERENCES "Category"("Cat_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Product" ADD CONSTRAINT "Product_Prod_itemId_fkey" FOREIGN KEY ("Prod_itemId") REFERENCES "Item"("Item_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Product" ADD CONSTRAINT "Product_createdBy_fkey" FOREIGN KEY ("createdBy") REFERENCES "User"("User_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Inventory" ADD CONSTRAINT "Inventory_Inv_prodId_fkey" FOREIGN KEY ("Inv_prodId") REFERENCES "Product"("Prod_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Inventory" ADD CONSTRAINT "Inventory_Inv_itemId_fkey" FOREIGN KEY ("Inv_itemId") REFERENCES "Item"("Item_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Inventory" ADD CONSTRAINT "Inventory_createdBy_fkey" FOREIGN KEY ("createdBy") REFERENCES "User"("User_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "ProcurementNote" ADD CONSTRAINT "ProcurementNote_Note_userId_fkey" FOREIGN KEY ("Note_userId") REFERENCES "User"("User_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "ProcurementNote" ADD CONSTRAINT "ProcurementNote_Note_proId_fkey" FOREIGN KEY ("Note_proId") REFERENCES "Procurement"("Pro_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "ProcurementNote" ADD CONSTRAINT "ProcurementNote_Note_procId_fkey" FOREIGN KEY ("Note_procId") REFERENCES "Procurement"("Proc_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "ProvisionRequests" ADD CONSTRAINT "ProvisionRequests_Prov_prodId_fkey" FOREIGN KEY ("Prov_prodId") REFERENCES "Product"("Prod_id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -341,10 +368,16 @@ ALTER TABLE "ProvisionRequests" ADD CONSTRAINT "ProvisionRequests_Prov_requested
 ALTER TABLE "StockMovement" ADD CONSTRAINT "StockMovement_Mov_prodId_fkey" FOREIGN KEY ("Mov_prodId") REFERENCES "Product"("Prod_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "StockMovement" ADD CONSTRAINT "StockMovement_Mov_procId_fkey" FOREIGN KEY ("Mov_procId") REFERENCES "Procurement"("Proc_id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "StockMovement" ADD CONSTRAINT "StockMovement_Mov_saleId_fkey" FOREIGN KEY ("Mov_saleId") REFERENCES "Sale"("Sale_id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "StockMovement" ADD CONSTRAINT "StockMovement_Mov_userId_fkey" FOREIGN KEY ("Mov_userId") REFERENCES "User"("User_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "InventoryRequests" ADD CONSTRAINT "InventoryRequests_Req_prodId_fkey" FOREIGN KEY ("Req_prodId") REFERENCES "Product"("Prod_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "StockMovement" ADD CONSTRAINT "StockMovement_InventoryInv_id_fkey" FOREIGN KEY ("InventoryInv_id") REFERENCES "Inventory"("Inv_id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "InventoryRequests" ADD CONSTRAINT "InventoryRequests_Req_depId_fkey" FOREIGN KEY ("Req_depId") REFERENCES "Departments"("Dep_id") ON DELETE RESTRICT ON UPDATE CASCADE;

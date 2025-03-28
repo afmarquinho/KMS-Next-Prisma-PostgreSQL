@@ -1,5 +1,5 @@
 // import { InventoryTable, Purchases } from "@/interfaces";
-import { ProcurementType } from "@/interface";
+import { InvProductType, ProcurementType } from "@/interface";
 import { create } from "zustand";
 
 type States = {
@@ -9,11 +9,17 @@ type States = {
   procurementModalOpen: boolean;
   inventoryModalOpen: boolean;
   requestsModalOpen: boolean;
-  
+
   productModalOpen: boolean;
   // products: any | null;
   loadingDetails: boolean; // LOading que maneja el spinner de la pagina de detalles de compras
-  
+
+  // Estados para la sección de inventario
+  invProducts: InvProductType[] | null; // Productos en inventario
+  isExpanded: boolean; // Estado para expandir los criterios de búsqueda
+  totalRecords: number; // Total de registros en la tabla de inventario
+  pageSize: number; // Cantidad de registros por página
+  hasSearched: boolean; // Estado para saber si se ha realizado una búsqueda
 };
 
 type Actions = {
@@ -25,6 +31,12 @@ type Actions = {
   toggleProductModal: () => void;
   // setProducts: (products: any) => void;
   setLoadingDetails: () => void;
+
+  setInvProducts: (products: InvProductType[]) => void;
+  setIsExpanded: () => void;
+  setTotalRecords: (total: number) => void;
+  setPageSize: (size: number) => void;
+  setHasSearched: () => void;
 };
 
 // Crear el store
@@ -41,6 +53,12 @@ export const useInventoryStore = create<States & Actions>((set, get) => ({
   productModalOpen: false,
   requestsModalOpen: false,
   loadingDetails: false,
+
+  invProducts: null,
+  isExpanded: false,
+  totalRecords: 0,
+  pageSize: 0,
+  hasSearched: false,
 
   // Acciones para actualizar el estado
   setProcessedProcurements: (purchases) => {
@@ -105,5 +123,23 @@ export const useInventoryStore = create<States & Actions>((set, get) => ({
   setLoadingDetails: () => {
     const { loadingDetails } = get();
     set({ loadingDetails: !loadingDetails });
+  },
+
+  setInvProducts: (products) => {
+    set({ invProducts: products });
+  },
+
+  setIsExpanded: () => {
+    const { isExpanded } = get();
+    set({ isExpanded: !isExpanded });
+  },
+  setTotalRecords: (total) => {
+    set({ totalRecords: total });
+  },
+  setPageSize: (size) => {
+    set({ pageSize: size });
+  },
+  setHasSearched: () => {
+    set({ hasSearched: true });
   },
 }));

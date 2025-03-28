@@ -58,12 +58,11 @@ export const useItemStore = create<States & Actions>((set, get) => ({
 
     if (action === "add") {
       set(() => ({
-        items: !items ? [item] : [...items, item]
-      }))
-
+        items: !items ? [item] : [...items, item],
+      }));
     } else if (action === "update") {
       if (typeof item.Item_id !== "number") {
-        console.error("Id del la compra inválida");
+        console.error("Id del ítem de la compra inválida");
         return;
       }
       if (!items) return;
@@ -72,6 +71,14 @@ export const useItemStore = create<States & Actions>((set, get) => ({
           value.Item_id === item.Item_id ? item : value
         ),
       }));
+    } else if (action === "delete") {
+      if (typeof item.Item_id !== "number") {
+        console.error("Id del ítem de la compra inválida");
+        return;
+      }
+      if (!items) return;
+      const newArray = items.filter((value) => value.Item_id !== item.Item_id);
+      set({ items: newArray });
     } else {
       console.error("Acción no reconocida");
     }

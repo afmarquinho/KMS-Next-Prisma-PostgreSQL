@@ -20,8 +20,12 @@ import { formatDateForInput } from "@/utils";
 type FormValuesTypes = z.infer<typeof procurementSchema>;
 
 export const ProcurementForm = () => {
-  const { procurement, updateProcurements, toggleCurrentView, clearProcurement } =
-    useProcurementStore();
+  const {
+    procurement,
+    updateProcurements,
+    toggleCurrentView,
+    clearProcurement,
+  } = useProcurementStore();
   const { supplierList } = useSupplierStore();
   const [loading, setLoading] = useState<boolean>(false);
   const { createProcurement, updateProcurement } = useProcurement();
@@ -44,11 +48,11 @@ export const ProcurementForm = () => {
           ok,
           data: updatedProc,
           message,
-        } = await updateProcurement(procurement.Pro_id, data);
+        } = await updateProcurement(procurement.Proc_id, data);
         if (ok && updatedProc) {
           updateProcurements("update", updatedProc);
           toggleCurrentView("list");
-          clearProcurement()
+          clearProcurement();
         } else {
           toast.error(message);
         }
@@ -90,33 +94,33 @@ export const ProcurementForm = () => {
         >
           <label className="flex flex-col">
             Descripción
-            {errors.Pro_desc && (
+            {errors.Proc_desc && (
               <div className="text-xs text-red-600 my-0 font-medium">
-                {errors.Pro_desc.message}
+                {errors.Proc_desc.message}
               </div>
             )}
             <textarea
               className="bg-slate-300 dark:bg-slate-700 p-2 focus:outline-none text-base rounded resize-none h-20"
-              {...register("Pro_desc")}
-              defaultValue={procurement ? procurement.Pro_desc : ""}
+              {...register("Proc_desc")}
+              defaultValue={procurement ? procurement.Proc_desc : ""}
             />
           </label>
 
-          <label className="flex flex-col">
-            Proveedor
-            {errors.Pro_suppId && (
+          <div className={`flex flex-col`}>
+            <label className="flex flex-col">Proveedor</label>
+            {errors.Proc_suppId && (
               <div className="text-xs text-red-600 my-0 font-medium">
-                {errors.Pro_suppId.message}
+                {errors.Proc_suppId.message}
               </div>
             )}
             <div className={`flex gap-1`}>
               <GetSupplierListButton />
               <select
                 className="bg-slate-300 dark:bg-slate-700 p-2 focus:outline-none text-base rounded flex-1"
-                {...register("Pro_suppId", { valueAsNumber: true })}
-                defaultValue={procurement ? procurement.Pro_suppId : ""}
+                {...register("Proc_suppId", { valueAsNumber: true })}
+                defaultValue={procurement ? procurement.Proc_suppId : ""}
               >
-                <option value={`${procurement ? procurement.Pro_suppId : ""}`}>
+                <option value={`${procurement ? procurement.Proc_suppId : ""}`}>
                   {procurement
                     ? procurement.Supplier.Supp_name
                     : "-- Seleccione --"}
@@ -128,36 +132,36 @@ export const ProcurementForm = () => {
                 ))}
               </select>
             </div>
-          </label>
+          </div>
 
           <label className="flex flex-col">
             Método de Pago
-            {errors.Pro_paymentMethod && (
+            {errors.Proc_paymentMethod && (
               <div className="text-xs text-red-600 my-0 font-medium">
-                {errors.Pro_paymentMethod.message}
+                {errors.Proc_paymentMethod.message}
               </div>
             )}
             <input
               type="text"
               className="bg-slate-300 dark:bg-slate-700 p-2 focus:outline-none text-base rounded"
-              {...register("Pro_paymentMethod")}
-              defaultValue={procurement ? procurement.Pro_paymentMethod : ""}
+              {...register("Proc_paymentMethod")}
+              defaultValue={procurement ? procurement.Proc_paymentMethod : ""}
             />
           </label>
 
           <label className="flex flex-col">
             Término de Pago
-            {errors.Pro_dueDate && (
+            {errors.Proc_dueDate && (
               <div className="text-xs text-red-600 my-0 font-medium">
-                {errors.Pro_dueDate.message}
+                {errors.Proc_dueDate.message}
               </div>
             )}
             <input
               type="date"
               className="bg-slate-300 dark:bg-slate-700 p-2 focus:outline-none text-base rounded"
-              {...register("Pro_dueDate", {valueAsDate: true})}
+              {...register("Proc_dueDate", { valueAsDate: true })}
               defaultValue={
-                procurement ? formatDateForInput(procurement.Pro_dueDate) : ""
+                procurement ? formatDateForInput(procurement.Proc_dueDate) : ""
               }
             />
           </label>

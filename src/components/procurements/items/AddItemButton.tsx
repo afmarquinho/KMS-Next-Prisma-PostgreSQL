@@ -1,27 +1,23 @@
 "use client";
 
+import { Button } from "@/components/UI/Button";
 import { useItemStore } from "@/store";
 import { PlusIcon } from "lucide-react";
-import { ItemForm } from "./ItemForm";
 
 export const AddItemButton = () => {
-  const { itemModalOpen, toggleItemModal, clearItem} = useItemStore();
+  const { toggleItemModal, clearItem } = useItemStore();
 
   const handleAddItem = () => {
     toggleItemModal();
-    clearItem()
+    clearItem();
   };
 
   return (
     <>
-      <button
-        className="px-4 py-2 bg-indigo-600 text-white font-semibold rounded shadow-md hover:bg-indigo-700 transition-all flex gap-1 items-center justify-center"
-        onClick={handleAddItem}
-      >
-        <PlusIcon className={`w-5`} />
+      <Button className={`w-32 md:w-40 md:h-[2.5rem]`} onClick={handleAddItem}>
+        <PlusIcon className={`w-5 h-5`} />
         Agregar Item
-      </button>
-      {itemModalOpen && <ItemForm />}
+      </Button>
     </>
   );
 };

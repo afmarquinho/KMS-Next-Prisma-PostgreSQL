@@ -5,7 +5,7 @@ export const GET = async () => {
   try {
     const procurements = await prisma.procurement.findMany({
       orderBy: {
-        Pro_date: "asc",
+        Proc_date: "asc",
       },
 
       include: {
@@ -63,12 +63,12 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    //TODO CAMBIAR EL USERID
+    console.log(body)
 
-    const { Pro_desc, Pro_paymentMethod, Pro_dueDate, Pro_suppId } = body;
+    const { Proc_desc, Proc_paymentMethod, Proc_dueDate, Proc_suppId } = body;
 
     // Validación de campos obligatorios
-    if (!Pro_desc || !Pro_paymentMethod || !Pro_dueDate || !Pro_suppId) {
+    if (!Proc_desc || !Proc_paymentMethod || !Proc_dueDate || !Proc_suppId) {
       return NextResponse.json(
         {
           ok: false,
@@ -79,11 +79,11 @@ export async function POST(req: NextRequest) {
       );
     }
     //TODO: CORREGIR EL USERID
-    const Pro_userId: number = 2;
+    const createdBy: number = 2;
 
     // Verificar existencia del usuario
     const existingUser = await prisma.user.findUnique({
-      where: { User_id: Pro_userId },
+      where: { User_id: createdBy },
     });
 
     if (!existingUser) {
@@ -95,7 +95,7 @@ export async function POST(req: NextRequest) {
 
     // Verificar existencia del proveedor
     const existingSupplier = await prisma.supplier.findUnique({
-      where: { Supp_id: Pro_suppId },
+      where: { Supp_id: Proc_suppId },
     });
     if (!existingSupplier) {
       return NextResponse.json(
@@ -103,7 +103,7 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
-    // const dueDate = new Date(Pro_dueDate);
+    // const dueDate = new Date(Proc_dueDate);
     // if (isNaN(dueDate.getTime())) {
     //   return NextResponse.json(
     //     {
@@ -117,7 +117,7 @@ export async function POST(req: NextRequest) {
 
     // Crear la compra
     const newProcurement = await prisma.procurement.create({
-      data: { ...body, Pro_userId },
+      data: { ...body, createdBy },
       include: {
         Supplier: {
           select: {
@@ -131,12 +131,12 @@ export async function POST(req: NextRequest) {
     const formattedAmount = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
-    }).format(Number(newProcurement.Pro_totalAmount));
+    }).format(Number(newProcurement.Proc_totalAmount));
 
     // Retornamos el objeto con el valor actualizado
     const response = {
       ...newProcurement,
-      Pro_totalAmount: formattedAmount, // Reemplazamos el valor original
+      Proc_totalAmount: formattedAmount, // Reemplazamos el valor original
     };
 
     return NextResponse.json(

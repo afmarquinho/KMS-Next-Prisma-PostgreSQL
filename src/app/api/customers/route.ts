@@ -99,7 +99,7 @@ export async function POST(req: NextRequest) {
         Cust_email,
         Cust_phoneNumber,
         Cust_address,
-        Cust_userId: 2       
+       createdBy: 2       
       },
     })
     return NextResponse.json(

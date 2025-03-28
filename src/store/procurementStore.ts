@@ -2,7 +2,6 @@ import {
   ProcurementDetailsType,
   ProcurementType,
 } from "@/interface/procurement.interface";
-import { Decimal } from "@prisma/client/runtime/client";
 import { create } from "zustand";
 
 type States = {
@@ -31,7 +30,7 @@ type Actions = {
 
   toggleProcurementModal: () => void; //* Maneja el estado que activa el modal del formulario para crear o e ditar.
   updateProcurements: (action: string, procurement: ProcurementType) => void; //* Actualiza (crea o edita) el array de compras.
-  updateAmount: (Pro_id: number, newAmount: Decimal) => void; //* Actualiza el monto total del arry de procurements cuando se crea o edita o elimina un nuevo item
+  // updateAmount: (Proc_id: number, newAmount: Decimal) => void; //* Actualiza el monto total del arry de procurements cuando se crea o edita o elimina un nuevo item
   toggleProcessProcurementModal: () => void; //* Maneja estado que activa el modal de cerrar compra.
   setProcurementId: (procurementId: number) => void; //* Llena el estado que almacena el Procurement_id.
   clearProcurementId: () => void; //* Limpia el estado que almacena el Procurement_id.
@@ -69,6 +68,8 @@ export const useProcurementStore = create<States & Actions>((set, get) => ({
   },
   setProcurementDetails: (details) => {
     set({ procurementDetails: details });
+    const { procurementDetails } = get();
+    console.log(procurementDetails);
   },
   clearProcurementDetails: () => {
     set({ procurementDetails: null });
@@ -94,26 +95,26 @@ export const useProcurementStore = create<States & Actions>((set, get) => ({
           : [...procurements, procurement],
       }));
     } else if (action === "update") {
-      if (typeof procurement.Pro_id !== "number") {
+      if (typeof procurement.Proc_id !== "number") {
         console.error("Id del la compra inválida");
         return;
       }
 
       if (!procurements) return;
       set(() => ({
-        procurements: procurements.map((item) =>
-          item.Pro_id === procurement.Pro_id ? procurement : item
+        procurements: procurements.map((p) =>
+          p.Proc_id === procurement.Proc_id ? procurement : p
         ),
       }));
     } else if (action === "delete") {
-      if (typeof procurement.Pro_id !== "number") {
+      if (typeof procurement.Proc_id !== "number") {
         console.error("Id del la compra inválida");
         return;
       }
       if (!procurements) return;
 
       const newArray = procurements.filter(
-        (item) => item.Pro_id !== procurement.Pro_id
+        (p) => p.Proc_id !== procurement.Proc_id
       );
       set({ procurements: newArray });
     } else {
@@ -121,16 +122,6 @@ export const useProcurementStore = create<States & Actions>((set, get) => ({
     }
   },
 
-  updateAmount: (Pro_id,  newAmount) => {
-    const { procurements } = get();
-    if (!procurements) return;
-
-    set(() => ({
-      procurements: procurements.map((item) =>
-        item.Pro_id=== Pro_id ? { ...item, Pro_totalAmount: newAmount } : item
-      ),
-    }));
-  },
 
   toggleProcurementModal: () => {
     const { procurementModalOpen } = get();

@@ -14,6 +14,7 @@ export const Item = [
     Item_unitMeasure: "Unidad",
     Item_proId: 3,
     Item_catId: 10,
+    createdBy: 2,
   },
   {
     Item_id: 3,
@@ -29,6 +30,7 @@ export const Item = [
     Item_unitMeasure: "Unidad",
     Item_proId: 1,
     Item_catId: 3,
+    createdBy: 2,
   },
   {
     Item_id: 12,
@@ -45,6 +47,7 @@ export const Item = [
     Item_unitMeasure: "caja / paquete",
     Item_proId: 3,
     Item_catId: 10,
+    createdBy: 2,
   },
   {
     Item_id: 13,
@@ -61,6 +64,7 @@ export const Item = [
     Item_unitMeasure: "unidad",
     Item_proId: 21,
     Item_catId: 1,
+    createdBy: 2,
   },
   {
     Item_id: 6,
@@ -76,6 +80,7 @@ export const Item = [
     Item_unitMeasure: "Unidad",
     Item_proId: 2,
     Item_catId: 5,
+    createdBy: 2,
   },
   {
     Item_id: 4,
@@ -92,6 +97,7 @@ export const Item = [
     Item_unitMeasure: "Unidad",
     Item_proId: 1,
     Item_catId: 3,
+    createdBy: 2,
   },
   {
     Item_id: 7,
@@ -108,6 +114,7 @@ export const Item = [
     Item_unitMeasure: "Unidad",
     Item_proId: 2,
     Item_catId: 7,
+    createdBy: 2,
   },
   {
     Item_id: 14,
@@ -124,6 +131,7 @@ export const Item = [
     Item_unitMeasure: "unidad",
     Item_proId: 21,
     Item_catId: 1,
+    createdBy: 2,
   },
   {
     Item_id: 10,
@@ -140,6 +148,7 @@ export const Item = [
     Item_unitMeasure: "Unidad",
     Item_proId: 2,
     Item_catId: 4,
+    createdBy: 2,
   },
   {
     Item_id: 22,
@@ -156,6 +165,7 @@ export const Item = [
     Item_unitMeasure: "unidad",
     Item_proId: 23,
     Item_catId: 2,
+    createdBy: 2,
   },
   {
     Item_id: 18,
@@ -172,6 +182,7 @@ export const Item = [
     Item_unitMeasure: "unidad",
     Item_proId: 22,
     Item_catId: 2,
+    createdBy: 2,
   },
   {
     Item_id: 15,
@@ -187,6 +198,7 @@ export const Item = [
     Item_unitMeasure: "unidad",
     Item_proId: 21,
     Item_catId: 1,
+    createdBy: 2,
   },
   {
     Item_id: 19,
@@ -203,6 +215,7 @@ export const Item = [
     Item_unitMeasure: "unidad",
     Item_proId: 22,
     Item_catId: 2,
+    createdBy: 2,
   },
   {
     Item_id: 5,
@@ -219,6 +232,7 @@ export const Item = [
     Item_unitMeasure: "Unidad",
     Item_proId: 1,
     Item_catId: 4,
+    createdBy: 2,
   },
   {
     Item_id: 20,
@@ -235,6 +249,7 @@ export const Item = [
     Item_unitMeasure: "unidad",
     Item_proId: 22,
     Item_catId: 2,
+    createdBy: 2,
   },
   {
     Item_id: 23,
@@ -251,6 +266,7 @@ export const Item = [
     Item_unitMeasure: "unidad",
     Item_proId: 23,
     Item_catId: 2,
+    createdBy: 2,
   },
   {
     Item_id: 16,
@@ -267,6 +283,7 @@ export const Item = [
     Item_unitMeasure: "unidad",
     Item_proId: 21,
     Item_catId: 1,
+    createdBy: 2,
   },
   {
     Item_id: 17,
@@ -283,6 +300,7 @@ export const Item = [
     Item_unitMeasure: "unidad",
     Item_proId: 21,
     Item_catId: 1,
+    createdBy: 2,
   },
   {
     Item_id: 1,
@@ -299,6 +317,7 @@ export const Item = [
     Item_unitMeasure: "Unidad",
     Item_proId: 1,
     Item_catId: 1,
+    createdBy: 2,
   },
   {
     Item_id: 2,
@@ -315,6 +334,7 @@ export const Item = [
     Item_unitMeasure: "Unidad",
     Item_proId: 1,
     Item_catId: 2,
+    createdBy: 2,
   },
   {
     Item_id: 27,
@@ -331,6 +351,7 @@ export const Item = [
     Item_unitMeasure: "unidad",
     Item_proId: 23,
     Item_catId: 1,
+    createdBy: 2,
   },
   {
     Item_id: 24,
@@ -347,6 +368,7 @@ export const Item = [
     Item_unitMeasure: "unidad",
     Item_proId: 23,
     Item_catId: 2,
+    createdBy: 2,
   },
   {
     Item_id: 21,
@@ -363,6 +385,7 @@ export const Item = [
     Item_unitMeasure: "unidad",
     Item_proId: 23,
     Item_catId: 2,
+    createdBy: 2,
   },
   {
     Item_id: 25,
@@ -379,6 +402,7 @@ export const Item = [
     Item_unitMeasure: "unidad",
     Item_proId: 23,
     Item_catId: 1,
+    createdBy: 2,
   },
   {
     Item_id: 26,
@@ -395,5 +419,6 @@ export const Item = [
     Item_unitMeasure: "unidad",
     Item_proId: 23,
     Item_catId: 1,
+    createdBy: 2,
   },
 ];

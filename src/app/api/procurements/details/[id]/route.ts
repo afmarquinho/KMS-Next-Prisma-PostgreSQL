@@ -12,9 +12,9 @@ export const GET = async (req: NextRequest) => {
     );
   }
 
-  const proId = parseInt(id, 10);
+  const procId = parseInt(id, 10);
 
-  if (isNaN(proId)) {
+  if (isNaN(procId)) {
     return NextResponse.json(
       { ok: false, data: null, message: "ID inválido." },
       { status: 400 }
@@ -23,15 +23,17 @@ export const GET = async (req: NextRequest) => {
 
   try {
     const procurementDetails = await prisma.procurement.findUnique({
-      where: { Pro_id: proId },
+      where: { Proc_id: procId },
       include: {
         Supplier: {
           select: {
             Supp_nit: true,
+            Supp_name: true,
             Supp_contactInfo: true,
             Supp_email: true,
             Supp_phoneNumber: true,
-            Supp_name: true,
+            Supp_city: true,
+            Supp_address: true,
           },
         },
         User: {
@@ -43,20 +45,27 @@ export const GET = async (req: NextRequest) => {
         Item: {
           select: {
             Item_id: true,
-            Item_desc: true,
-            Item_name: true,
-            Item_location: true,
-            Item_proId: true,
-            Item_qtyOrdered: true,
-            Item_qtyReceived: true,
-            Item_ref: true,
-            Item_status: true,
-            Item_totalAmount: true,
             Item_unitCost: true,
-            Item_catId: true,
-            Item_unitMeasure: true,
-            Category: {
-              select: { Cat_name: true },
+            Item_qtyOrdered: true,
+            Item_totalAmount: true,
+            Item_qtyReceived: true,
+            Item_location: true,
+            Item_status: true,
+            Item_prodId: true,
+            Item_procId: true,
+            createdBy: true,
+            Product: {
+              select: {
+                Prod_name: true,
+                Prod_desc: true,
+                Prod_ref: true,
+                Prod_unitMeasure: true,
+                Category: {
+                  select: {
+                    Cat_name: true,
+                  },
+                },
+              },
             },
           },
         },
@@ -110,7 +119,7 @@ export const DELETE = async (req: NextRequest) => {
 
   try {
     const deletedProcurement = await prisma.procurement.delete({
-      where: { Pro_id: proId },
+      where: { Proc_id: proId },
       include: {
         Supplier: {
           select: {
@@ -160,8 +169,8 @@ export const PUT = async (req: NextRequest) => {
 
   try {
     const closedProcurement = await prisma.procurement.update({
-      where: { Pro_id: proId },
-      data: { Pro_processed: true },
+      where: { Proc_id: proId },
+      data: { Proc_processed: true },
       include: {
         Supplier: {
           select: {
@@ -170,6 +179,7 @@ export const PUT = async (req: NextRequest) => {
         },
       },
     });
+    
 
     return NextResponse.json(
       { ok: true, data: closedProcurement, message: "Compra procesada." },

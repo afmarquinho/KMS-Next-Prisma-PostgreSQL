@@ -2,6 +2,7 @@
 
 import { useItemStore, useProcurementStore } from "@/store";
 import { LockIcon } from "lucide-react";
+import { Button } from "../UI/Button";
 
 export const ProcessProcurementButton = () => {
   const { toggleProcessProcurementModal, setProId, procurementDetails } =
@@ -9,9 +10,9 @@ export const ProcessProcurementButton = () => {
 
   const { items } = useItemStore();
 
-  const handleCloseProcurement = () => {
+  const handleProcessProcurement = () => {
     if (!procurementDetails) return;
-    setProId(procurementDetails?.Pro_id);
+    setProId(procurementDetails?.Proc_id);
     toggleProcessProcurementModal();
   };
 
@@ -20,16 +21,12 @@ export const ProcessProcurementButton = () => {
   }
 
   return (
-    <button
-      className={`flex gap-1 justify-center items-center  rounded-md px-2 py-1 text-white transition-colors  ${
-        items.length < 1 ? "bg-gray-500" : "bg-red-600 hover:bg-red-800"
-      }
-                 `}
+    <Button
       disabled={items.length < 1}
-      onClick={handleCloseProcurement}
+      onClick={handleProcessProcurement}
+      className={`w-40 h-8 md:h-10`}
     >
-      <LockIcon className={`w-5`} />
-      Procesar para pago
-    </button>
+      <LockIcon className={`w-5`} /> Procesar para pago
+    </Button>
   );
 };

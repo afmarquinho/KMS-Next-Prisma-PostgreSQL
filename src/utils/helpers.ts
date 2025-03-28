@@ -23,7 +23,7 @@ export const formatISOToDate = (dateInput: string | Date): string => {
 };
 
 //* FORMATEAR UN VALOR DE TIPO DECIMAL A MONEDA
-export const formatToCurrency = (value: Decimal): string => {
+export const formatToCurrency = (value: Decimal | string): string => {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",

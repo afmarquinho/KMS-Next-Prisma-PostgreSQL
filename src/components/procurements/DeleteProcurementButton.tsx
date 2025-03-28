@@ -2,6 +2,7 @@
 
 import { useItemStore, useProcurementStore } from "@/store";
 import { TrashIcon } from "lucide-react";
+import { Button } from "../UI/Button";
 
 export const DeleteProcurementButton = () => {
   const { toggleDeleteProcurementModal, procurementDetails, setProId } =
@@ -10,25 +11,25 @@ export const DeleteProcurementButton = () => {
 
   const handleDetele = () => {
     if (!procurementDetails) return;
-    
+
     toggleDeleteProcurementModal();
-    setProId(procurementDetails?.Pro_id);
+    setProId(procurementDetails?.Proc_id);
   };
 
   if (!items || !procurementDetails) {
     return;
   }
   return (
-    <button
-      className={`flex gap-1 justify-center items-center  rounded-md px-2 py-1 text-white transition-colors ${
+    <Button
+    variant="danger"
+      className={`w-40 h-8 md:h-10 ${
         items.length > 0 ? "bg-gray-500" : "bg-black"
-      }
-               `}
+      }`}
       disabled={items.length > 0}
       onClick={handleDetele}
     >
       <TrashIcon className={`w-5`} />
       Eliminar Compra
-    </button>
+    </Button>
   );
 };

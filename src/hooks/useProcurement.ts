@@ -37,7 +37,7 @@ export const useProcurement = () => {
           ? error.response.data.message
           : error instanceof Error
           ? error.message
-          : "Error al obtene el detalle de la compra.";
+          : "Error al obtener el detalle de la compra.";
 
       return { ok: false, data: null, message: errorMessage };
     }
@@ -48,6 +48,7 @@ export const useProcurement = () => {
   ) => {
     try {
       const { data } = await API.post("/", newProc);
+
       return { ok: data.ok, data: data.data, message: data.message };
     } catch (error: unknown) {
       console.error("Error al procesesar la solicitud:", error);
@@ -56,8 +57,6 @@ export const useProcurement = () => {
       const errorMessage =
         axios.isAxiosError(error) && error.response?.data?.message
           ? error.response.data.message
-          : error instanceof Error
-          ? error.message
           : "Error al crear la compra.";
 
       return { ok: false, data: null, message: errorMessage };
@@ -123,7 +122,6 @@ export const useProcurement = () => {
       return { ok: false, data: null, message: errorMessage };
     }
   };
-
 
   return {
     getAllProcurements,

@@ -16,6 +16,7 @@ export const ItemCard = ({ item, procurementStatus }: Props) => {
   const handleEdit = (item: ItemDetailsType) => {
     toggleItemModal();
     setItem(item);
+    console.log(item)
   };
 
   const handleDelete = (item: ItemDetailsType) => {
@@ -24,7 +25,7 @@ export const ItemCard = ({ item, procurementStatus }: Props) => {
   };
 
   return (
-    <div className="bg-white dark:bg-slate-800 shadow-md border border-gray-200 dark:border-gray-700 rounded-lg p-6 w-full transition-transform transform hover:scale-105 hover:shadow-lg relative">
+    <div className="bg-white dark:bg-slate-800 shadow-md border border-gray-200 dark:border-gray-700 rounded p-6 w-full transition-transform transform hover:scale-105 hover:shadow-lg relative">
       {!procurementStatus && (
         <div className="flex gap-3 justify-end">
           <button
@@ -45,46 +46,42 @@ export const ItemCard = ({ item, procurementStatus }: Props) => {
       <table className="w-full text-left">
         <tbody>
           <tr>
-            <th className="text-gray-600 dark:text-gray-300 pb-1">
-              Referencia
-            </th>
-            <td className="font-medium">{item.Item_ref}</td>
+            <th className="text-gray-600 dark:text-gray-300">Referencia</th>
+            <td className="">{item.Product.Prod_ref}</td>
           </tr>
           <tr>
-            <th className="text-gray-600 dark:text-gray-300 pb-1">Nombre</th>
-            <td className="font-bold text-lg">{item.Item_name}</td>
+            <th className="text-gray-600 dark:text-gray-300 ">Nombre</th>
+            <td className="font-semibold">{item.Product.Prod_name}</td>
           </tr>
           <tr>
-            <th className="text-gray-600 dark:text-gray-300 pb-1">
-              Descripción
-            </th>
-            <td>{item.Item_desc}</td>
+            <th className="text-gray-600 dark:text-gray-300 ">Descripción</th>
+            <td>{item.Product.Prod_desc}</td>
           </tr>
           <tr>
-            <th className="text-gray-600 dark:text-gray-300 pb-1">Categoría</th>
+            <th className="text-gray-600 dark:text-gray-300 ">Categoría</th>
             <td className="italic text-indigo-600 dark:text-indigo-400">
-              {item.Category.Cat_name}
+              {item.Product.Category.Cat_name}
             </td>
           </tr>
           <tr>
-            <th className="text-gray-600 dark:text-gray-300 pb-1">Costo</th>
+            <th className="text-gray-600 dark:text-gray-300 ">Costo</th>
             <td className="text-green-600 dark:text-green-400 font-semibold">
               {formatToCurrency(item.Item_unitCost)}
             </td>
           </tr>
           <tr>
-            <th className="text-gray-600 dark:text-gray-300 pb-1">Cantidad</th>
+            <th className="text-gray-600 dark:text-gray-300 ">Cantidad</th>
             <td>{item.Item_qtyOrdered}</td>
           </tr>
           <tr>
-            <th className="text-gray-600 dark:text-gray-300 pb-1">
+            <th className="text-gray-600 dark:text-gray-300 ">
               Unidad de Medida
             </th>
-            <td>{item.Item_unitMeasure}</td>
+            <td>{item.Product.Prod_unitMeasure}</td>
           </tr>
           <tr>
-            <th className="text-gray-600 dark:text-gray-300 pb-1">TOTAL</th>
-            <td className="font-bold text-lg text-red-600 dark:text-red-400">
+            <th className="text-gray-600 dark:text-gray-300 ">Total</th>
+            <td className="font-bold  text-blue-600 dark:text-blue-400">
               {formatToCurrency(item.Item_totalAmount)}
             </td>
           </tr>

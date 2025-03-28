@@ -1,16 +1,16 @@
 import { z } from "zod";
 
 const procurementSchema = z.object({
-  Pro_desc: z
+  Proc_desc: z
     .string({
       required_error: "La descripción es obligatoria",
       invalid_type_error: "Digite un texto válido",
     })
     .min(1, "Digite un téxto válido")
     .max(250, "Descripción demasiado larga"),
-  Pro_paymentMethod: z.string().min(1, "Digite el medio de pago"),
+  Proc_paymentMethod: z.string().min(1, "Digite el medio de pago"),
 
-  Pro_dueDate: z
+  Proc_dueDate: z
     // .string()
     // .refine((date) => new Date(date).toString() !== "Invalid Date", {
     //   message: "La fecha es requerida",
@@ -21,7 +21,7 @@ const procurementSchema = z.object({
     // }),
     .date(),
 
-  Pro_suppId: z.preprocess(
+  Proc_suppId: z.preprocess(
     (value) => {
       if (typeof value === "string" && value.trim() === "") {
         return NaN;

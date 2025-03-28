@@ -49,7 +49,7 @@ export const DeleteProcurementModal = () => {
   return (
     <>
       <div
-        className={`fixed inset-[-100px] bg-black bg-opacity-60 dark:bg-opacity-80 z-20 flex justify-center items-center backdrop-blur-[1px]`}
+        className={`fixed  inset-0 !m-0 bg-black bg-opacity-60 dark:bg-opacity-80 z-20 flex justify-center items-center backdrop-blur-[1px]`}
       >
         <div
           className={`w-full max-w-96 bg-white dark:bg-slate-700 rounded overflow-hidden`}

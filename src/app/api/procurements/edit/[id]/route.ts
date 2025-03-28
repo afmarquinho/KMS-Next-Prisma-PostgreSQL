@@ -5,7 +5,8 @@ import { NextRequest, NextResponse } from "next/server";
 export async function PUT(req: NextRequest) {
   try {
     const id = req.url.split("/").pop();
-    
+    const body = await req.json();
+
     if (!id) {
       return NextResponse.json(
         { ok: false, data: null, message: "Id de la compra no proporcionado." },
@@ -16,60 +17,64 @@ export async function PUT(req: NextRequest) {
     const procurementId = parseInt(id, 10);
 
     if (isNaN(procurementId)) {
-        return NextResponse.json(
-          { ok: false, data: null, message: "ID inválido." },
-          { status: 400 }
-        );
-      }
+      return NextResponse.json(
+        { ok: false, data: null, message: "ID inválido." },
+        { status: 400 }
+      );
+    }
 
-// Validamos que exista la compra
+    // Validamos que exista la compra
     const existingProcurement = await prisma.procurement.findUnique({
-        where:{
-            Pro_id: procurementId
-        }
-    })
+      where: {
+        Proc_id: procurementId,
+      },
+    });
     if (!existingProcurement) {
-        return NextResponse.json(
-          { ok: false, data: null, message: "La compra que intantas actualizar no existe." },
-          { status: 404 }
-        );
-      }
+      return NextResponse.json(
+        {
+          ok: false,
+          data: null,
+          message: "La compra que intantas actualizar no existe.",
+        },
+        { status: 404 }
+      );
+    }
 
-    const body = await req.json();
-    
-
-    const { Pro_desc, Pro_paymentMethod, Pro_dueDate, Pro_suppId } = body;
-
-     // Validación de campos obligatorios
-     if (!Pro_desc || !Pro_paymentMethod || !Pro_dueDate || !Pro_suppId) {
-        return NextResponse.json(
-          {
-            ok: false,
-            data: null,
-            message: "Todos los campos son obligatorios.",
-          },
-          { status: 400 }
-        );
-      }
+    // Validación de campos obligatorios
+    if (
+      !body.Proc_desc ||
+      !body.Proc_paymentMethod ||
+      !body.Proc_dueDate ||
+      !body.Proc_suppId
+    ) {
+      return NextResponse.json(
+        {
+          ok: false,
+          data: null,
+          message: "Todos los campos son obligatorios.",
+        },
+        { status: 400 }
+      );
+    }
 
     //TODO: CAMBIAR EL USERID
-    const Pro_userId: number = 4
+    const createdBy: number = 4;
 
     const existingUser = await prisma.user.findUnique({
-        where: { User_id: Pro_userId },
-      });
-  
-      if (!existingUser) {
-        return NextResponse.json(
-          { ok: false, data: null, message: "Usuario no encontrado." },
-          { status: 404 }
-        );
-      }
+      where: { User_id: createdBy },
+    });
+
+    if (!existingUser) {
+      return NextResponse.json(
+        { ok: false, data: null, message: "Usuario no encontrado." },
+        { status: 404 }
+      );
+    }
 
     // Actualizar la compra
     const updatedPro = await prisma.procurement.update({
-      where: { Pro_id: procurementId},
-      data: {...body, Pro_userId},
+      where: { Proc_id: procurementId },
+      data: body,
       include: {
         Supplier: {
           select: {
@@ -79,16 +84,15 @@ export async function PUT(req: NextRequest) {
       },
     });
 
-   
-    const response = {
+    const res = {
       ...updatedPro,
-      Pro_totalAmount: formatToCurrency(updatedPro.Pro_totalAmount), // Reemplazamos el valor original
+      Proc_totalAmount: formatToCurrency(updatedPro.Proc_totalAmount),
     };
 
     return NextResponse.json(
       {
         ok: true,
-        data: response,
+        data: res,
         message: "Compra actualizada actualizada exitosamente.",
       },
       { status: 200 }

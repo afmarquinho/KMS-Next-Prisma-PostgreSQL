@@ -1,67 +1,184 @@
 "use client";
 
-import { useCategoryStore } from "@/store/categoryStore";
 import { useItemStore } from "@/store/ItemStore";
-import itemSchema from "@/validations/ItemSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { SaveIcon, XIcon } from "lucide-react";
-import { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { z } from "zod";
-import { GetCategoriesButton } from "./GetCategoriesButton";
-import { measurementUnits } from "@/seed/data";
-import { useItem } from "@/hooks/useItem";
-import { useProcurementStore } from "@/store/procurementStore";
+import { CalculatorIcon, RefreshCwIcon } from "lucide-react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useItem, useProducts } from "@/hooks";
+import { useProductStore } from "@/store/productStore";
 import { LoadingSpinner } from "@/components/UI";
-import { formatToCurrency, parseCurrencyToNumber } from "@/utils";
+import { Button } from "@/components/UI/Button";
+import { useProcurementStore } from "@/store";
+import { decimalToNumber } from "@/utils";
+
+type SelectedProductType = {
+  Item_prodId: number;
+  Item_procId: number;
+  Item_unitCost: number;
+  Item_qtyOrdered: number;
+  Item_totalAmount: number;
+};
 
 export const ItemForm = () => {
-  const { item, toggleItemModal, setItems, clearItem } = useItemStore();
-  const { procurementDetails, setProcurementDetails, updateAmount } =
-    useProcurementStore();
-  const [loading, setLoading] = useState<boolean>(false);
-  const { categories } = useCategoryStore();
+  const { item, toggleItemModal, clearItem, setItems } = useItemStore();
+  const { procurementDetails, setProcurementDetails } = useProcurementStore();
   const { createItem, updateItem } = useItem();
+  const [loading, setLoading] = useState<boolean>(false);
+  const { getProductList } = useProducts();
+  const { setProductList, productList } = useProductStore();
+  const [loadingProducts, setLoadingProducts] = useState<boolean>(false);
 
-  type FormValuesType = z.infer<typeof itemSchema>;
-
-  // TODO: HACER QUE SE ACTUALICE LA TABLA PRINCEPAL AL EIDTAR O CRAR ITEN (CON LOS MONTOS NUEVOS), LO PUEDE HACER CREANDO UN NUEVO STORE
-
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<FormValuesType>({
-    resolver: zodResolver(itemSchema),
-  });
+  const [selectedProduct, setSelectedProduct] = useState<string | null>(null);
+  const [unitCost, setUnitCost] = useState<number>(0);
+  const [quantity, setQuantity] = useState<number>(0);
+  const [selectedProducts, setSelectedProducts] = useState<
+    SelectedProductType[]
+  >([]);
+  const [editIndex, setEditIndex] = useState<number | null>(null);
 
   const handleCancel = () => {
     clearItem();
     toggleItemModal();
+    setSelectedProduct(null);
+    setSelectedProducts([]);
   };
 
-  const onSubmit: SubmitHandler<FormValuesType> = async (data) => {
-    if (!procurementDetails) return;
+  const handleCalcProduct = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    // Validar los campos
+    if (!selectedProduct || unitCost <= 0 || quantity <= 0) {
+      toast.error("Todos los campos son obligatorios y deben ser mayores a 0.");
+      return;
+    }
+
+    // Buscar el producto seleccionado en el array.
+    if (!productList) {
+      return toast.error("No se ha cargado la lista de productos.");
+    }
+
+    const product = productList.find((p) => p.Prod_name === selectedProduct);
+
+    if (!product) {
+      toast.error("Producto no encontrado.");
+      return;
+    }
+
+    // Crear el nuevo producto en el array.
+    if (!procurementDetails) {
+      return toast.error("No se ha cargado la lista de productos.");
+    }
+    const newProduct: SelectedProductType = {
+      Item_prodId: product.Prod_id,
+      Item_procId: procurementDetails?.Proc_id,
+      Item_unitCost: unitCost,
+      Item_qtyOrdered: quantity,
+      Item_totalAmount: unitCost * quantity,
+    };
+
+    if (editIndex !== null) {
+      // Editar producto existente en el array.
+      const updatedProducts = [...selectedProducts];
+      updatedProducts[editIndex] = newProduct;
+      setSelectedProducts(updatedProducts);
+      setEditIndex(null);
+    } else {
+      // Verificar si el producto ya está en la lista.
+      const existingProduct = selectedProducts.find(
+        (p) => p.Item_prodId === product.Prod_id
+      );
+      if (existingProduct) {
+        toast.error(
+          "El producto ya fue agregado. Para cambiar la cantidad o el valor unitario, edítelo."
+        );
+        setSelectedProduct(null);
+        setUnitCost(0);
+        setQuantity(0);
+        setEditIndex(null);
+        return;
+      }
+      // Si se está editando un producto agregado en la BBDD ya no se puede adicionar un prodcutos al array, solo se puede editar 1 elemento.
+      if (item) {
+        toast.error(
+          "No puedes adicionar mas productos ya que estas tratando de editar otro."
+        );
+        setSelectedProduct(null);
+        setUnitCost(0);
+        setQuantity(0);
+        setEditIndex(null);
+        return;
+      }
+      // Agregar nuevo producto al array antes de enviar a la bbdd.
+      setSelectedProducts([...selectedProducts, newProduct]);
+    }
+
+    setSelectedProduct(null);
+    setUnitCost(0);
+    setQuantity(0);
+    setEditIndex(null);
+  };
+
+  const handleProductList = async () => {
+    setLoadingProducts(true);
+    try {
+      const { ok, data, message } = await getProductList();
+      if (ok && data) {
+        setProductList(data);
+      } else {
+        toast.error(message);
+      }
+    } catch {
+      toast.error("Error interno.");
+    } finally {
+      setLoadingProducts(false);
+    }
+  };
+
+  const handleEditProduct = (index: number) => {
+    const productToEdit = selectedProducts[index];
+
+    if (!productList) {
+      return toast.error("No se ha cargado la lista de productos.");
+    }
+
+    setSelectedProduct(
+      productList.find((p) => p.Prod_id === productToEdit.Item_prodId)
+        ?.Prod_name || null
+    );
+    setUnitCost(productToEdit.Item_unitCost); //para que se llene el formulario
+    setQuantity(productToEdit.Item_qtyOrdered); // Para llenar el campo en el formulario
+    setEditIndex(index);
+  };
+
+  const handleDeleteProduct = (index: number) => {
+    setSelectedProducts(selectedProducts.filter((_, i) => i !== index));
+  };
+
+  const handleItem = async () => {
+    if (!procurementDetails) {
+      return toast.error("Debes cargar una compra para agregar productos.");
+    }
+    if (!selectedProducts || selectedProducts.length === 0) {
+      return toast.error("No se han seleccionado productos.");
+    }
 
     setLoading(true);
-    if (item) {
+    if (!item) {
+      //* Si Item es Nulo, se crea el Item
       try {
-        const {
-          ok,
-          data: upData,
-          message,
-        } = await updateItem(procurementDetails.Pro_id, item.Item_id, data);
-        if (ok && upData) {
-          const { Item, ...procurement } = upData;
+        const { ok, data, message } = await createItem(
+          procurementDetails?.Proc_id,
+          selectedProducts
+        );
+        if (ok && data) {
+          toast.success("Productos agregados a la orden.");
+
+          const { Item, ...procurement } = data;
           setProcurementDetails(procurement);
           setItems(Item);
-          updateAmount(procurementDetails.Pro_id, procurement.Pro_totalAmount);
           toggleItemModal();
-
-          toast.success("Producto actualizado.");
-          reset();
+          setSelectedProduct(null);
+          setSelectedProducts([]);
+          clearItem();
         } else {
           toast.error(message);
         }
@@ -72,20 +189,23 @@ export const ItemForm = () => {
         setLoading(false);
       }
     } else {
-      try {
-        const {
-          ok,
-          data: newItem,
-          message,
-        } = await createItem(procurementDetails.Pro_id, data);
-        if (ok && newItem) {
-          const { Item, ...procurement } = newItem;
+      // ** Si el ítem no es nulo, se edita el item exitente en la bbdd
+
+         try {
+        const { ok, data, message } = await updateItem(
+          item.Item_procId,
+          selectedProducts[0],
+          item.Item_id
+        );
+        if (ok && data) {
+          toast.success(message);
+          const { Item, ...procurement } = data;
           setProcurementDetails(procurement);
           setItems(Item);
-          updateAmount(procurementDetails.Pro_id, procurement.Pro_totalAmount);
           toggleItemModal();
-          reset();
-          toast.success("Producto creado exitosamente.");
+          setSelectedProduct(null);
+          setSelectedProducts([]);
+          clearItem();
         } else {
           toast.error(message);
         }
@@ -98,204 +218,176 @@ export const ItemForm = () => {
     }
   };
 
+  useEffect(() => {
+    if (item) {
+      setSelectedProducts([
+        {
+          Item_prodId: item.Item_prodId,
+          Item_procId: item.Item_procId,
+          Item_unitCost: decimalToNumber(item.Item_unitCost),
+          Item_qtyOrdered: item.Item_qtyOrdered,
+          Item_totalAmount: decimalToNumber(item.Item_totalAmount),
+        },
+      ]);
+    }
+  }, [item]);
+
   return (
-    <>
-      <div
-        className={`fixed inset-0 bg-black bg-opacity-60 dark:bg-opacity-80 z-20 flex justify-center items-center backdrop-blur-[1px]`}
-      >
-        <div className="overflow-auto my-5 bg-white p-5 dark:bg-slate-900 rounded  w-11/12 max-w-[800px] mx-auto">
-          <h2
-            className={`text-base font-semibold text-center bg-indigo-900 text-slate-200 border-b-8 border-b-blue-600 dark:border-b-blue-800 py-2`}
+    <div className="fixed inset-0 bg-black bg-opacity-60 dark:bg-opacity-80 z-20 flex justify-center items-center backdrop-blur-[1px] !m-0">
+      <div className="bg-white dark:bg-slate-800 p-5 rounded w-11/12 max-w-[800px] mx-auto max-h-[38rem]">
+        <h2 className="text-base font-semibold text-center bg-indigo-900 text-white py-2">
+          {item ? "Editar Producto la órden" : "Agregar Producto a la Orden"}
+        </h2>
+
+        <div className="flex flex-row-reverse justify-between items-center my-5">
+          <Button variant="danger" showIcon={true} onClick={handleCancel}>
+            Cancelar
+          </Button>
+
+          <Button
+            variant="info"
+            showIcon={loadingProducts ? false : !productList}
+            className="w-36"
+            onClick={handleProductList}
           >
-            {item ? "Editar Ítem" : "Crear Ítem"}
-          </h2>
-
-          <form
-            className={`w-full max-w-[600px] mx-auto py-2 space-y-4`}
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            <div className={`flex flex-col md:flex-row w-full gap-4`}>
-              {/* //*NOMBRE */}
-              <label className={`flex flex-col w-full md:w-1/2`}>
-                Nombre
-                {errors.Item_name && (
-                  <div className={`text-xs text-red-600 my-0 font-medium`}>
-                    {errors.Item_name.message}
-                  </div>
-                )}
-                <input
-                  type="text"
-                  className={`bg-slate-300 dark:bg-slate-700 p-2 focus:outline-none text-base rounded`}
-                  {...register("Item_name")}
-                  defaultValue={item ? item.Item_name : ""}
-                  readOnly={loading}
-                  autoFocus={item === null}
-                />
-              </label>
-              {/* //*FIN NOMBRE */}
-
-              {/* //*REFERENCIA */}
-              <label className={`flex flex-col w-full md:w-1/2`}>
-                Referencia
-                <input
-                  type="text"
-                  className={`bg-slate-300 dark:bg-slate-700 p-2 focus:outline-none text-base rounded uppercase ${
-                    item ? "text-gray-600" : ""
-                  }`}
-                  {...register("Item_ref")}
-                  defaultValue={item && item.Item_ref ? item.Item_ref : ""}
-                  readOnly={loading || item !== null}
-                />
-              </label>
-              {/* //*FIN REFERENCIA */}
-            </div>
-
-            {/* //* DESCRIPCIÓN*/}
-            <label className={`flex flex-col w-full`}>
-              Descripción
-              {errors.Item_desc && (
-                <div className={`text-xs text-red-600 my-0 font-medium`}>
-                  {errors.Item_desc.message}
-                </div>
-              )}
-              <textarea
-                className={`bg-slate-300 dark:bg-slate-700 p-2 focus:outline-none text-base rounded resize-none`}
-                {...register("Item_desc")}
-                defaultValue={item ? item.Item_desc : ""}
-                readOnly={loading}
-                autoFocus={item === null}
-              />
-            </label>
-            {/* //* FIN DESCRIPCIÓN*/}
-
-            {/* //* CATEGORÍA*/}
-            <label className={`flex flex-col w-full`}>
-              Categoría
-              {errors.Item_catId && (
-                <div className={`text-xs text-red-600 my-0 font-medium`}>
-                  {errors.Item_catId.message}
-                </div>
-              )}
-              <div className={`flex gap-2 md:gap-3`}>
-                <GetCategoriesButton />
-                <select
-                  className="bg-slate-300 dark:bg-slate-700 p-2 focus:outline-none text-base rounded flex-1"
-                  {...register("Item_catId", { valueAsNumber: true })}
-                  disabled={loading}
-                >
-                  <option value={`${item ? item.Item_id : ""}`}>
-                    {item ? item.Category.Cat_name : "-- Seleccione --"}
-                  </option>
-                  {categories?.map((category) => (
-                    <option key={category.Cat_id} value={category.Cat_id}>
-                      {category.Cat_name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </label>
-            {/* //* FIN CATEGORÍA*/}
-
-            <div className={`flex flex-col md:flex-row w-full gap-4`}>
-              {/* //*COSTO UNITARIO */}
-              <label className={`flex flex-col w-full md:w-1/2`}>
-                Costo Unitario
-                {errors.Item_unitCost && (
-                  <div className={`text-xs text-red-600 my-0 font-medium`}>
-                    {errors.Item_unitCost.message}
-                  </div>
-                )}
-                <input
-                  type="number"
-                  step="0.01"
-                  className={`bg-slate-300 dark:bg-slate-700 p-2 focus:outline-none text-base rounded`}
-                  {...register("Item_unitCost", { valueAsNumber: true })}
-                  defaultValue={
-                    item
-                      ? parseCurrencyToNumber(
-                          formatToCurrency(item.Item_unitCost)
-                        )
-                      : ""
-                  }
-                  readOnly={loading}
-                  autoFocus={item === null}
-                />
-              </label>
-              {/* //*COSTO UNITARIO */}
-
-              {/* //* CANTIDAD */}
-              <label className={`flex flex-col w-full md:w-1/2`}>
-                Cantidad
-                {errors.Item_qtyOrdered && (
-                  <div className={`text-xs text-red-600 my-0 font-medium`}>
-                    {errors.Item_qtyOrdered.message}
-                  </div>
-                )}
-                <input
-                  type="number"
-                  className={`bg-slate-300 dark:bg-slate-700 p-2 focus:outline-none text-base rounded`}
-                  {...register("Item_qtyOrdered", { valueAsNumber: true })}
-                  defaultValue={item ? item.Item_qtyOrdered : ""}
-                  readOnly={loading}
-                />
-              </label>
-              {/* //* FIN CANTIDAD */}
-            </div>
-
-            {/* //* UNIDAES DE MEDIDA*/}
-            <label className={`flex w-full flex-col`}>
-              Unidad de medida
-              {errors.Item_unitMeasure && (
-                <div className={`text-xs text-red-600 my-0 font-medium`}>
-                  {errors.Item_unitMeasure.message}
-                </div>
-              )}
-              <select
-                className="bg-slate-300 dark:bg-slate-700 p-2 focus:outline-none text-base rounded"
-                {...register("Item_unitMeasure")}
-                disabled={loading}
-              >
-                <option value={`${item ? item.Item_unitMeasure : ""}`}>
-                  {item ? item.Item_unitMeasure : "-- Seleccione --"}
-                </option>
-                {measurementUnits.map((unit) => (
-                  <option key={unit} value={unit}>
-                    {unit}
-                  </option>
-                ))}
-              </select>
-            </label>
-            {/* //* FIN UNIDAES DE MEDIDA*/}
-
-            <div
-              className={`flex items-center justify-between md:justify-evenly`}
-            >
-              <button
-                type="button"
-                className={`flex items-center justify-center  gap-1 text-white bg-rose-600 dark:bg-rose-700 hover:bg-rose-700 dark:hover:bg-rose-600 rounded transition-colors duration-300 w-44 h-9 md:h-10`}
-                onClick={handleCancel}
-                disabled={loading}
-              >
-                <XIcon className={`w-5`} /> Cancelar
-              </button>
-
-              <button
-                type="submit"
-                className={`flex items-center justify-center  gap-1 text-white bg-indigo-900 dark:bg-indigo-700 hover:bg-indigo-700 dark:hover:bg-indigo-600 rounded transition-colors duration-300 w-44 h-9 md:h-10`}
-                disabled={loading}
-              >
-                {loading ? (
-                  <LoadingSpinner />
-                ) : (
-                  <>
-                    <SaveIcon className={`w-5`} /> {item ? "Editar" : "Guardar"}
-                  </>
-                )}
-              </button>
-            </div>
-          </form>
+            {loadingProducts ? (
+              <LoadingSpinner />
+            ) : productList ? (
+              <>
+                <RefreshCwIcon />
+                Recargar
+              </>
+            ) : (
+              "Ver Productos"
+            )}
+          </Button>
         </div>
+
+        {productList && productList.length > 0 && (
+          <div className={`flex flex-col md:flex-row gap-2`}>
+            <div className={`flex flex-col justify-between gap-5`}>
+              <div className={`flex-1 flex flex-col gap-2`}>
+                <input
+                  type="search"
+                  list="products"
+                  placeholder="Buscar producto..."
+                  value={selectedProduct || ""}
+                  onChange={(e) => setSelectedProduct(e.target.value)}
+                  className="w-full p-2 border rounded"
+                />
+                <datalist id="products">
+                  {productList.map((p) => (
+                    <option key={p.Prod_id} value={p.Prod_name} />
+                  ))}
+                </datalist>
+
+                <div className={`flex gap-1`}>
+                  <label className={`flex flex-col w-1/2 md:w-1/3`}>
+                    Cantidad
+                    <input
+                      type="number"
+                      placeholder="Cantidad"
+                      value={quantity}
+                      onChange={(e) => setQuantity(Number(e.target.value))}
+                      className="flex-1 p-2 border rounded"
+                    />
+                  </label>
+
+                  <label className={`flex flex-col flex-1`}>
+                    Costo Unitario
+                    <input
+                      type="number"
+                      placeholder="Costo Unitario"
+                      value={unitCost}
+                      onChange={(e) => setUnitCost(Number(e.target.value))}
+                      className="flex-1 p-2 border rounded"
+                    />
+                  </label>
+                </div>
+
+                {item && selectedProducts.length > 1 ? (
+                  <p className={`w-full md:w-60 italic font-medium`}>
+                    Solo puedes editar 1 item a la vez.{" "}
+                    <span className={`text-red-700 bg-red-300 rounded-lg px-2`}>
+                      Elimina
+                    </span>{" "}
+                    el item que has agregado.
+                  </p>
+                ) : (
+                  <Button
+                    type="button"
+                    variant="info"
+                    showIcon={false}
+                    onClick={handleCalcProduct}
+                    className={`md:w-full`}
+                  >
+                    <CalculatorIcon className={`w-5 h-5`} />
+                    Calcular
+                  </Button>
+                )}
+              </div>
+              {selectedProducts.length > 0 && (
+                <Button
+                  variant="primary"
+                  showIcon={loading ? false : true}
+                  onClick={handleItem}
+                  className={`w-60 md:w-full`}
+                >
+                  {loading ? <LoadingSpinner /> : "Cargar Productos a la Órden"}
+                </Button>
+              )}
+            </div>
+            {/* Línea divisoaria */}
+            <div
+              className={`bg-gray-300 w-full h-[1px] md:w-[1px] md:h-40 md:my-auto `}
+            />
+
+            <div className="flex-1 overflow-y-auto max-h-[20rem]">
+              {/* Mostrar la lista de productos seleccionados */}
+              {selectedProducts.length > 0 && productList && (
+                <ul className={`space-y-2`}>
+                  {selectedProducts.map((product, index) => (
+                    <li
+                      key={index}
+                      className="border p-2 rounded bg-slate-100 dark:bg-slate-950"
+                    >
+                      <p>
+                        Producto:{" "}
+                        {
+                          productList.find(
+                            (p) => p.Prod_id === product.Item_prodId
+                          )?.Prod_name
+                        }
+                      </p>
+                      <p>Cantidad: {product.Item_qtyOrdered}</p>
+                      <p>Costo Unitario: ${product.Item_unitCost}</p>
+                      <p className={`font-medium`}>
+                        Total: ${product.Item_totalAmount}
+                      </p>
+                      <div className={`flex gap-10`}>
+                        <button
+                          type="button"
+                          className="font-medium text-blue-700 bg-blue-200 rounded-lg px-2"
+                          onClick={() => handleEditProduct(index)}
+                        >
+                          Editar
+                        </button>
+                        <button
+                          type="button"
+                          className="font-medium text-red-700 bg-red-300 rounded-lg px-2"
+                          onClick={() => handleDeleteProduct(index)}
+                        >
+                          Eliminar
+                        </button>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+        )}
       </div>
-    </>
+    </div>
   );
 };
