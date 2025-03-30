@@ -139,7 +139,7 @@ model Procurement {
   Supplier    Supplier @relation(fields: [Proc_suppId], references: [Supp_id])
   Item        Item[]
 
-  ProcurementNotes ProcurementNote[]
+  ProcurementNote ProcurementNote[]
 
   StockMovement StockMovement[]
 }
@@ -162,7 +162,6 @@ model Item {
 
   SaleDetails SaleDetails[]
   Inventory   Inventory[]
-
 }
 
 model Product {
@@ -173,8 +172,7 @@ model Product {
   Prod_catId              Int
   Prod_procurementEnabled Boolean @default(true) // Habilitado para compras
   Prod_brand              String?
-  Prod_unitMeasure String
-
+  Prod_unitMeasure        String
 
   createdBy Int
   createdAt DateTime @default(now())
@@ -213,13 +211,14 @@ model Inventory {
 }
 
 model ProcurementNote {
-  Note_id        Int      @id @default(autoincrement())
-  Note_content   String
-  Note_createdAt DateTime @default(now())
-  Note_userId    Int
-  User           User     @relation(fields: [Note_userId], references: [User_id])
-
+  Note_id      Int      @id @default(autoincrement())
+  Note_content String
   Note_procId Int
+  createdBy    Int
+  createdAt    DateTime @default(now())
+  
+  
+  User         User     @relation(fields: [createdBy], references: [User_id])
   Procurement Procurement @relation(fields: [Note_procId], references: [Proc_id])
 
   @@index([Note_procId])
@@ -246,7 +245,7 @@ model StockMovement {
   Mov_reason String // Razón del movimiento (e.g., "venta", "compra", "ajuste")
   Mov_prodId Int
   Mov_dest   String   @default("bodega") // (e.g., ventas, garantías, ...)
-  Mov_userId Int
+  createdBy Int
   Mov_procId Int? // ID relacionado (e.g., Sale_id o Purchase_id)
   Mov_saleId Int? // ID relacionado (e.g., Sale_id o Purchase_id)
   createdAt  DateTime @default(now())
@@ -254,7 +253,7 @@ model StockMovement {
   Product         Product      @relation(fields: [Mov_prodId], references: [Prod_id])
   Procurement     Procurement? @relation(fields: [Mov_procId], references: [Proc_id])
   Sale            Sale?        @relation(fields: [Mov_saleId], references: [Sale_id])
-  User            User         @relation(fields: [Mov_userId], references: [User_id])
+  User            User         @relation(fields: [createdBy], references: [User_id])
   Inventory       Inventory?   @relation(fields: [InventoryInv_id], references: [Inv_id])
   InventoryInv_id Int?
 

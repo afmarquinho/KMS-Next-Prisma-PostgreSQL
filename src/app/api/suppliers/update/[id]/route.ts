@@ -68,7 +68,8 @@ export async function PUT(req: NextRequest) {
       );
     }
 
-    // TODO: Manejar el userId
+    // Todo: cambiar dinamicamente
+    const createdBy = 1;
     // Actualizar cliente
     const updatedSupplier = await prisma.supplier.update({
       where: { Supp_id: supplierId },
@@ -79,7 +80,7 @@ export async function PUT(req: NextRequest) {
         Supp_phoneNumber,
         Supp_city,
         Supp_address,
-        Supp_userId: 2,
+        createdBy,
       },
     });
 

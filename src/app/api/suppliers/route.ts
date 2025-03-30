@@ -69,6 +69,8 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
+    // Todo: cambiar dinamicamente
+    const createdBy = 1;
 
     // Crear nuevo proveedor
     const newSupplier = await prisma.supplier.create({
@@ -80,7 +82,7 @@ export async function POST(req: NextRequest) {
         Supp_phoneNumber,
         Supp_city,
         Supp_address,
-        Supp_userId: 1,
+        createdBy,
       },
     });
 

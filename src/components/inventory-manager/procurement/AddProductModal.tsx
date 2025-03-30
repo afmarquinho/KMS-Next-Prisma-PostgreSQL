@@ -32,7 +32,7 @@ export const AddProductModal = ({
 
   const [loading, setLoading] = useState<boolean>(false);
   const { toggleProductModal } = useInventoryStore();
-  const { updateInventory } = useInventory();
+  const { updateInvAndStockMov } = useInventory();
 
   const {
     register,
@@ -64,15 +64,15 @@ export const AddProductModal = ({
     try {
       const {
         ok,
-        data: updatedProduct,
         message,
-      } = await updateInventory(product.Item_proId, {
-        ...data,
-        Prod_name: product.Item_name,
-        Prod_catId: product.Item_catId,
-        Item_id: product.Item_id,
+      } = await updateInvAndStockMov(product.Item_prodId, {
+        Inv_stock: data.Prod_qtyReceive,
+        Inv_itemId: product.Item_id,
+        Inv_batch: data.Prod_batchCode,
+        Inv_batchDueDate: data.Prod_batchDate,
+        Mov_reason: data.reason
       });
-      if (ok && updatedProduct) {
+      if (ok) {
         toast.success(message);
         setProduct(null);
         setItemQtyRemaining(0);
@@ -136,23 +136,10 @@ export const AddProductModal = ({
         onClick={(e) => e.stopPropagation()}
       >
         <h3 className={`italic font-bold text-center mb-2`}>
-          Ingresar: <span>{product?.Item_name}</span> al Inventario
+          Ingresar: <span>{product?.Product.Prod_name}</span> al Inventario
         </h3>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <label className={`flex gap-2 justify-start items-center mb-2`}>
-            <span className={`w-20 italic`}>Referencia:</span>
-            {errors.Prod_ref && (
-              <div className={`text-xs text-red-600 my-0 font-medium`}>
-                {errors.Prod_ref.message}
-              </div>
-            )}
-            <input
-              type="text"
-              className={`bg-slate-300 dark:bg-slate-800 p-2 focus:outline-none text-base rounded h-8 flex-1 max-w-40 uppercase`}
-              {...register("Prod_ref")}
-              defaultValue={product?.Item_ref || ""}
-            />
-          </label>
+          <p>Referencia: <span className={`font-medium`}>{product?.Product.Prod_ref}</span></p>
           <label className={`flex gap-2 justify-start items-center mb-2`}>
             <span className={`w-20 italic`}>Cantidad:</span>
             {errors.Prod_qtyReceive && (
@@ -189,7 +176,7 @@ export const AddProductModal = ({
             <input
               type="date"
               className={`bg-slate-300 dark:bg-slate-800 p-2 focus:outline-none rounded h-8 flex-1 max-w-40 uppercase`}
-              {...register("Prod_batchDate", {valueAsDate: true})}
+              {...register("Prod_batchDate", { valueAsDate: true })}
             />
           </label>
           <label className={`flex gap-2 justify-start items-center mb-2 `}>

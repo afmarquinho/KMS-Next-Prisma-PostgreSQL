@@ -1,18 +1,21 @@
 "use client";
 
-import { useInventory } from "@/hooks";
+import { LoadingSpinner } from "@/components/UI";
+import { useProcurementNotes } from "@/hooks";
 import { SendHorizontal } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
 type Props = {
-  proId: number;
+  procId: number;
+  procClose: boolean;
 };
-export const AddNoteForm = ({ proId }: Props) => {
+export const AddNoteForm = ({ procId, procClose }: Props) => {
   const router = useRouter();
   const [text, setText] = useState<string>("");
-  const { createNote } = useInventory();
+  const [loading, setLoading] = useState<boolean>(false);
+  const { createNote } = useProcurementNotes();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,7 +28,7 @@ export const AddNoteForm = ({ proId }: Props) => {
     }
     if (text.length < 5) {
       toast.error("Nota demasiado corta.");
-      setText("")
+      setText("");
       return;
     }
     if (text.length > 200) {
@@ -33,10 +36,11 @@ export const AddNoteForm = ({ proId }: Props) => {
       return;
     }
 
+    setLoading(true);
     try {
-      const { ok, data, message } = await createNote(proId, text);
+      const { ok, data, message } = await createNote(procId, text);
       if (ok && data) {
-        setText("")
+        setText("");
         router.refresh();
       } else {
         toast.error(message);
@@ -44,6 +48,8 @@ export const AddNoteForm = ({ proId }: Props) => {
     } catch (error) {
       toast.error("Hubo un problema al procesar la solicitud");
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -55,12 +61,19 @@ export const AddNoteForm = ({ proId }: Props) => {
         onChange={(e) => setText(e.target.value)}
         value={text}
       />
-      <button
-        type="submit"
-        className="bg-teal-600 dark:bg-teal-700 rounded-full text-white p-2 my-2 hover:bg-teal-500 dark:hover:bg-teal-500 shadow-md transition-all"
-      >
-        <SendHorizontal />
-      </button>
+      {!procClose && (
+        <button
+          type="submit"
+          className="bg-teal-600 dark:bg-teal-700 rounded-full text-white w-11 h-11 hover:bg-teal-500 dark:hover:bg-teal-500 shadow-md transition-all flex items-center justify-center mt-1"
+          disabled={loading}
+        >
+          {loading ? (
+            <LoadingSpinner />
+          ) : (
+            <SendHorizontal className={`w-6 h-6`} />
+          )}
+        </button>
+      )}
     </form>
   );
 };

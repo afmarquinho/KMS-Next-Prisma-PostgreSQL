@@ -31,7 +31,7 @@ export const CommentsSection = ({ notes }: Props) => {
                   {note.User.User_name} {note.User.User_surname}
                 </span>
                 <span>-</span>
-                {note.Note_createdAt}
+                {note.createdAt}
               </div>
             </div>
           ))}

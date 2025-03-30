@@ -9,7 +9,7 @@ export const Supplier = [
     Supp_city: "Metropolis",
     Supp_address: "123 Tech Street\nMetropolis, NY 10001",
     Supp_active: true,
-    Supp_registrationDate: "2024-01-10T20:00:00.000Z",
+    Supp_registrationDate: "2024-01-11T01:00:00.000Z",
     createdBy: 15,
   },
   {
@@ -22,7 +22,7 @@ export const Supplier = [
     Supp_city: "Springfield",
     Supp_address: "456 Market Avenue\nSpringfield, IL 62704",
     Supp_active: true,
-    Supp_registrationDate: "2023-11-15T20:00:00.000Z",
+    Supp_registrationDate: "2023-11-16T01:00:00.000Z",
     createdBy: 7,
   },
   {
@@ -35,7 +35,7 @@ export const Supplier = [
     Supp_city: "Gotham",
     Supp_address: "789 Industrial Road\nGotham, CA 90210",
     Supp_active: false,
-    Supp_registrationDate: "2023-09-05T20:00:00.000Z",
+    Supp_registrationDate: "2023-09-06T01:00:00.000Z",
     createdBy: 19,
   },
   {
@@ -48,7 +48,7 @@ export const Supplier = [
     Supp_city: "Star City",
     Supp_address: "987 Star Avenue\nStar City, WA 98101",
     Supp_active: true,
-    Supp_registrationDate: "2023-12-01T20:00:00.000Z",
+    Supp_registrationDate: "2023-12-02T01:00:00.000Z",
     createdBy: 3,
   },
   {
@@ -61,7 +61,7 @@ export const Supplier = [
     Supp_city: "Central City",
     Supp_address: "654 Innovation Blvd\nCentral City, OH 44114",
     Supp_active: false,
-    Supp_registrationDate: "2023-10-20T20:00:00.000Z",
+    Supp_registrationDate: "2023-10-21T01:00:00.000Z",
     createdBy: 11,
   },
   {
@@ -74,7 +74,7 @@ export const Supplier = [
     Supp_city: "Rivertown",
     Supp_address: "123 River Lane\nRivertown, TX 75001",
     Supp_active: true,
-    Supp_registrationDate: "2023-08-25T20:00:00.000Z",
+    Supp_registrationDate: "2023-08-26T01:00:00.000Z",
     createdBy: 2,
   },
   {
@@ -87,7 +87,7 @@ export const Supplier = [
     Supp_city: "Harmony",
     Supp_address: "456 Peace Blvd\nHarmony, FL 32003",
     Supp_active: true,
-    Supp_registrationDate: "2024-02-01T20:00:00.000Z",
+    Supp_registrationDate: "2024-02-02T01:00:00.000Z",
     createdBy: 8,
   },
   {
@@ -100,7 +100,7 @@ export const Supplier = [
     Supp_city: "Cedar Valley",
     Supp_address: "789 Cedar Road\nCedar Valley, MN 55044",
     Supp_active: false,
-    Supp_registrationDate: "2023-06-10T20:00:00.000Z",
+    Supp_registrationDate: "2023-06-11T01:00:00.000Z",
     createdBy: 12,
   },
   {
@@ -113,7 +113,7 @@ export const Supplier = [
     Supp_city: "Evergreen",
     Supp_address: "654 Green St\nEvergreen, CO 80501",
     Supp_active: true,
-    Supp_registrationDate: "2023-07-18T20:00:00.000Z",
+    Supp_registrationDate: "2023-07-19T01:00:00.000Z",
     createdBy: 14,
   },
   {
@@ -126,7 +126,7 @@ export const Supplier = [
     Supp_city: "Skyline",
     Supp_address: "321 Skyline Drive\nSkyline, AZ 85225",
     Supp_active: true,
-    Supp_registrationDate: "2023-12-15T20:00:00.000Z",
+    Supp_registrationDate: "2023-12-16T01:00:00.000Z",
     createdBy: 5,
   },
   {
@@ -139,7 +139,7 @@ export const Supplier = [
     Supp_city: "Crystal Lake",
     Supp_address: "777 Crystal Blvd\nCrystal Lake, GA 30188",
     Supp_active: false,
-    Supp_registrationDate: "2023-09-22T20:00:00.000Z",
+    Supp_registrationDate: "2023-09-23T01:00:00.000Z",
     createdBy: 18,
   },
   {
@@ -152,7 +152,7 @@ export const Supplier = [
     Supp_city: "Highland",
     Supp_address: "890 Highland Road\nHighland, KY 41011",
     Supp_active: true,
-    Supp_registrationDate: "2023-10-10T20:00:00.000Z",
+    Supp_registrationDate: "2023-10-11T01:00:00.000Z",
     createdBy: 4,
   },
   {
@@ -165,7 +165,7 @@ export const Supplier = [
     Supp_city: "Lakeside",
     Supp_address: "432 Lake View Drive\nLakeside, TN 37122",
     Supp_active: false,
-    Supp_registrationDate: "2023-08-05T20:00:00.000Z",
+    Supp_registrationDate: "2023-08-06T01:00:00.000Z",
     createdBy: 1,
   },
   {
@@ -178,7 +178,7 @@ export const Supplier = [
     Supp_city: "Riverdale",
     Supp_address: "678 Riverfront Avenue\nRiverdale, ME 04074",
     Supp_active: true,
-    Supp_registrationDate: "2024-01-20T20:00:00.000Z",
+    Supp_registrationDate: "2024-01-21T01:00:00.000Z",
     createdBy: 9,
   },
   {
@@ -191,7 +191,7 @@ export const Supplier = [
     Supp_city: "Meadowbrook",
     Supp_address: "123 Meadow Lane\nMeadowbrook, NJ 07039",
     Supp_active: true,
-    Supp_registrationDate: "2023-11-30T20:00:00.000Z",
+    Supp_registrationDate: "2023-12-01T01:00:00.000Z",
     createdBy: 6,
   },
   {
@@ -204,7 +204,7 @@ export const Supplier = [
     Supp_city: "Brookside",
     Supp_address: "890 Brook Lane\nBrookside, WI 53705",
     Supp_active: false,
-    Supp_registrationDate: "2023-07-05T20:00:00.000Z",
+    Supp_registrationDate: "2023-07-06T01:00:00.000Z",
     createdBy: 13,
   },
   {
@@ -217,7 +217,7 @@ export const Supplier = [
     Supp_city: "Willow Creek",
     Supp_address: "456 Willow St\nWillow Creek, MA 01020",
     Supp_active: true,
-    Supp_registrationDate: "2023-10-25T20:00:00.000Z",
+    Supp_registrationDate: "2023-10-26T01:00:00.000Z",
     createdBy: 20,
   },
   {
@@ -230,7 +230,7 @@ export const Supplier = [
     Supp_city: "Mapleton",
     Supp_address: "678 Maple Ave\nMapleton, MI 48858",
     Supp_active: false,
-    Supp_registrationDate: "2023-06-15T20:00:00.000Z",
+    Supp_registrationDate: "2023-06-16T01:00:00.000Z",
     createdBy: 16,
   },
   {
@@ -243,7 +243,7 @@ export const Supplier = [
     Supp_city: "Summerville",
     Supp_address: "789 Summit Blvd\nSummerville, PA 17055",
     Supp_active: true,
-    Supp_registrationDate: "2023-12-02T20:00:00.000Z",
+    Supp_registrationDate: "2023-12-03T01:00:00.000Z",
     createdBy: 17,
   },
   {
@@ -256,7 +256,7 @@ export const Supplier = [
     Supp_city: "Oakwood",
     Supp_address: "321 Oakwood Ave\nOakwood, VT 05401",
     Supp_active: true,
-    Supp_registrationDate: "2024-01-10T20:00:00.000Z",
+    Supp_registrationDate: "2024-01-11T01:00:00.000Z",
     createdBy: 3,
   },
   {
@@ -269,7 +269,7 @@ export const Supplier = [
     Supp_city: "Brightwood",
     Supp_address: "122 Forest Hills\nBrightwood, OR 97011",
     Supp_active: true,
-    Supp_registrationDate: "2023-08-15T20:00:00.000Z",
+    Supp_registrationDate: "2023-08-16T01:00:00.000Z",
     createdBy: 5,
   },
   {
@@ -282,7 +282,7 @@ export const Supplier = [
     Supp_city: "Seabreeze",
     Supp_address: "145 Ocean Drive\nSeabreeze, FL 32937",
     Supp_active: true,
-    Supp_registrationDate: "2023-10-22T20:00:00.000Z",
+    Supp_registrationDate: "2023-10-23T01:00:00.000Z",
     createdBy: 7,
   },
   {
@@ -295,7 +295,7 @@ export const Supplier = [
     Supp_city: "Hilltop",
     Supp_address: "678 Summit Ave\nHilltop, TN 37027",
     Supp_active: false,
-    Supp_registrationDate: "2023-09-08T20:00:00.000Z",
+    Supp_registrationDate: "2023-09-09T01:00:00.000Z",
     createdBy: 9,
   },
   {
@@ -308,7 +308,7 @@ export const Supplier = [
     Supp_city: "Greenwood",
     Supp_address: "321 Valley Road\nGreenwood, IN 46142",
     Supp_active: true,
-    Supp_registrationDate: "2023-11-12T20:00:00.000Z",
+    Supp_registrationDate: "2023-11-13T01:00:00.000Z",
     createdBy: 3,
   },
   {
@@ -321,7 +321,7 @@ export const Supplier = [
     Supp_city: "Cedar Heights",
     Supp_address: "876 Pine Lane\nCedar Heights, WA 98077",
     Supp_active: true,
-    Supp_registrationDate: "2024-01-18T20:00:00.000Z",
+    Supp_registrationDate: "2024-01-19T01:00:00.000Z",
     createdBy: 15,
   },
   {
@@ -334,7 +334,7 @@ export const Supplier = [
     Supp_city: "Springfield",
     Supp_address: "432 Meadow Street\nSpringfield, IL 62704",
     Supp_active: false,
-    Supp_registrationDate: "2023-10-01T20:00:00.000Z",
+    Supp_registrationDate: "2023-10-02T01:00:00.000Z",
     createdBy: 12,
   },
   {
@@ -347,7 +347,7 @@ export const Supplier = [
     Supp_city: "Silverwood",
     Supp_address: "567 Birch Street\nSilverwood, CA 92020",
     Supp_active: true,
-    Supp_registrationDate: "2023-12-09T20:00:00.000Z",
+    Supp_registrationDate: "2023-12-10T01:00:00.000Z",
     createdBy: 6,
   },
   {
@@ -360,7 +360,7 @@ export const Supplier = [
     Supp_city: "Lakeshore",
     Supp_address: "111 Lake Drive\nLakeshore, MI 49441",
     Supp_active: false,
-    Supp_registrationDate: "2023-07-20T20:00:00.000Z",
+    Supp_registrationDate: "2023-07-21T01:00:00.000Z",
     createdBy: 19,
   },
   {
@@ -373,7 +373,7 @@ export const Supplier = [
     Supp_city: "Elmwood",
     Supp_address: "789 Elm Lane\nElmwood, NY 14222",
     Supp_active: true,
-    Supp_registrationDate: "2023-09-25T20:00:00.000Z",
+    Supp_registrationDate: "2023-09-26T01:00:00.000Z",
     createdBy: 2,
   },
   {
@@ -386,7 +386,7 @@ export const Supplier = [
     Supp_city: "Ashwood",
     Supp_address: "654 Oak Avenue\nAshwood, TX 75002",
     Supp_active: true,
-    Supp_registrationDate: "2023-11-30T20:00:00.000Z",
+    Supp_registrationDate: "2023-12-01T01:00:00.000Z",
     createdBy: 11,
   },
   {
@@ -399,7 +399,7 @@ export const Supplier = [
     Supp_city: "Hillside",
     Supp_address: "321 Hill Drive\nHillside, NV 89110",
     Supp_active: true,
-    Supp_registrationDate: "2023-12-15T20:00:00.000Z",
+    Supp_registrationDate: "2023-12-16T01:00:00.000Z",
     createdBy: 10,
   },
   {
@@ -412,7 +412,7 @@ export const Supplier = [
     Supp_city: "Oakview",
     Supp_address: "123 Acorn Lane\nOakview, MD 21702",
     Supp_active: false,
-    Supp_registrationDate: "2023-08-01T20:00:00.000Z",
+    Supp_registrationDate: "2023-08-02T01:00:00.000Z",
     createdBy: 13,
   },
   {
@@ -425,7 +425,7 @@ export const Supplier = [
     Supp_city: "Ridgefield",
     Supp_address: "890 Ridge Street\nRidgefield, WA 98642",
     Supp_active: true,
-    Supp_registrationDate: "2024-01-05T20:00:00.000Z",
+    Supp_registrationDate: "2024-01-06T01:00:00.000Z",
     createdBy: 18,
   },
   {
@@ -438,21 +438,8 @@ export const Supplier = [
     Supp_city: "Stonebridge",
     Supp_address: "456 Quarry Road\nStonebridge, CO 80120",
     Supp_active: false,
-    Supp_registrationDate: "2023-10-05T20:00:00.000Z",
+    Supp_registrationDate: "2023-10-06T01:00:00.000Z",
     createdBy: 17,
-  },
-  {
-    Supp_id: 35,
-    Supp_nit: 56789650,
-    Supp_name: "Alpha Network",
-    Supp_contactInfo: "Isabel Walker",
-    Supp_email: "isabel.walker@example.com",
-    Supp_phoneNumber: "001-555-321-7654",
-    Supp_city: "Riverbend",
-    Supp_address: "789 Bend Drive\nRiverbend, AL 36116",
-    Supp_active: true,
-    Supp_registrationDate: "2023-11-10T20:00:00.000Z",
-    createdBy: 20,
   },
   {
     Supp_id: 36,
@@ -464,7 +451,7 @@ export const Supplier = [
     Supp_city: "Summitview",
     Supp_address: "321 Peak Lane\nSummitview, AZ 85022",
     Supp_active: true,
-    Supp_registrationDate: "2023-09-19T20:00:00.000Z",
+    Supp_registrationDate: "2023-09-20T01:00:00.000Z",
     createdBy: 4,
   },
   {
@@ -477,7 +464,7 @@ export const Supplier = [
     Supp_city: "Bridgeport",
     Supp_address: "890 River Street\nBridgeport, CT 06604",
     Supp_active: false,
-    Supp_registrationDate: "2023-12-29T20:00:00.000Z",
+    Supp_registrationDate: "2023-12-30T01:00:00.000Z",
     createdBy: 14,
   },
   {
@@ -490,7 +477,7 @@ export const Supplier = [
     Supp_city: "Fairview",
     Supp_address: "654 Green Lane\nFairview, NC 28730",
     Supp_active: true,
-    Supp_registrationDate: "2023-08-25T20:00:00.000Z",
+    Supp_registrationDate: "2023-08-26T01:00:00.000Z",
     createdBy: 1,
   },
   {
@@ -503,7 +490,7 @@ export const Supplier = [
     Supp_city: "Clearwater",
     Supp_address: "321 Blue Street\nClearwater, FL 33755",
     Supp_active: true,
-    Supp_registrationDate: "2024-01-12T20:00:00.000Z",
+    Supp_registrationDate: "2024-01-13T01:00:00.000Z",
     createdBy: 8,
   },
   {
@@ -516,7 +503,20 @@ export const Supplier = [
     Supp_city: "Mountainview",
     Supp_address: "789 Ridge Lane\nMountainview, CO 80120",
     Supp_active: true,
-    Supp_registrationDate: "2023-07-30T20:00:00.000Z",
+    Supp_registrationDate: "2023-07-31T01:00:00.000Z",
     createdBy: 16,
+  },
+  {
+    Supp_id: 35,
+    Supp_nit: 56789650,
+    Supp_name: "Alpha Network",
+    Supp_contactInfo: "Isabel Walker",
+    Supp_email: "isabel.walker@example.com",
+    Supp_phoneNumber: "3214785214",
+    Supp_city: "Riverbend",
+    Supp_address: "789 Bend DriveRiverbend, AL 36116",
+    Supp_active: false,
+    Supp_registrationDate: "2023-11-11T01:00:00.000Z",
+    createdBy: 1,
   },
 ];

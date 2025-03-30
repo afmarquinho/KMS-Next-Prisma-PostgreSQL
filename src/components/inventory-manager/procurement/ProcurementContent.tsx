@@ -1,6 +1,6 @@
 "use client";
 
-import { LoadingSpinner } from "@/components/UI";
+import { LoadingSpinner, MainButton } from "@/components/UI";
 import { useInventory } from "@/hooks";
 import { useInventoryStore } from "@/store";
 import { PencilLineIcon, RefreshCwIcon, ShoppingCartIcon } from "lucide-react";
@@ -15,24 +15,6 @@ export const ProcurementContent = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const { getProcessedProcurements } = useInventory();
 
-  // const handleView = async (id: number) => {
-  //   try {
-  //     setLoadingDetails();
-  //     router.push(`/inventory-manager/procurement/${id}`);
-
-  //     const { ok, data, message } = await getProcurementInventoryById(id);
-  //     if (ok && data) {
-  //       setProcurementDetails(data);
-  //     } else {
-  //       toast.error(message);
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //     toast.error("Hubo un problema al procesar la solicitud");
-  //   } finally {
-  //     setLoadingDetails();
-  //   }
-  // };
 
   const getProcessed = async () => {
     setLoading(true);
@@ -53,9 +35,10 @@ export const ProcurementContent = () => {
 
   return (
     <>
-      <button
+      <MainButton
+      variant="secondary"
         onClick={getProcessed}
-        className={`w-36 md:w-40 md:px-0 h-10 flex justify-center items-center gap-1 text-white transition-colors duration-300 text-xs bg-teal-600 hover:bg-teal-700 dark:bg-teal-700 dark:hover:bg-teal-600 shadow-md rounded`}
+        // className={`w-36 md:w-40 md:px-0 h-10 flex justify-center items-center gap-1 text-white transition-colors duration-300 text-xs bg-teal-600 hover:bg-teal-700 dark:bg-teal-700 dark:hover:bg-teal-600 shadow-md rounded`}
         disabled={loading}
       >
         {loading ? (
@@ -74,7 +57,7 @@ export const ProcurementContent = () => {
             {procurements ? "Refrescar" : "Ver Compras"}
           </>
         )}
-      </button>
+      </MainButton>
       {!procurements ? (
         <div className={`italic font-medium text-base`}>
           No hay compras pendientes en el panel
@@ -104,25 +87,25 @@ export const ProcurementContent = () => {
               <tbody>
                 {procurements?.map((procurement, i) => (
                   <tr
-                    key={procurement.Pro_id}
+                    key={procurement.Proc_id}
                     className={`hover:bg-gray-300 dark:hover:bg-teal-900 py-5 ${
                       i % 2 === 0 ? "bg-slate-100 dark:bg-slate-800" : ""
                     }`}
                   >
                     <td className="py-2 px-2">{i + 1}</td>
                     <td className="py-2 px-2 text-left">
-                      {procurement.Pro_id}
+                      {procurement.Proc_id}
                     </td>
-                    <td className="py-2 ps-1 pe-5">{procurement.Pro_desc}</td>
+                    <td className="py-2 ps-1 pe-5">{procurement.Proc_desc}</td>
                     <td className="py-2 px-1">
                       {procurement.Supplier.Supp_name}
                     </td>
-                    <td className="py-2 px-1">{procurement.Pro_date}</td>
-                    <td className="py-2 px-1">{procurement.Pro_dueDate}</td>
-                    <td className="py-2 px-1">{procurement.Pro_totalAmount}</td>
+                    <td className="py-2 px-1">{procurement.Proc_date}</td>
+                    <td className="py-2 px-1">{procurement.Proc_dueDate}</td>
+                    <td className="py-2 px-1">{procurement.Proc_totalAmount}</td>
                     <td className="py-2 px-1">
                       <Link
-                        href={`/inventory-manager/procurement/${procurement.Pro_id}`}
+                        href={`/inventory-manager/procurement/${procurement.Proc_id}`}
                         className="bg-rose-600 w-8 h-8 flex justify-center items-center shadow-md rounded-sm"
                       >
                         <PencilLineIcon

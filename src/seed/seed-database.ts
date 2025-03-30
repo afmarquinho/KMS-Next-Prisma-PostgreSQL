@@ -1,5 +1,5 @@
 import { prisma } from "../lib/db";
-import { Category, Customer, Departments, Procurement, Product, Supplier, User } from "./data";
+import { Category, Customer, Departments, Procurement, Product, Supplier, User, Item } from "./data";
 async function main() {
   try {
     // 1. Eliminar registros en el orden correcto
@@ -30,8 +30,8 @@ async function main() {
      // 2.4 Insertar compras (dependen de proveedores y usuarios)
      await prisma.procurement.createMany({ data: Procurement });
 
-    // // 2.5 Insertar los ítems de compra (dependen de compras, categorías y usuarios)
-    // await prisma.item.createMany({ data: Item });
+    // 2.5 Insertar los ítems de compra (dependen de compras, categorías y usuarios)
+     await prisma.item.createMany({ data: Item });
     // // 2.6 Insertar las notas de las compras (dependen de compras y usuarios)
     // await prisma.procurementNote.createMany({ data: ProcurementNote });
 

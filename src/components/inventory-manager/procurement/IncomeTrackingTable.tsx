@@ -11,6 +11,7 @@ type Props = {
 };
 
 export const IncomeTrackingTable = ({ items }: Props) => {
+  
   const { productModalOpen, toggleProductModal } = useInventoryStore();
   const [itemQtyRemaining, setItemQtyRemaining] = useState<number>(0);
 
@@ -23,9 +24,9 @@ export const IncomeTrackingTable = ({ items }: Props) => {
   };
 
   return (
-    <>
+    <div className="overflow-auto my-5 bg-white p-5 dark:bg-slate-900 rounded">
       <table
-        className={`w-full rounded-lg border-collapse text-left overflow-hidden shadow-md text-sm mb-5`}
+        className={`w-full rounded border-collapse text-left overflow-hidden shadow-md text-sm mb-5`}
       >
         <thead
           className={`bg-indigo-900 dark:bg-indigo-900 text-slate-200 border-b-8 border-b-blue-600 dark:border-b-blue-800`}
@@ -51,10 +52,10 @@ export const IncomeTrackingTable = ({ items }: Props) => {
               }`}
             >
               <td className={`py-2 px-2`}>{i + 1}</td>
-              <td className={`py-2 px-1`}>{item.Item_ref}</td>
-              <td className={`py-2 px-1`}>{item.Item_name}</td>
-              <td className={`py-2 px-1`}>{item.Category.Cat_name}</td>
-              <td className={`py-2 px-1`}>{item.Item_desc}</td>
+              <td className={`py-2 px-1`}>{item.Product.Prod_ref}</td>
+              <td className={`py-2 px-1`}>{item.Product.Prod_name}</td>
+              <td className={`py-2 px-1`}>{item.Product.Category.Cat_name}</td>
+              <td className={`py-2 px-1`}>{item.Product.Prod_desc}</td>
               <td className={`py-2 px-1`}>{item.Item_qtyOrdered}</td>
               <td className={`py-2 px-1`}>{item.Item_qtyReceived}</td>
               <td className={`py-2 px-1`}>
@@ -83,6 +84,6 @@ export const IncomeTrackingTable = ({ items }: Props) => {
           setProduct={setProduct} // Se pasa la acción para limpiar el estado al terminar o cancelar
         />
       )}
-    </>
+    </div>
   );
 };

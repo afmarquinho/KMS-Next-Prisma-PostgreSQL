@@ -137,9 +137,9 @@ CREATE TABLE "Inventory" (
 CREATE TABLE "ProcurementNote" (
     "Note_id" SERIAL NOT NULL,
     "Note_content" TEXT NOT NULL,
-    "Note_createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "Note_userId" INTEGER NOT NULL,
     "Note_procId" INTEGER NOT NULL,
+    "createdBy" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "ProcurementNote_pkey" PRIMARY KEY ("Note_id")
 );
@@ -353,7 +353,7 @@ ALTER TABLE "Inventory" ADD CONSTRAINT "Inventory_Inv_itemId_fkey" FOREIGN KEY (
 ALTER TABLE "Inventory" ADD CONSTRAINT "Inventory_createdBy_fkey" FOREIGN KEY ("createdBy") REFERENCES "User"("User_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "ProcurementNote" ADD CONSTRAINT "ProcurementNote_Note_userId_fkey" FOREIGN KEY ("Note_userId") REFERENCES "User"("User_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "ProcurementNote" ADD CONSTRAINT "ProcurementNote_createdBy_fkey" FOREIGN KEY ("createdBy") REFERENCES "User"("User_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "ProcurementNote" ADD CONSTRAINT "ProcurementNote_Note_procId_fkey" FOREIGN KEY ("Note_procId") REFERENCES "Procurement"("Proc_id") ON DELETE RESTRICT ON UPDATE CASCADE;

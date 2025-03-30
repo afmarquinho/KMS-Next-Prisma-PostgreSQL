@@ -1,10 +1,28 @@
 import { prisma } from "@/lib/db";
 import { formatISOToDate, formatToCurrency } from "@/utils";
+import { NextRequest, NextResponse } from "next/server";
 
-export const getProcurementInventoryById = async (id: number) => {
+export async function GET(req: NextRequest) {
   try {
+    const id = req.nextUrl.pathname.split("/").pop();
+
+    if (!id) {
+      return NextResponse.json(
+        { ok: false, data: null, message: "Id de la compra no proporcionado." },
+        { status: 400 }
+      );
+    }
+
+    const procurementId = parseInt(id, 10);
+    if (isNaN(procurementId)) {
+      return NextResponse.json(
+        { ok: false, data: null, message: "ID inválido." },
+        { status: 400 }
+      );
+    }
+
     const procurement = await prisma.procurement.findUnique({
-      where: { Proc_id: id },
+      where: { Proc_id: procurementId },
       include: {
         Supplier: {
           select: {
@@ -27,18 +45,22 @@ export const getProcurementInventoryById = async (id: number) => {
               select: {
                 Prod_id: true,
                 Prod_name: true,
+                Prod_ref: true,
+                Prod_desc: true,
+                Category: {
+                  select: {
+                    Cat_name: true,
+                  },
+                },
               },
             },
           },
         },
-        ProcurementNotes: {
+        ProcurementNote: {
           orderBy: {
-            Note_createdAt: "desc",
+            createdAt: "desc",
           },
-          select: {
-            Note_id: true,
-            Note_content: true,
-            Note_createdAt: true,
+          include: {
             User: {
               select: {
                 User_name: true,
@@ -57,14 +79,12 @@ export const getProcurementInventoryById = async (id: number) => {
     });
 
     if (!procurement) {
-      return {
-        response: {
-          ok: false,
-          data: null,
-          message: "La compra que buscas no existe",
-        },
-        status: { status: 404 },
-      };
+      if (!procurement) {
+        return NextResponse.json(
+          { ok: false, data: null, message: "La compra que buscas no existe" },
+          { status: 404 }
+        );
+      }
     }
 
     const res = {
@@ -72,9 +92,9 @@ export const getProcurementInventoryById = async (id: number) => {
       Proc_totalAmount: formatToCurrency(procurement.Proc_totalAmount),
       Proc_date: formatISOToDate(procurement.Proc_date),
       Proc_dueDate: formatISOToDate(procurement.Proc_dueDate),
-      ProcurementNote: procurement.ProcurementNotes.map((note) => ({
+      ProcurementNote: procurement.ProcurementNote.map((note) => ({
         ...note,
-        Note_createdAt: formatISOToDate(note.Note_createdAt),
+        createdAt: formatISOToDate(note.createdAt),
       })),
       Item: procurement.Item.map((item) => ({
         ...item,
@@ -83,23 +103,15 @@ export const getProcurementInventoryById = async (id: number) => {
       })),
     };
 
-    return {
-      response: {
-        ok: true,
-        data: res,
-        message: "Compra cargada exitosamente",
-      },
-      status: { status: 200 },
-    };
+    return NextResponse.json(
+      { ok: true, data: res, message: "Compra cargada exitosamente" },
+      { status: 200 }
+    );
   } catch (error) {
     console.error("Error al obtener la compra: ", error);
-    return {
-      response: {
-        ok: false,
-        data: null,
-        message: error instanceof Error ? error.message : "Error desconocido",
-      },
-      status: { status: 500 },
-    };
+    return NextResponse.json(
+      { ok: false, data: null, message: "Error interno del servidor." },
+      { status: 500 }
+    );
   }
-};
+}

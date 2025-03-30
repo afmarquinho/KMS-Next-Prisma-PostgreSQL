@@ -12,6 +12,7 @@ export * from './procurement/AddProductModal';
 export * from './procurement/CommentsSection';
 export * from './procurement/IncomeTrackingTable';
 export * from './procurement/ProcurementContent';
+export * from './procurement/ProcurementSummary';
 export * from './provision/ProvisionRequests';
 export * from './ui/InventoryContainer';
 export * from './ui/InventoryMenu';

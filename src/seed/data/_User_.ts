@@ -11,7 +11,7 @@ export const User = [
     User_phoneNumber: "3214567890",
     User_address: "Calle 1, Ciudad A",
     User_active: true,
-    User_registrationDate: "2024-12-18T11:12:02.336Z",
+    User_registrationDate: "2024-12-18T16:12:02.336Z",
     User_depId: 1,
   },
   {
@@ -26,7 +26,7 @@ export const User = [
     User_phoneNumber: "3214567891",
     User_address: "Calle 2, Ciudad B",
     User_active: false,
-    User_registrationDate: "2024-12-18T11:12:02.336Z",
+    User_registrationDate: "2024-12-18T16:12:02.336Z",
     User_depId: 5,
   },
   {
@@ -41,7 +41,7 @@ export const User = [
     User_phoneNumber: "3214567892",
     User_address: "Calle 3, Ciudad C",
     User_active: true,
-    User_registrationDate: "2024-12-18T11:12:02.336Z",
+    User_registrationDate: "2024-12-18T16:12:02.336Z",
     User_depId: 4,
   },
   {
@@ -56,7 +56,7 @@ export const User = [
     User_phoneNumber: "3214567893",
     User_address: "Calle 4, Ciudad D",
     User_active: false,
-    User_registrationDate: "2024-12-18T11:12:02.336Z",
+    User_registrationDate: "2024-12-18T16:12:02.336Z",
     User_depId: 10,
   },
   {
@@ -71,7 +71,7 @@ export const User = [
     User_phoneNumber: "3214567894",
     User_address: "Calle 5, Ciudad E",
     User_active: true,
-    User_registrationDate: "2024-12-18T11:12:02.336Z",
+    User_registrationDate: "2024-12-18T16:12:02.336Z",
     User_depId: 4,
   },
   {
@@ -86,23 +86,8 @@ export const User = [
     User_phoneNumber: "3214567895",
     User_address: "Calle 6, Ciudad F",
     User_active: false,
-    User_registrationDate: "2024-12-18T11:12:02.336Z",
+    User_registrationDate: "2024-12-18T16:12:02.336Z",
     User_depId: 6,
-  },
-  {
-    User_id: 7,
-    User_code: "acccf8f7-c65d-4079-a757-07859d8fd5ad",
-    User_dni: 100007,
-    User_role: "USER",
-    User_name: "Jorge",
-    User_surname: "Hernández",
-    User_email: "jorge.hernandez@example.com",
-    User_password: "password123",
-    User_phoneNumber: "3214567896",
-    User_address: "Calle 7, Ciudad G",
-    User_active: true,
-    User_registrationDate: "2024-12-18T11:12:02.336Z",
-    User_depId: 8,
   },
   {
     User_id: 8,
@@ -116,7 +101,7 @@ export const User = [
     User_phoneNumber: "3214567897",
     User_address: "Calle 8, Ciudad H",
     User_active: false,
-    User_registrationDate: "2024-12-18T11:12:02.336Z",
+    User_registrationDate: "2024-12-18T16:12:02.336Z",
     User_depId: 7,
   },
   {
@@ -131,7 +116,7 @@ export const User = [
     User_phoneNumber: "3214567898",
     User_address: "Calle 9, Ciudad I",
     User_active: true,
-    User_registrationDate: "2024-12-18T11:12:02.336Z",
+    User_registrationDate: "2024-12-18T16:12:02.336Z",
     User_depId: 8,
   },
   {
@@ -146,7 +131,7 @@ export const User = [
     User_phoneNumber: "3214567899",
     User_address: "Calle 10, Ciudad J",
     User_active: false,
-    User_registrationDate: "2024-12-18T11:12:02.336Z",
+    User_registrationDate: "2024-12-18T16:12:02.336Z",
     User_depId: 6,
   },
   {
@@ -161,7 +146,7 @@ export const User = [
     User_phoneNumber: "3214567900",
     User_address: "Calle 11, Ciudad K",
     User_active: true,
-    User_registrationDate: "2024-12-18T11:12:02.336Z",
+    User_registrationDate: "2024-12-18T16:12:02.336Z",
     User_depId: 9,
   },
   {
@@ -176,7 +161,7 @@ export const User = [
     User_phoneNumber: "3214567901",
     User_address: "Calle 12, Ciudad L",
     User_active: true,
-    User_registrationDate: "2024-12-18T11:12:02.336Z",
+    User_registrationDate: "2024-12-18T16:12:02.336Z",
     User_depId: 4,
   },
   {
@@ -191,7 +176,7 @@ export const User = [
     User_phoneNumber: "3214567902",
     User_address: "Calle 13, Ciudad M",
     User_active: false,
-    User_registrationDate: "2024-12-18T11:12:02.336Z",
+    User_registrationDate: "2024-12-18T16:12:02.336Z",
     User_depId: 4,
   },
   {
@@ -206,7 +191,7 @@ export const User = [
     User_phoneNumber: "3214567903",
     User_address: "Calle 14, Ciudad N",
     User_active: false,
-    User_registrationDate: "2024-12-18T11:12:02.336Z",
+    User_registrationDate: "2024-12-18T16:12:02.336Z",
     User_depId: 4,
   },
   {
@@ -221,7 +206,7 @@ export const User = [
     User_phoneNumber: "3214567904",
     User_address: "Calle 15, Ciudad O",
     User_active: true,
-    User_registrationDate: "2024-12-18T11:12:02.336Z",
+    User_registrationDate: "2024-12-18T16:12:02.336Z",
     User_depId: 8,
   },
   {
@@ -236,7 +221,7 @@ export const User = [
     User_phoneNumber: "3214567905",
     User_address: "Calle 16, Ciudad P",
     User_active: true,
-    User_registrationDate: "2024-12-18T11:12:02.336Z",
+    User_registrationDate: "2024-12-18T16:12:02.336Z",
     User_depId: 7,
   },
   {
@@ -251,7 +236,7 @@ export const User = [
     User_phoneNumber: "3214567906",
     User_address: "Calle 17, Ciudad Q",
     User_active: true,
-    User_registrationDate: "2024-12-18T11:12:02.336Z",
+    User_registrationDate: "2024-12-18T16:12:02.336Z",
     User_depId: 4,
   },
   {
@@ -266,7 +251,7 @@ export const User = [
     User_phoneNumber: "3214567907",
     User_address: "Calle 18, Ciudad R",
     User_active: true,
-    User_registrationDate: "2024-12-18T11:12:02.336Z",
+    User_registrationDate: "2024-12-18T16:12:02.336Z",
     User_depId: 9,
   },
   {
@@ -281,7 +266,7 @@ export const User = [
     User_phoneNumber: "3214567908",
     User_address: "Calle 19, Ciudad S",
     User_active: false,
-    User_registrationDate: "2024-12-18T11:12:02.336Z",
+    User_registrationDate: "2024-12-18T16:12:02.336Z",
     User_depId: 7,
   },
   {
@@ -296,7 +281,22 @@ export const User = [
     User_phoneNumber: "3214567909",
     User_address: "Calle 20, Ciudad T",
     User_active: false,
-    User_registrationDate: "2024-12-18T11:12:02.336Z",
+    User_registrationDate: "2024-12-18T16:12:02.336Z",
     User_depId: 6,
+  },
+  {
+    User_id: 7,
+    User_code: "acccf8f7-c65d-4079-a757-07859d8fd5ad",
+    User_dni: 100007,
+    User_role: "USER",
+    User_name: "Jorge",
+    User_surname: "Hernández",
+    User_email: "jorge.hernandez@example.com",
+    User_password: "password123",
+    User_phoneNumber: "3254178014",
+    User_address: "Calle 7, Ciudad G",
+    User_active: true,
+    User_registrationDate: "2024-12-18T16:12:02.336Z",
+    User_depId: 1,
   },
 ];

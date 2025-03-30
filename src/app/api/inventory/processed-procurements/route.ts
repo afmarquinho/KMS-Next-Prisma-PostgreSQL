@@ -6,10 +6,10 @@ export async function GET() {
   try {
     const processed = await prisma.procurement.findMany({
       where: {
-        Pro_processed: true,
+        Proc_processed: true,
       },
       orderBy: {
-        Pro_dueDate: "asc",
+        Proc_dueDate: "asc",
       },
       include: {
         Supplier: {
@@ -22,9 +22,9 @@ export async function GET() {
 
     const formattedProcessed = processed.map((procurement) => ({
       ...procurement,
-      Pro_totalAmount: formatToCurrency(procurement.Pro_totalAmount),
-      Pro_date: formatISOToDate(procurement.Pro_date),
-      Pro_dueDate: formatISOToDate(procurement.Pro_dueDate),
+      Proc_totalAmount: formatToCurrency(procurement.Proc_totalAmount),
+      Proc_date: formatISOToDate(procurement.Proc_date),
+      Proc_dueDate: formatISOToDate(procurement.Proc_dueDate),
     }));
 
     return NextResponse.json(

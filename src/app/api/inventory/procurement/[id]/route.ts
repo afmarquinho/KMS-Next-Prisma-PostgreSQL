@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
 
     const procurement = await prisma.procurement.findUnique({
       where: {
-        Pro_id: intInt,
+        Proc_id: intInt,
       },
 
       include: {
@@ -36,12 +36,12 @@ export async function GET(req: NextRequest) {
         Item: {
           select: {
             Item_id: true,
-            Item_desc: true,
-            Item_name: true,
+            
+            
             Item_qtyOrdered: true,
             Item_location: true,
             Item_qtyReceived: true,
-            Item_ref: true,
+            
             Item_status: true,
             Category: {
               select: {
