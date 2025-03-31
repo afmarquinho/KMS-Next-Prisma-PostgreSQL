@@ -1,4 +1,4 @@
-import { Item, Prisma } from "@prisma/client";
+import { Inventory, Item, Prisma } from "@prisma/client";
 import { Decimal } from "@prisma/client/runtime/client";
 
 export type InvTableType = Prisma.ProductGetPayload<{
@@ -48,7 +48,6 @@ type InvProcurementNoteBaseType = Prisma.ProcurementNoteGetPayload<{
   };
 }>;
 
-
 export type InvProcurementNoteType = Omit<
   InvProcurementNoteBaseType,
   "createdAt"
@@ -61,41 +60,41 @@ export type InvProcurementNoteType = Omit<
 //   Prisma.ProcurementGetPayload<{
 //     include: {
 //       Supplier: {
-  //       select: {
-  //         Supp_nit: true;
-  //         Supp_name: true;
-  //         Supp_contactInfo: true;
-  //         Supp_email: true;
-  //         Supp_phoneNumber: true;
-  //         Supp_city: true;
-  //         Supp_address: true;
-  //         Supp_active: true;
-  //       };
-  //     };
-  //     Item: true;
-  //     ProcurementNote: {
-  //       orderBy: { Note_createdAt: "desc" };
-  //       select: {
-  //         Note_id: true;
-  //         Note_content: true;
-  //         Note_createdAt: true;
-  //         User: {
-  //           select: {
-  //             User_name: true;
-  //             User_surname: true;
-  //           };
-  //         };
-  //       };
-  //     };
-  //     User: {
-  //       select: {
-  //         User_name: true;
-  //         User_surname: true;
-  //       };
-  //     };
-  //   };
-  // }>,
-  // "Item" | "ProcurementNote" | "Pro_totalAmount" | "Pro_date" | "Pro_dueDate"
+//       select: {
+//         Supp_nit: true;
+//         Supp_name: true;
+//         Supp_contactInfo: true;
+//         Supp_email: true;
+//         Supp_phoneNumber: true;
+//         Supp_city: true;
+//         Supp_address: true;
+//         Supp_active: true;
+//       };
+//     };
+//     Item: true;
+//     ProcurementNote: {
+//       orderBy: { Note_createdAt: "desc" };
+//       select: {
+//         Note_id: true;
+//         Note_content: true;
+//         Note_createdAt: true;
+//         User: {
+//           select: {
+//             User_name: true;
+//             User_surname: true;
+//           };
+//         };
+//       };
+//     };
+//     User: {
+//       select: {
+//         User_name: true;
+//         User_surname: true;
+//       };
+//     };
+//   };
+// }>,
+// "Item" | "ProcurementNote" | "Pro_totalAmount" | "Pro_date" | "Pro_dueDate"
 // > & {
 //   Pro_totalAmount: string;
 //   Pro_date: string;
@@ -106,32 +105,54 @@ export type InvProcurementNoteType = Omit<
 
 export type InvDataType = {
   //? --> Type para adicionar un producto al inventario
-  Inv_stock:number;
-  Inv_itemId:number;
+  Inv_stock: number;
+  Inv_itemId: number;
   Inv_batch: string;
   Inv_batchDueDate: Date;
   Mov_reason: string;
 };
 
 //? Respuesta de la consulta a la api para visualizar el inventario
-export type InvProductType = {
-  Prod_id: number;
-  Prod_name: string;
-  Prod_ref: string;
-  Prod_stock: number;
-  Prod_batch: string;
-  Prod_procurementEnabled: boolean;
-  Prod_saleEnabled: boolean;
-  Prod_margin: Decimal;
-  Item: {
-    Item_unitCost: Decimal;
+export type InventoryResponseType = Omit<
+  Inventory,
+  "Inv_prodId" | "Inv_itemId" | "Inv_marginValidity" | "createdBy"
+> & {
+  Product: {
+    Prod_name: string;
+    Prod_procurementEnabled: boolean;
+    Prod_ref: string;
     Category: {
       Cat_name: string;
     };
+  };
+  Item: {
+    Item_unitCost: Decimal;
     Procurement: {
       Supplier: {
-        Supp_name: true;
+        Supp_name: string;
       };
     };
   };
 };
+
+// {
+//   Prod_id: number;
+//   Prod_name: string;
+//   Prod_ref: string;
+//   Prod_stock: number;
+//   Prod_batch: string;
+//   Prod_procurementEnabled: boolean;
+//   Prod_saleEnabled: boolean;
+//   Prod_margin: Decimal;
+//   Item: {
+//     Item_unitCost: Decimal;
+//     Category: {
+//       Cat_name: string;
+//     };
+//     Procurement: {
+//       Supplier: {
+//         Supp_name: true;
+//       };
+//     };
+//   };
+// };

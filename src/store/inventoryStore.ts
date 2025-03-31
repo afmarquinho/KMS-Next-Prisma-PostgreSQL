@@ -1,5 +1,5 @@
 // import { InventoryTable, Purchases } from "@/interfaces";
-import { InvProductType, ProcurementType } from "@/interface";
+import { InventoryResponseType, ProcurementType } from "@/interface";
 import { create } from "zustand";
 
 type States = {
@@ -15,7 +15,7 @@ type States = {
   loadingDetails: boolean; // LOading que maneja el spinner de la pagina de detalles de compras
 
   // Estados para la sección de inventario
-  invProducts: InvProductType[] | null; // Productos en inventario
+  inventoryList:  InventoryResponseType[] | null; // Productos en inventario
   isExpanded: boolean; // Estado para expandir los criterios de búsqueda
   totalRecords: number; // Total de registros en la tabla de inventario
   pageSize: number; // Cantidad de registros por página
@@ -32,7 +32,7 @@ type Actions = {
   // setProducts: (products: any) => void;
   setLoadingDetails: () => void;
 
-  setInvProducts: (products: InvProductType[]) => void;
+  setInventoryList: (products:  InventoryResponseType[]) => void;
   setIsExpanded: () => void;
   setTotalRecords: (total: number) => void;
   setPageSize: (size: number) => void;
@@ -54,7 +54,7 @@ export const useInventoryStore = create<States & Actions>((set, get) => ({
   requestsModalOpen: false,
   loadingDetails: false,
 
-  invProducts: null,
+  inventoryList: null,
   isExpanded: false,
   totalRecords: 0,
   pageSize: 0,
@@ -125,8 +125,8 @@ export const useInventoryStore = create<States & Actions>((set, get) => ({
     set({ loadingDetails: !loadingDetails });
   },
 
-  setInvProducts: (products) => {
-    set({ invProducts: products });
+  setInventoryList: (products) => {
+    set({ inventoryList: products });
   },
 
   setIsExpanded: () => {

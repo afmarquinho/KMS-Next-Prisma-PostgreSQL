@@ -6,118 +6,99 @@ export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
 
-    const stock = searchParams.get("prod_stock");
-    const procurementEnabled = searchParams.get("prod_procurementEnabled");
-    const saleEnabled = searchParams.get("prod_saleEnabled");
-    const lote = searchParams.get("prod_batch");
-    const margenMin = searchParams.get("prod_margin_min");
-    const margenMax = searchParams.get("prod_margin_max");
-    const costoMin = searchParams.get("prod_unit_cost_min");
-    const costoMax = searchParams.get("prod_unit_cost_max");
-    const categoria = searchParams.get("prod_category");
-    const proveedor = searchParams.get("prod_supplier");
-    const fechaInicio = searchParams.get("prod_createdAt_min");
-    const fechaFin = searchParams.get("prod_createdAt_max");
-    const referencia = searchParams.get("prod_ref");
-    const nombre = searchParams.get("prod_name");
+    // Extraer los parámetros de búsqueda
+    const stock = searchParams.get("stock");
+    const batch = searchParams.get("batch");
+    const marginMin = searchParams.get("margin_min");
+    const marginMax = searchParams.get("margin_max");
+    const minCost = searchParams.get("unit_cost_min");
+    const maxCost = searchParams.get("unit_cost_max");
+    const category = searchParams.get("category");
+    const supplierName = searchParams.get("supplier");
+    const startDate = searchParams.get("createdAt_min");
+    const endDate = searchParams.get("createdAt_max");
+    const ref = searchParams.get("ref");
+    const name = searchParams.get("name");
+    const procurementEnabled = searchParams.get("procurementEnabled");
+    const saleEnabled = searchParams.get("saleEnabled");
 
-    const page = parseInt(searchParams.get("prod_page") || "1", 10);
-    const limit = parseInt(searchParams.get("prod_page_size") || "20", 10);
+    const page = parseInt(searchParams.get("page") || "1", 10);
+    const limit = parseInt(searchParams.get("page_size") || "20", 10);
     const offset = (page - 1) * limit;
 
-    // Construcción dinámica del WHERE
-    const where: Prisma.ProductWhereInput = {};
+    // Construcción dinámica del filtro `where`
+    const where: Prisma.InventoryWhereInput = {};
 
-    // Filtros directos en la tabla Product
-    if (stock !== null) {
-      where.Prod_stock = stock === "0" ? 0 : { gt: 0 };
+    if (stock) where.Inv_stock = parseInt(stock);
+    if (saleEnabled) where.Inv_saleEnabled = saleEnabled === "true";
+    if (batch) where.Inv_batch = { contains: batch, mode: "insensitive" };
+    if (marginMin || marginMax) {
+      where.Inv_margin = {};
+      if (marginMin) where.Inv_margin.gte = parseFloat(marginMin);
+      if (marginMax) where.Inv_margin.lte = parseFloat(marginMax);
+    }
+    if (startDate || endDate) {
+      where.createdAt = {};
+      if (startDate) where.createdAt.gte = new Date(startDate);
+      if (endDate) where.createdAt.lte = new Date(endDate);
     }
 
-    if (procurementEnabled !== null) {
-      where.Prod_procurementEnabled = procurementEnabled === "1";
-    }
+    const whereProduct: Prisma.ProductWhereInput = {};
 
-    if (saleEnabled !== null) {
-      where.Prod_saleEnabled = saleEnabled === "1";
-    }
-
-    if (lote !== null) where.Prod_batch = lote;
-
-    if (margenMin !== null || margenMax !== null) {
-      where.Prod_margin = {
-        ...(margenMin !== null ? { gte: parseFloat(margenMin) / 100 } : {}),
-        ...(margenMax !== null ? { lte: parseFloat(margenMax) / 100 } : {}),
+    if (procurementEnabled)
+      whereProduct.Prod_procurementEnabled = procurementEnabled === "true";
+    if (category)
+      whereProduct.Category = {
+        Cat_name: { contains: category, mode: "insensitive" },
       };
+    if (ref) whereProduct.Prod_ref = { contains: ref, mode: "insensitive" };
+    if (name) whereProduct.Prod_name = { contains: name, mode: "insensitive" };
+
+    const whereItem: Prisma.ItemWhereInput = {};
+    if (minCost || maxCost) {
+      whereItem.Item_unitCost = {};
+      if (minCost) whereItem.Item_unitCost.gte = parseFloat(minCost);
+      if (maxCost) whereItem.Item_unitCost.lte = parseFloat(maxCost);
     }
 
-    if (fechaInicio !== null || fechaFin !== null) {
-      where.createdAt = {
-        ...(fechaInicio !== null ? { gte: new Date(fechaInicio) } : {}),
-        ...(fechaFin !== null ? { lte: new Date(fechaFin) } : {}),
-      };
-    }
+    const whereSupplier: Prisma.SupplierWhereInput = {};
+    if (supplierName)
+      whereSupplier.Supp_name = { contains: supplierName, mode: "insensitive" };
 
-    if (nombre !== null) {
-      where.Prod_name = { contains: nombre, mode: "insensitive" };
-    }
+    console.log("Buscando el inventario...");
+    console.log("Clausula where", where);
 
-    if (referencia !== null) {
-      where.Prod_ref = { contains: referencia, mode: "insensitive" };
-    }
-
-    // Filtros en relaciones
-    if (
-      costoMin !== null ||
-      costoMax !== null ||
-      categoria !== null ||
-      proveedor !== null
-    ) {
-      where.Item = {
-        ...(costoMin !== null
-          ? { Item_unitCost: { gte: parseFloat(costoMin) } }
-          : {}),
-        ...(costoMax !== null
-          ? { Item_unitCost: { lte: parseFloat(costoMax) } }
-          : {}),
-        ...(categoria !== null
-          ? {
-              Category: {
-                Cat_name: { contains: categoria, mode: "insensitive" },
-              },
-            }
-          : {}),
-        ...(proveedor !== null
-          ? {
-              Procurement: {
-                Supplier: {
-                  Supp_name: { contains: proveedor, mode: "insensitive" },
-                },
-              },
-            }
-          : {}),
-      };
-    }
-
-    // Consulta de productos con filtros y paginación
-    const products = await prisma.product.findMany({
-      where,
+    // Consulta Prisma con relaciones
+    const data = await prisma.inventory.findMany({
+      where: {
+        ...where,
+        Product: { ...whereProduct },
+        Item: { ...whereItem, Procurement: { Supplier: { ...whereSupplier } } },
+      },
       select: {
-        Prod_id: true,
-        Prod_name: true,
-        Prod_ref: true,
-        Prod_stock: true,
-        Prod_batch: true,
-        Prod_procurementEnabled: true,
-        Prod_saleEnabled: true,
-        Prod_margin: true,
-        Item: {
+        Inv_id: true,
+        Inv_stock: true,
+        Inv_saleEnabled: true,
+        Inv_location: true,
+        Inv_batch: true,
+        Inv_batchDueDate: true,
+        Inv_margin: true,
+        createdAt: true,
+        Product: {
           select: {
-            Item_unitCost: true,
+            Prod_name: true,
+            Prod_procurementEnabled: true,
+            Prod_ref: true,
             Category: {
               select: {
                 Cat_name: true,
               },
             },
+          },
+        },
+        Item: {
+          select: {
+            Item_unitCost: true,
             Procurement: {
               select: {
                 Supplier: {
@@ -130,17 +111,22 @@ export async function GET(req: NextRequest) {
           },
         },
       },
-      orderBy: { Prod_id: "asc" },
+      orderBy: { createdAt: "asc" },
       skip: offset,
       take: limit,
     });
 
-    // Segunda consulta para obtener el total de registros sin paginación
-    const totalRecords = await prisma.product.count({ where });
+    
+    const totalRecords = await prisma.inventory.count({
+      where: {
+      ...where,
+      Product: { ...whereProduct },
+      Item: { ...whereItem, Procurement: { Supplier: { ...whereSupplier } } },
+    }});
 
     return NextResponse.json({
       ok: true,
-      data: products,
+      data,
       total: totalRecords,
       page,
       pageSize: limit,

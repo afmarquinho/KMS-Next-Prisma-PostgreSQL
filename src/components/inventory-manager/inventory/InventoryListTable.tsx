@@ -1,13 +1,13 @@
-import { InvProductType } from "@/interface";
+import { InventoryResponseType } from "@/interface";
 import { formatToCurrency } from "@/utils";
 import { SearchIcon } from "lucide-react";
 import Link from "next/link";
 
 type Props = {
-  products: InvProductType[];
+  products: InventoryResponseType[];
 };
 
-export const ProductsTable = ({ products }: Props) => {
+export const InventoryListTable = ({ products }: Props) => {
   return (
     <div className="overflow-auto my-5 bg-white p-5 dark:bg-slate-900 rounded shadow-md">
       <table className="w-full border-collapse text-left rounded overflow-hidden text-xs">
@@ -31,56 +31,56 @@ export const ProductsTable = ({ products }: Props) => {
         <tbody>
           {products.map((p, i) => (
             <tr
-              key={p.Prod_id}
+              key={p.Inv_id}
               className={`dark:border-slate-600 hover:bg-gray-300 dark:hover:bg-teal-900 ${
                 i % 2 === 0 ? "bg-slate-100 dark:bg-slate-800" : ""
               }`}
             >
               <td className="py-2 px-2">{i + 1}</td>
-              <td className="py-2 px-2">{p.Prod_name}</td>
+              <td className="py-2 px-2">{p.Product.Prod_name}</td>
               <td className="py-2 px-2 text-amber-700 dark:text-amber-400">
-                {p.Prod_ref}
+                {p.Product.Prod_ref}
               </td>
               <td className="py-2 px-2 text-amber-700 dark:text-amber-400">
-                {p.Prod_batch}
+                {p.Inv_batch}
               </td>
               <td
                 className={`py-2 px-2 ${
-                  p.Prod_stock < 1
+                  p.Inv_stock < 1
                     ? "bg-rose-200 text-center text-red-700 dark:bg-rose-950 dark:text-red-100"
                     : "text-green-600 dark:text-green-400 font-medium"
                 }`}
               >
-                {p.Prod_stock < 1 ? "Agotado" : p.Prod_stock}
+                {p.Inv_stock < 1 ? "Agotado" : p.Inv_stock}
               </td>
               <td className="py-2 px-2 text-green-600 dark:text-green-400">
                 {formatToCurrency(p.Item.Item_unitCost)}
               </td>
               <td className="py-2 px-2 text-green-600 dark:text-green-400">
-                {(parseFloat(p.Prod_margin.toString()) * 100).toFixed(1)} %
+                {(parseFloat(p.Inv_margin.toString()) * 100).toFixed(1)} %
               </td>
               <td className="py-2 px-2 text-green-600 dark:text-green-400">
                 $
                 {(
                   parseFloat(p.Item.Item_unitCost.toString()) *
-                  (parseFloat(p.Prod_margin.toString()) + 1)
+                  (parseFloat(p.Inv_margin.toString()) + 1)
                 ).toFixed(2)}
               </td>
               <td className="py-2 px-2 text-amber-700 dark:text-amber-400">
-                {p.Item.Category.Cat_name}
+                {p.Product.Category.Cat_name}
               </td>
               <td className="py-2 px-2">
                 {p.Item.Procurement.Supplier.Supp_name}
               </td>
               <td
                 className={`px-2 py-2 ${
-                  p.Prod_procurementEnabled
+                  p.Product.Prod_procurementEnabled
                     ? ""
                     : "bg-slate-600 text-center text-white dark:bg-rose-950 dark:text-red-100"
                 }`}
               >
                 <div className={`flex gap-1 items-center justify-start`}>
-                  {p.Prod_procurementEnabled ? (
+                  {p.Product.Prod_procurementEnabled ? (
                     <>
                       <div className={`h-2 w-2 rounded-full bg-green-500`} />{" "}
                       Habilidato
@@ -95,13 +95,13 @@ export const ProductsTable = ({ products }: Props) => {
               </td>
               <td
                 className={`px-2 py-2 ${
-                  p.Prod_saleEnabled
+                  p.Inv_saleEnabled
                     ? ""
                     : "bg-slate-600 text-center text-white dark:bg-rose-950 dark:text-red-100"
                 }`}
               >
                 <div className={`flex gap-1 items-center justify-start`}>
-                  {p.Prod_saleEnabled ? (
+                  {p.Inv_saleEnabled ? (
                     <>
                       <div className={`h-2 w-2 rounded-full bg-green-500`} />{" "}
                       Habilidato
@@ -116,7 +116,7 @@ export const ProductsTable = ({ products }: Props) => {
               </td>
               <td className={`py-2 px-2`}>
                 <Link
-                  href={`/inventory-manager/product/${p.Prod_ref}`}
+                  href={`/inventory-manager/product/${p.Product.Prod_ref}`}
                   className="w-8 h-6 p-1 bg-rose-500 hover:bg-red-700 text-white rounded shadow-md transition-colors duration-300 ease-linear  flex justify-center items-center"
                   onClick={() => console.log("Ver producto", p)}
                 >

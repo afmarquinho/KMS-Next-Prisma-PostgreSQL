@@ -31,7 +31,7 @@ export const GET = async (
         },
         Item: {
           select: {
-            Item_unitMeasure: true,
+            Item_unitMeaure: true,
           },
         },
       },

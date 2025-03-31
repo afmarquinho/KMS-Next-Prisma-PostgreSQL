@@ -62,15 +62,12 @@ export const AddProductModal = ({
     //* Actualizamos o creamos la bbdd del inventario con la cantidad recibida.
     setLoading(true);
     try {
-      const {
-        ok,
-        message,
-      } = await updateInvAndStockMov(product.Item_prodId, {
+      const { ok, message } = await updateInvAndStockMov(product.Item_prodId, {
         Inv_stock: data.Prod_qtyReceive,
         Inv_itemId: product.Item_id,
-        Inv_batch: data.Prod_batchCode,
+        Inv_batch: data.Prod_batchCode.toUpperCase(),
         Inv_batchDueDate: data.Prod_batchDate,
-        Mov_reason: data.reason
+        Mov_reason: data.reason,
       });
       if (ok) {
         toast.success(message);
@@ -88,42 +85,6 @@ export const AddProductModal = ({
     } finally {
       setLoading(false);
     }
-
-    //     const updatedProductData: ProductData = {
-    //       ...productData,
-    //       Product_qtyReceive: qtyReceive,
-    //       Product_batchCode: batchCode,
-    //       Product_batchDate: batchDate,
-    //       reason,
-    //     };
-    //     setLoading(true);
-    //     try {
-    //       const { ok, data, message } = await updatePurchaseItemStock(
-    //         updatedProductData.Product_purchaseId,
-    //         updatedProductData,
-    //         // TODO: Reemplazar con userId dinámico
-    //         4
-    //       );
-    //       if (ok && data) {
-    //         toast.success(message);
-    //         setQtyReceive(0);
-    //         setBatchCode("");
-    //         setReason("");
-    //         setBatchDate("");
-    //         setProductData(null);
-    //         setItemQtyRemaining(0);
-    //         toggleProductModal();
-    //         router.refresh();
-    //       } else {
-    //         toast.error(message);
-    //       }
-    //     } catch (error) {
-    //       console.error(error);
-    //       toast.error("Error al procesar el producto.");
-    //     } finally {
-    //       setLoading(false);
-    //     }
-    //   }
   };
 
   return (
@@ -139,7 +100,10 @@ export const AddProductModal = ({
           Ingresar: <span>{product?.Product.Prod_name}</span> al Inventario
         </h3>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <p>Referencia: <span className={`font-medium`}>{product?.Product.Prod_ref}</span></p>
+          <p>
+            Referencia:{" "}
+            <span className={`font-medium`}>{product?.Product.Prod_ref}</span>
+          </p>
           <label className={`flex gap-2 justify-start items-center mb-2`}>
             <span className={`w-20 italic`}>Cantidad:</span>
             {errors.Prod_qtyReceive && (

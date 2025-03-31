@@ -1,37 +1,12 @@
 "use client";
 
 import { useInventory } from "@/hooks";
-import { Decimal } from "@prisma/client/runtime/client";
-// import { useParams } from "next/navigation";
 import { useState } from "react";
 type Props = {
   productRef: string;
-  
-}
+};
 
-type ProductResponse = {
-  Prod_id: number;
-  Prod_batch: string;
-  createdAt: Date;
-  Prod_batchDueDate: Date;
-  Prod_stock: number;
-  Prod_margin: Decimal;
-  Prod_validity: Date;
-  Prod_saleEnabled: boolean;
-  Prod_procurementEnabled: boolean;
-  Prod_location: string;
-  Item: {
-    Item_unitCost: number;
-    Procurement: {
-      Supplier: {
-        Supp_name: string;
-      }[];
-    }[];
-  } | null;
-}[];
-
-
-export const ProcurementAndSupply = ({productRef}: Props) => {
+export const ProcurementAndSupply = ({ productRef }: Props) => {
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -45,7 +20,10 @@ export const ProcurementAndSupply = ({productRef}: Props) => {
 
     const queryString = `limit=${limit}`;
 
-    const response = await fetchProductProcurementDetails(productRef, queryString);
+    const response = await fetchProductProcurementDetails(
+      productRef,
+      queryString
+    );
 
     if (response.ok) {
       setProducts(response.data);
