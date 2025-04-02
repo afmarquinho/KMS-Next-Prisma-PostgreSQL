@@ -6,10 +6,11 @@ import { PencilIcon, TrashIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Subtitle } from "../../UI/Subtitle";
-import { LoadingSpinner2 } from "@/components/UI";
+import { LoadingSpinner2, MainButton } from "@/components/UI";
 import { NewCategoryModal } from "./NewCategoryModal";
 import { Category } from "@prisma/client";
 import { DeleteCategoryModal } from "./DeleteCategoryModal";
+
 
 export const CategoryContent = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -70,19 +71,20 @@ export const CategoryContent = () => {
     </div>
   ) : (
     <>
-      <div className={`flex gap-2`}>
+      <div className={`flex gap-2 mt-2`}>
         {/* <button
          className={`w-36 md:w-40 md:px-0 h-10 flex justify-center items-center gap-1 text-xs shadow-md p-2 border-2 transition-all duration-300 rounded hover:bg-gray-300 hover:dark:bg-slate-900 bg-white dark:bg-transparent  dark:border-slate-300  border-white`}
           // onClick={onNew}
         >
           Ver Categorías
         </button> */}
-        <button
-          className={`w-36 md:w-40 md:px-0 h-10 flex justify-center items-center gap-1 text-white transition-colors duration-300 text-xs bg-teal-600 hover:bg-teal-700 dark:bg-teal-700 dark:hover:bg-teal-600 shadow-md rounded`}
+        <MainButton
+        variant="secondary"
+          className={`text-white`}
           onClick={handleNew}
         >
           Nueva Categoría
-        </button>
+        </MainButton>
       </div>
 
       {!categories || categories.length < 1 ? (
@@ -91,7 +93,7 @@ export const CategoryContent = () => {
         </div>
       ) : (
         <>
-          <Subtitle label="Categorías" />
+          <Subtitle label="Listado de Categorías" />
           <div className="overflow-auto my-5 bg-white p-5 dark:bg-slate-900 shadow-lg rounded">
             <table className="w-full rounded overflow-hidden text-left shadow-md border-collapse">
               <thead className="bg-indigo-900 text-slate-200 border-b-8 border-b-blue-600">

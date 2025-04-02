@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 const API = axios.create({ baseURL: "/api/procurements" });
 
 export const useProducts = () => {
@@ -19,8 +20,11 @@ export const useProducts = () => {
       return { ok: false, data: null, message: errorMessage };
     }
   };
+  
+ 
+  
 
   return {
-    getProductList,
+    getProductList
   };
 };

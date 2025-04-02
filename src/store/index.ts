@@ -4,5 +4,7 @@ export * from './categoryStore';
 export * from './customerStore';
 export * from './inventoryStore';
 export * from './procurementStore';
+export * from './productStore';
+export * from './referenceStore';
 export * from './supplierStore';
 export * from './userStore';

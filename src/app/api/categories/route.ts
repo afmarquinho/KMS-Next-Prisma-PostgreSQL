@@ -53,8 +53,10 @@ export async function POST(req: NextRequest) {
     }
 
     // TODO: Cambiar el userId
+    const createdBy=2
+    
     const newCategory = await prisma.category.create({
-      data: { ...body, Cat_createdBy: 2 },
+      data: { ...body, createdBy },
     });
 
     return NextResponse.json(

@@ -100,7 +100,7 @@ export const InventoryContent = () => {
           className={`font-medium mt-5 text-blue-900 dark:text-yellow-500 flex gap-2`}
           onClick={() => setIsExpanded()}
         >
-          Criterio de Búsqueda
+          Criterios de Búsqueda
           <span
             className={`transform transition-transform ${
               isExpanded ? "rotate-90" : "rotate-0"
@@ -331,7 +331,7 @@ export const InventoryContent = () => {
 
         {/* Botón de consulta */}
         <div className={`w-full flex justify-center items-center`}>
-          <MainButton onClick={getInventory} variant="secondary">
+          <MainButton onClick={getInventory} variant="secondary" className={`text-white`}>
             {loading ? (
               <LoadingSpinner />
             ) : (

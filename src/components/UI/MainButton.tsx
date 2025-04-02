@@ -11,11 +11,11 @@ export const MainButton: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseStyles =
-    "flex items-center justify-center gap-1 rounded transition-all duration-300 w-40 h-10 shadow text-xs";
+    "flex items-center justify-center gap-1 rounded transition-all duration-300 w-40 h-10 shadow text-xs border-2 border-white";
 
   const variants = {
-    primary: "bg-blue-600 text-white hover:bg-blue-700",
-    secondary: "bg-teal-600 hover:bg-teal-700 border-2 border-white text-white", //Color teal
+    primary: "bg-indigo-900 dark:bg-teal-700 text-slate-200",
+    secondary: "bg-teal-600 dark:bg-slate-900 border-2", //Color teal
     
   };
 

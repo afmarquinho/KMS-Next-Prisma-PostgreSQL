@@ -9,14 +9,14 @@ import {
 
 import { notFound } from "next/navigation";
 
-interface PageProps {
-  params: { id: string }; // El parámetro dinámico de la URL
-}
+// interface PageProps {
+//   params: Awaited<{ id: string }>;
+// }
 
-const InventoryItemsManagementPage = async ({ params }: PageProps) => {
-  const { id } = await params;
+const InventoryItemsManagementPage = async ({ params }: { params: { id: string } }) => {
+  const idInt = parseInt(params.id, 10);
 
-  const idInt = parseInt(id, 10); // Convertir el parámetro a número
+
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/inventory/processed-procurements/${idInt}`,

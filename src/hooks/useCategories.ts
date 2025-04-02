@@ -42,6 +42,7 @@ export const useCategories = () => {
       return { ok: false, data: null, message: errorMessage };
     }
   };
+  
   const updateCategory = async (
     id: number,
     formValues: z.infer<typeof categorySchema>

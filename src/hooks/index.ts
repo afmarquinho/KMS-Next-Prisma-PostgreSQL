@@ -5,5 +5,7 @@ export * from './useItem';
 export * from './useProcurement';
 export * from './useProcurementNotes';
 export * from './useProducts';
+export * from './useProvisionRequest';
+export * from './useReferences';
 export * from './useSuppliers';
 export * from './useUsers';

@@ -38,7 +38,7 @@ export const ProcurementContent = () => {
       <MainButton
       variant="secondary"
         onClick={getProcessed}
-        // className={`w-36 md:w-40 md:px-0 h-10 flex justify-center items-center gap-1 text-white transition-colors duration-300 text-xs bg-teal-600 hover:bg-teal-700 dark:bg-teal-700 dark:hover:bg-teal-600 shadow-md rounded`}
+        className={`text-white`}
         disabled={loading}
       >
         {loading ? (

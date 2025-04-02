@@ -1,5 +1,5 @@
 import { useInventoryStore } from "@/store";
-import { ArchiveIcon, PackageOpenIcon, TagIcon, TruckIcon } from "lucide-react";
+import { ArchiveIcon, PackageOpenIcon, TruckIcon } from "lucide-react";
 
 type Props = {
   label: keyof typeof icons; // Restringe label a las claves de icons
@@ -8,33 +8,29 @@ type Props = {
 const icons = {
   Compras: <PackageOpenIcon size={20} strokeWidth={1.25} className="h-4" />,
   Inventario: <ArchiveIcon size={20} strokeWidth={1.25} className="h-4" />,
-  Categoría: <TagIcon size={20} strokeWidth={1.25} className="h-4" />,
-  Solicitudes: <TruckIcon size={20} strokeWidth={1.25} className="h-4" />,
+  Referencias: <TruckIcon size={20} strokeWidth={1.25} className="h-4" />,
 };
 
 export const InventoryMenuButton = ({ label }: Props) => {
   const {
-    toggleCategoryModal,
     toggleProcurementModal,
     toggleInventoryModal,
-    toggleRequestsModal,
-    categoryModalOpen,
+    toggleReferenceModal,
     procurementModalOpen,
     inventoryModalOpen,
-    requestsModalOpen,
+    referenceModalOpen
   } = useInventoryStore();
 
   // Configuración de modales y estados
   const modalConfig = {
     Compras: { isOpen: procurementModalOpen, toggle: toggleProcurementModal },
     Inventario: { isOpen: inventoryModalOpen, toggle: toggleInventoryModal },
-    Categoría: { isOpen: categoryModalOpen, toggle: toggleCategoryModal },
-    Solicitudes: { isOpen: requestsModalOpen, toggle: toggleRequestsModal },
+    Referencias: { isOpen: referenceModalOpen, toggle: toggleReferenceModal },
   };
 
   // Clases dinámicas basadas en el estado del modal
   const dynamicClasses = modalConfig[label].isOpen
-    ? "bg-blue-600 dark:bg-blue-800 text-white"
+    ? "bg-indigo-900 dark:bg-teal-700 text-slate-200"
     : "hover:bg-gray-300 hover:dark:bg-slate-900 bg-white dark:bg-transparent";
 
   const handleClick = () => {

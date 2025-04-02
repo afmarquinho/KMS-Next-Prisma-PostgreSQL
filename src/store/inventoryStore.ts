@@ -5,17 +5,16 @@ import { create } from "zustand";
 type States = {
   processedProcurement: ProcurementType[] | null;
 
-  categoryModalOpen: boolean;
   procurementModalOpen: boolean;
   inventoryModalOpen: boolean;
-  requestsModalOpen: boolean;
+  referenceModalOpen: boolean;
 
   productModalOpen: boolean;
   // products: any | null;
   loadingDetails: boolean; // LOading que maneja el spinner de la pagina de detalles de compras
 
   // Estados para la sección de inventario
-  inventoryList:  InventoryResponseType[] | null; // Productos en inventario
+  inventoryList: InventoryResponseType[] | null; // Productos en inventario
   isExpanded: boolean; // Estado para expandir los criterios de búsqueda
   totalRecords: number; // Total de registros en la tabla de inventario
   pageSize: number; // Cantidad de registros por página
@@ -25,14 +24,13 @@ type States = {
 type Actions = {
   setProcessedProcurements: (procurement: ProcurementType[]) => void;
   toggleProcurementModal: (isOpen: boolean) => void;
-  toggleCategoryModal: (isOpen: boolean) => void;
   toggleInventoryModal: (isOpen: boolean) => void;
-  toggleRequestsModal: (isOpen: boolean) => void;
+  toggleReferenceModal: (isOpen: boolean) => void;
   toggleProductModal: () => void;
   // setProducts: (products: any) => void;
   setLoadingDetails: () => void;
 
-  setInventoryList: (products:  InventoryResponseType[]) => void;
+  setInventoryList: (products: InventoryResponseType[]) => void;
   setIsExpanded: () => void;
   setTotalRecords: (total: number) => void;
   setPageSize: (size: number) => void;
@@ -45,13 +43,12 @@ export const useInventoryStore = create<States & Actions>((set, get) => ({
   processedProcurement: null,
 
   procurementModalOpen: true, // Inicia mostrando la tabla de compras en el módulo de inventarios.
-  categoryModalOpen: false,
   inventoryModalOpen: false,
 
   newCategoryModal: false,
   // products: null,
   productModalOpen: false,
-  requestsModalOpen: false,
+  referenceModalOpen: false,
   loadingDetails: false,
 
   inventoryList: null,
@@ -68,43 +65,30 @@ export const useInventoryStore = create<States & Actions>((set, get) => ({
     if (isOpen) {
       set({
         procurementModalOpen: isOpen,
-        categoryModalOpen: !isOpen,
         inventoryModalOpen: !isOpen,
-        requestsModalOpen: !isOpen,
-      });
-    }
-    return;
-  },
-  toggleCategoryModal: (isOpen) => {
-    if (isOpen) {
-      set({
-        procurementModalOpen: !isOpen,
-        categoryModalOpen: isOpen,
-        inventoryModalOpen: !isOpen,
-        requestsModalOpen: !isOpen,
-      });
-    }
-    return;
-  },
-  toggleInventoryModal: (isOpen) => {
-    if (isOpen) {
-      set({
-        procurementModalOpen: !isOpen,
-        categoryModalOpen: !isOpen,
-        inventoryModalOpen: isOpen,
-        requestsModalOpen: !isOpen,
+        referenceModalOpen: !isOpen,
       });
     }
     return;
   },
 
-  toggleRequestsModal: (isOpen) => {
+  toggleInventoryModal: (isOpen) => {
     if (isOpen) {
       set({
         procurementModalOpen: !isOpen,
-        categoryModalOpen: !isOpen,
+        inventoryModalOpen: isOpen,
+        referenceModalOpen: !isOpen,
+      });
+    }
+    return;
+  },
+
+  toggleReferenceModal: (isOpen) => {
+    if (isOpen) {
+      set({
+        procurementModalOpen: !isOpen,
         inventoryModalOpen: !isOpen,
-        requestsModalOpen: isOpen,
+        referenceModalOpen: isOpen,
       });
     }
     return;

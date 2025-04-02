@@ -16,8 +16,8 @@ export const InvetoryMenu = () => {
         <div className={`flex gap-2 mb-2`}>
           <InventoryMenuButton label="Compras" />
           <InventoryMenuButton label="Inventario" />
-          <InventoryMenuButton label="Solicitudes" />
-          <InventoryMenuButton label="Categoría" />
+          <InventoryMenuButton label="Referencias" />
+          
         </div>
       ) : (
         <div className={`flex justify-end gap-2`}>

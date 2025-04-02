@@ -213,29 +213,28 @@ model Inventory {
 model ProcurementNote {
   Note_id      Int      @id @default(autoincrement())
   Note_content String
-  Note_procId Int
+  Note_procId  Int
   createdBy    Int
   createdAt    DateTime @default(now())
-  
-  
-  User         User     @relation(fields: [createdBy], references: [User_id])
+
+  User        User        @relation(fields: [createdBy], references: [User_id])
   Procurement Procurement @relation(fields: [Note_procId], references: [Proc_id])
 
   @@index([Note_procId])
 }
 
 model ProvisionRequests {
-  Prov_id          Int      @id @default(autoincrement())
-  Prov_prodId      Int
-  Prov_quantity    Int
-  Prov_status      String   @default("pending")
-  Prov_desc        String
-  Prov_requestedBy Int
-  createdAt        DateTime @default(now())
+  Prov_id       Int      @id @default(autoincrement())
+  Prov_prodId   Int
+  Prov_quantity Int
+  Prov_status   String   @default("pending")
+  Prov_desc     String
+  createdBy     Int     
+  createdAt     DateTime @default(now())
 
   Product Product @relation(fields: [Prov_prodId], references: [Prod_id])
 
-  User User @relation(fields: [Prov_requestedBy], references: [User_id])
+  User User @relation(fields: [createdBy], references: [User_id])
 }
 
 model StockMovement {
@@ -245,7 +244,7 @@ model StockMovement {
   Mov_reason String // Razón del movimiento (e.g., "venta", "compra", "ajuste")
   Mov_prodId Int
   Mov_dest   String   @default("bodega") // (e.g., ventas, garantías, ...)
-  createdBy Int
+  createdBy  Int
   Mov_procId Int? // ID relacionado (e.g., Sale_id o Purchase_id)
   Mov_saleId Int? // ID relacionado (e.g., Sale_id o Purchase_id)
   createdAt  DateTime @default(now())
