@@ -94,8 +94,10 @@ model Customer {
   Cust_habeasData       Boolean  @default(true)
   Cust_registrationDate DateTime @default(now())
   createdBy             Int
-  User                  User     @relation(fields: [createdBy], references: [User_id])
-  Sale                  Sale[]
+  createdAt             DateTime @default(now())
+
+  User User   @relation(fields: [createdBy], references: [User_id])
+  Sale Sale[]
 }
 
 model Supplier {
@@ -111,6 +113,8 @@ model Supplier {
   Supp_registrationDate DateTime @default(now())
 
   createdBy   Int
+  createdAt          DateTime @default(now())
+
   User        User          @relation(fields: [createdBy], references: [User_id])
   Procurement Procurement[]
 }
@@ -132,8 +136,9 @@ model Procurement {
   Proc_dueDate       DateTime
   Proc_close         Boolean  @default(false)
   Proc_processed     Boolean  @default(false)
+  createdBy          Int
+  createdAt          DateTime @default(now())
 
-  createdBy   Int
   User        User     @relation(fields: [createdBy], references: [User_id])
   Proc_suppId Int
   Supplier    Supplier @relation(fields: [Proc_suppId], references: [Supp_id])
@@ -173,6 +178,7 @@ model Product {
   Prod_procurementEnabled Boolean @default(true) // Habilitado para compras
   Prod_brand              String?
   Prod_unitMeasure        String
+  Prod_rating           Int     @default(0)
 
   createdBy Int
   createdAt DateTime @default(now())
@@ -229,7 +235,7 @@ model ProvisionRequests {
   Prov_quantity Int
   Prov_status   String   @default("pending")
   Prov_desc     String
-  createdBy     Int     
+  createdBy     Int
   createdAt     DateTime @default(now())
 
   Product Product @relation(fields: [Prov_prodId], references: [Prod_id])
