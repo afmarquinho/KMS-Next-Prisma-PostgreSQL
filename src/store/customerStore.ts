@@ -27,7 +27,7 @@ type Actions = {
   setLoadingdetails: (status: boolean) => void; //* Maneja el esstado del loadingDetail.
 };
 
-export const useCustomerStore = create<States & Actions>((set, get) => ({
+export const customerStore = create<States & Actions>((set, get) => ({
   customers: null,
   customer: null,
   currentView: "list",

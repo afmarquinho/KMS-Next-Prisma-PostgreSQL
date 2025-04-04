@@ -16,11 +16,11 @@ import {
 import Image from "next/image";
 import logo from "../../../public/logo.png";
 
-import { useUIStore } from "@/store/UIStore";
+import { UIStore } from "@/store/UIStore";
 import { SidebarLink } from "./SidebarLink";
 
 export const Sidebar = () => {
-  const { isSidebarCollapsed, setSidebarCollapsed } = useUIStore();
+  const { isSidebarCollapsed, setSidebarCollapsed } = UIStore();
 
   return (
     <div

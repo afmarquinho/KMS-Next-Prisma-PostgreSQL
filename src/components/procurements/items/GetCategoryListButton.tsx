@@ -2,13 +2,13 @@
 
 import { LoadingSpinner } from "@/components/UI";
 import { useCategories } from "@/hooks/useCategories";
-import { useCategoryStore } from "@/store/categoryStore";
+import { categoryStore } from "@/store/categoryStore";
 import { EllipsisIcon } from "lucide-react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
 export const GetCategoryListButton = () => {
-  const { setCategories } = useCategoryStore();
+  const { setCategories } = categoryStore();
   const { getCategories } = useCategories();
   const [loading, setLoading] = useState<boolean>(false);
 

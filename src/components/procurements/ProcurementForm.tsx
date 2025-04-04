@@ -1,6 +1,6 @@
 "use client";
 
-import { useSupplierStore } from "@/store";
+import { supplierStore } from "@/store";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 // import { Decimal } from "@prisma/client/runtime/library";
@@ -9,7 +9,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 
 import { LoadingSpinner } from "../UI/LoadingSpinner";
 import { z } from "zod";
-import { useProcurementStore } from "@/store/procurementStore";
+import { procurementStore } from "@/store/procurementStore";
 
 import { GetSupplierListButton } from "./supplier/GetSupplierListButton";
 import procurementSchema from "@/validations/procurementSchema";
@@ -25,8 +25,8 @@ export const ProcurementForm = () => {
     updateProcurements,
     toggleCurrentView,
     clearProcurement,
-  } = useProcurementStore();
-  const { supplierList } = useSupplierStore();
+  } = procurementStore();
+  const { supplierList } = supplierStore();
   const [loading, setLoading] = useState<boolean>(false);
   const { createProcurement, updateProcurement } = useProcurement();
 

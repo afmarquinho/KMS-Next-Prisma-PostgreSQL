@@ -6,10 +6,10 @@ import { SupplierDetails } from "./SupplierDetails";
 import { SupplierListButton } from "./SupplierListButton";
 import { Undo2Icon } from "lucide-react";
 import SupplierViewManager from "./SupplierViewManager";
-import { useSupplierStore } from "@/store";
+import { supplierStore } from "@/store";
 
 export const SuppliersContainer = () => {
-  const { detailManager } = useSupplierStore();
+  const { detailManager } = supplierStore();
   return (
     <>
       {detailManager ? (

@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { TriangleAlert, X, CirclePower } from "lucide-react";
 import { toast } from "react-toastify";
-import { useSupplierStore } from "@/store";
+import { supplierStore } from "@/store";
 import { LoadingSpinner } from "../UI";
 import { useSuppliers } from "@/hooks/useSuppliers";
 
@@ -12,7 +12,7 @@ export const ActiveSupplierModal = () => {
     supplierDetails,
     setSupplierDetails,
     updateSuppliers,
-  } = useSupplierStore();
+  } = supplierStore();
   const { activeStatus } = useSuppliers();
 
   const [loading, setLoading] = useState<boolean>(false);

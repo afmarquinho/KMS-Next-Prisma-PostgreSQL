@@ -39,7 +39,7 @@ type Actions = {
   clearProId: () => void; //* Limpia el Pro id.
 };
 
-export const useProcurementStore = create<States & Actions>((set, get) => ({
+export const procurementStore = create<States & Actions>((set, get) => ({
   procurements: null,
   procurement: null,
   currentView: "list",

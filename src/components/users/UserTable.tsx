@@ -1,6 +1,6 @@
 "use client";
 
-import { useUserStore } from "@/store/userStore";
+import { userStore } from "@/store/userStore";
 import { FilePenLineIcon, SearchIcon } from "lucide-react";
 
 import { User } from "@prisma/client";
@@ -13,7 +13,7 @@ import { GetUsersButton } from "./GetUsersButton";
 // import { UserType } from "@/src/types";
 
 export const UsersTable = () => {
-  const { users, setUser, setUserDetails, toggleCurrentView } = useUserStore();
+  const { users, setUser, setUserDetails, toggleCurrentView } = userStore();
 
   //   const { users, editUserModalOpen, setEditUserModal, setUser, cleanUser } =
   //     userStore();
@@ -113,6 +113,7 @@ export const UsersTable = () => {
                       !user.User_active && "opacity-40 cursor-not-allowed"
                     }`}
                     onClick={() => handleEdit(user)}
+                    disabled={!user.User_active}
                   >
                     <FilePenLineIcon className={`text-white w-5`} />
                   </button>

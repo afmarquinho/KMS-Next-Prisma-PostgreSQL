@@ -22,6 +22,7 @@ export * from './customers/CustomerViewManager';
 export * from './customers/CustomersTable';
 export * from './customers/GetCustomersButton';
 export * from './customers/NewCustomerButton';
+export * from './dashboard/CardGrid';
 export * from './inventory-manager/inventory/InventoryContent';
 export * from './inventory-manager/inventory/InventoryListTable';
 export * from './inventory-manager/inventory/Pagination';

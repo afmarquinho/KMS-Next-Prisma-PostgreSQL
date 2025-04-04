@@ -5,7 +5,7 @@ import { useProcurement } from "@/hooks/useProcurement";
 import { formatISOToDate, formatToCurrency } from "@/utils";
 import { toast } from "react-toastify";
 import { FilePenLineIcon, SearchIcon } from "lucide-react";
-import { useItemStore, useProcurementStore } from "@/store";
+import { itemStore, procurementStore } from "@/store";
 import { ProcurementType } from "@/interface";
 import { GetProcurementButton } from "./GetProcurementButton";
 
@@ -19,8 +19,8 @@ export const ProcurementTable = () => {
     setDetailManager,
     setLoadingdetails,
     setProcurementDetails,
-  } = useProcurementStore();
-  const { setItems } = useItemStore();
+  } = procurementStore();
+  const { setItems } = itemStore();
   const { getProcurementDetails } = useProcurement();
 
   // const {get}= usePurchases()
@@ -106,7 +106,7 @@ export const ProcurementTable = () => {
 
                 <td className="py-2 px-1">
                   <button
-                    className={`bg-gradient-to-b from-rose-500 to-rose-700 hover:from-red-800 hover:to-red-800 transition-colors duration-300 ease-linear rounded-full w-8 h-6 p-1 flex justify-center items-center shadow`}
+                    className="w-8 h-6 p-1 bg-rose-500 hover:bg-red-700 text-white rounded shadow-md transition-colors duration-300 ease-linear  flex justify-center items-center"
                     onClick={() => handleView(procurement.Proc_id)}
                   >
                     <SearchIcon className="text-white w-5" />
@@ -114,9 +114,10 @@ export const ProcurementTable = () => {
                 </td>
                 <td className="py-2 px-1">
                   <button
-                    className={`bg-gradient-to-b from-indigo-500 to-indigo-700 hover:from-blue-800 hover:to-blue-800 transition-colors duration-300 ease-linear w-8 h-6 p-1 flex justify-center items-center shadow-md rounded ${
-                      procurement.Proc_processed && "hidden"
+                    className={`w-8 h-6 p-1 bg-blue-500 hover:bg-blue-700 text-white rounded  shadow-md transition-colors duration-300 ease-linear  flex justify-center items-center ${
+                      procurement.Proc_processed && "opacity-40 cursor-not-allowed"
                     }`}
+                    disabled={procurement.Proc_processed}
                     onClick={() => handleEdit(procurement)}
                   >
                     <FilePenLineIcon className="text-white w-5" />

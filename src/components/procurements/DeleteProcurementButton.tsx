@@ -1,13 +1,13 @@
 "use client";
 
-import { useItemStore, useProcurementStore } from "@/store";
+import { itemStore, procurementStore } from "@/store";
 import { TrashIcon } from "lucide-react";
 import { Button } from "../UI/Button";
 
 export const DeleteProcurementButton = () => {
   const { toggleDeleteProcurementModal, procurementDetails, setProId } =
-    useProcurementStore();
-  const { items } = useItemStore();
+    procurementStore();
+  const { items } = itemStore();
 
   const handleDetele = () => {
     if (!procurementDetails) return;

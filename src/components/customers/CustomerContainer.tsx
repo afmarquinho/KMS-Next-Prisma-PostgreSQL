@@ -1,6 +1,6 @@
 "use client";
 
-import { useCustomerStore } from "@/store";
+import { customerStore } from "@/store";
 import { CustomerListButton } from "./CustomerListButton";
 import { CustomerViewManager } from "./CustomerViewManager";
 import { NewCustomerButton } from "./NewCustomerButton";
@@ -9,7 +9,7 @@ import Link from "next/link";
 import { Undo2Icon } from "lucide-react";
 
 export const CustomerContainer = () => {
-  const { detailManager } = useCustomerStore();
+  const { detailManager } = customerStore();
   return (
     <>
       {detailManager ? (

@@ -1,10 +1,10 @@
-import { useSupplierStore } from "@/store";
+import { supplierStore } from "@/store";
 import { Undo2Icon } from "lucide-react";
 
 export const BackButtonSupplier = () => {
   
     <div>BackButtonSupplier</div>
-    const { clearSupplierDetails, setDetailManager } = useSupplierStore();
+    const { clearSupplierDetails, setDetailManager } = supplierStore();
     
     const closeUserView = () => {
       clearSupplierDetails();

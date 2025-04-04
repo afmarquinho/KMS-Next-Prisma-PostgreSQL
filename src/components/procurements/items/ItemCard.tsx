@@ -1,7 +1,7 @@
 "use client";
 
 import { ItemDetailsType } from "@/interface";
-import { useItemStore } from "@/store";
+import { itemStore } from "@/store";
 import { formatToCurrency } from "@/utils";
 import { PencilIcon, XIcon } from "lucide-react";
 
@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const ItemCard = ({ item, procurementStatus }: Props) => {
-  const { setItem, toggleDeleteItemModal, toggleItemModal } = useItemStore();
+  const { setItem, toggleDeleteItemModal, toggleItemModal } = itemStore();
 
   const handleEdit = (item: ItemDetailsType) => {
     toggleItemModal();

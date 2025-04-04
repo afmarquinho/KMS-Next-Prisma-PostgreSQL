@@ -3,16 +3,16 @@
 import { LoadingSpinner } from "@/components/UI";
 import { Button } from "@/components/UI/Button";
 import { useItem } from "@/hooks/useItem";
-import { useItemStore, useProcurementStore } from "@/store";
+import { itemStore, procurementStore } from "@/store";
 import { Trash2Icon, TriangleAlertIcon, XIcon } from "lucide-react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
 export const DeleteItemModal = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  const { toggleDeleteItemModal, item, setItems, clearItem } = useItemStore();
+  const { toggleDeleteItemModal, item, setItems, clearItem } = itemStore();
   const { deleteItem } = useItem();
-  const { setProcurementDetails } = useProcurementStore();
+  const { setProcurementDetails } = procurementStore();
 
   const handleCancel = () => {
     toggleDeleteItemModal();

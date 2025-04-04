@@ -2,7 +2,7 @@
 
 import { LoadingSpinner, MainButton, Subtitle } from "@/components/UI";
 import { useReferences } from "@/hooks";
-import { useReferenceStore } from "@/store";
+import { referenceStore } from "@/store";
 import { RefreshCcwIcon, ShoppingCartIcon } from "lucide-react";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -21,7 +21,7 @@ export const ReferenceManager = () => {
   } | null>(null);
 
   const { getReferenceList } = useReferences();
-  const { setReferenceList, referenceList } = useReferenceStore();
+  const { setReferenceList, referenceList } = referenceStore();
 
   const handleReferences = async () => {
     setLoadingRef(true);
@@ -57,27 +57,23 @@ export const ReferenceManager = () => {
 
   return (
     <>
-      <div className={`flex gap-1 mt-2`}>
+      <div className={`flex gap-2 mt-2`}>
         <MainButton
-          variant="secondary"
-          onClick={handleCheckReferences}
+          variant={checkReferences ? "secondary" : "tertiary"}
           className={`${
-            !checkReferences
-              ? "bg-white text-slate-800 dark:bg-transparent dark:text-slate-200 hover:bg-gray-300 dark:hover:bg-slate-900"
-              : "text-white dark:bg-slate-500"
+            !checkReferences ? "hover:bg-gray-300 dark:hover:bg-slate-900" : ""
           }`}
+          onClick={handleCheckReferences}
         >
           Referencias
         </MainButton>
         <MainButton
-          variant="secondary"
-          onClick={handleForm}
-          className={`${
-            !refForm
-              ? "bg-white text-slate-800 dark:bg-transparent dark:text-slate-200 hover:bg-gray-300 dark:hover:bg-slate-900"
-              : "text-white dark:bg-slate-500"
-          }`}
-        >
+         variant={refForm ? "secondary" : "tertiary"}
+         className={`${
+           !refForm ? "hover:bg-gray-300 dark:hover:bg-slate-900" : ""
+         }`}
+            onClick={handleForm}
+            >
           Nueva Referencia
         </MainButton>
       </div>
@@ -96,7 +92,7 @@ export const ReferenceManager = () => {
             )}
           </MainButton>
           {referenceList.length < 1 ? (
-            <p className={`mt-2`}>No hay productos cargados</p>
+            <p className={`mt-2 text-center italic font-medium`}>No hay productos cargados</p>
           ) : (
             <>
               <Subtitle label="Administrar Referencias" />

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { LoadingSpinner } from "../UI";
 import { LockIcon, TriangleAlertIcon, XIcon } from "lucide-react";
-import { useProcurementStore } from "@/store";
+import { procurementStore } from "@/store";
 import { useProcurement } from "@/hooks/useProcurement";
 import { toast } from "react-toastify";
 import { Button } from "../UI/Button";
@@ -16,7 +16,7 @@ export const ProcessProcurementModal = () => {
     procurementDetails,
     updateProcurements,
     setDetailManager,
-  } = useProcurementStore();
+  } = procurementStore();
 
   const { processProcurement } = useProcurement();
 

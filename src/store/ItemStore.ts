@@ -19,7 +19,7 @@ type Actions = {
 };
 
 // Crear el store
-export const useItemStore = create<States & Actions>((set, get) => ({
+export const itemStore = create<States & Actions>((set, get) => ({
   items: null,
   item: null,
   deleteItemModalOpen: false,

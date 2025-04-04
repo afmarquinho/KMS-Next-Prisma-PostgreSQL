@@ -1,10 +1,10 @@
 "use client";
 
-import { useUserStore } from "@/store";
+import { userStore } from "@/store";
 import { UserRoundPlusIcon } from "lucide-react";
 
 export const NewUserButton = () => {
-  const { toggleCurrentView, currentView, user } = useUserStore();
+  const { toggleCurrentView, currentView, user } = userStore();
 
   const handleView = () => {
     toggleCurrentView("form");

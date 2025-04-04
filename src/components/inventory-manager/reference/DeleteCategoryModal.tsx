@@ -2,14 +2,14 @@
 
 import { LoadingSpinner } from "@/components/UI";
 import { useCategories } from "@/hooks/useCategories";
-import { useCategoryStore } from "@/store";
+import { categoryStore } from "@/store";
 import { TriangleAlertIcon, XIcon } from "lucide-react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
 export const DeleteCategoryModal = () => {
   const { updateCategories, setDeleteCategoryModal, deleteCategoryModalOpen } =
-    useCategoryStore();
+    categoryStore();
   const { deleteCategory } = useCategories();
 
   const [loading, setLoading] = useState<boolean>(false);

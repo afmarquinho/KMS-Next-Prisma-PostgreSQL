@@ -1,14 +1,14 @@
 "use client";
 
-import { useItemStore } from "@/store/ItemStore";
+import { itemStore } from "@/store/ItemStore";
 import { CalculatorIcon, RefreshCwIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useItem, useProducts } from "@/hooks";
-import { useProductStore } from "@/store/productStore";
+import { productStore } from "@/store/productStore";
 import { LoadingSpinner } from "@/components/UI";
 import { Button } from "@/components/UI/Button";
-import { useProcurementStore } from "@/store";
+import { procurementStore } from "@/store";
 import { decimalToNumber } from "@/utils";
 
 type SelectedProductType = {
@@ -20,12 +20,12 @@ type SelectedProductType = {
 };
 
 export const ItemForm = () => {
-  const { item, toggleItemModal, clearItem, setItems } = useItemStore();
-  const { procurementDetails, setProcurementDetails } = useProcurementStore();
+  const { item, toggleItemModal, clearItem, setItems } = itemStore();
+  const { procurementDetails, setProcurementDetails } = procurementStore();
   const { createItem, updateItem } = useItem();
   const [loading, setLoading] = useState<boolean>(false);
   const { getProductList } = useProducts();
-  const { setProductList, productList } = useProductStore();
+  const { setProductList, productList } = productStore();
   const [loadingProducts, setLoadingProducts] = useState<boolean>(false);
 
   const [selectedProduct, setSelectedProduct] = useState<string | null>(null);

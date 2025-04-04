@@ -31,33 +31,27 @@ export const ReferenceContent = () => {
     <>
       <div className={`flex gap-2`}>
         <MainButton
-          variant="secondary"
+          variant={manager ? "secondary" : "tertiary"}
           className={`${
-            !manager
-              ? "bg-white text-slate-800 dark:bg-transparent dark:text-slate-200 hover:bg-gray-300 dark:hover:bg-slate-900"
-              : "text-white dark:bg-slate-500"
+            !manager ? "hover:bg-gray-300 dark:hover:bg-slate-900" : ""
           }`}
           onClick={handleManager}
         >
           Administrar
         </MainButton>
         <MainButton
-          variant="secondary"
-          className={`${
-            !category
-              ? "bg-white text-slate-800 dark:bg-transparent dark:text-slate-200 hover:bg-gray-300 dark:hover:bg-slate-900"
-              : "text-white dark:bg-slate-500"
-          }`}
+         variant={category ? "secondary" : "tertiary"}
+         className={`${
+           !category ? "hover:bg-gray-300 dark:hover:bg-slate-900" : ""
+         }`}
           onClick={handleCategory}
         >
           Categorías
         </MainButton>
         <MainButton
-          variant="secondary"
+          variant={requests? "secondary" : "tertiary"}
           className={`${
-            !requests
-              ? "bg-white text-slate-800 dark:bg-transparent dark:text-slate-200 hover:bg-gray-300 dark:hover:bg-slate-900"
-              : "text-white dark:bg-slate-500"
+            !requests ? "hover:bg-gray-300 dark:hover:bg-slate-900" : ""
           }`}
           onClick={handleRequests}
         >

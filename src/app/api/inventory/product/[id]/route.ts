@@ -6,10 +6,11 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise <{ id: string }> }
 ) => {
   try {
     const { id } = await params;
+    
     const productId = parseInt(id, 10);
 
     if (isNaN(productId)) {

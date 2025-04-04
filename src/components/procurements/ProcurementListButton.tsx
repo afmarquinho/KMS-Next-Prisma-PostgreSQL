@@ -1,10 +1,10 @@
 "use client";
 
-import { useProcurementStore } from "@/store/procurementStore";
+import { procurementStore } from "@/store/procurementStore";
 import { ListCheckIcon } from "lucide-react";
 
 export const ProcurementListButton = () => {
-  const { currentView, toggleCurrentView, clearProcurement } = useProcurementStore();
+  const { currentView, toggleCurrentView, clearProcurement } = procurementStore();
 
   const handleView = () => {
     toggleCurrentView("list");

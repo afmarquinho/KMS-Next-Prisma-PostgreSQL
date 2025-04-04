@@ -1,13 +1,13 @@
 "use client";
 
-import { useProcurementStore } from "@/store/procurementStore";
+import { procurementStore } from "@/store/procurementStore";
 import { NewProcurementButton } from "./NewProcurementButton";
 import { ProcurementDetails } from "./ProcurementDetails";
 import { ProcurementListButton } from "./ProcurementListButton";
 import { ProcurementViewManager } from "./ProcurementViewManager";
 
 export const ProcurementContainer = () => {
-  const { detailManager } = useProcurementStore();
+  const { detailManager } = procurementStore();
   return (
     <>
       {detailManager ? (

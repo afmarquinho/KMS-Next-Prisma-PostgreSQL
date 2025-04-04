@@ -23,7 +23,7 @@ type Actions = {
 };
 
 // Crear el store
-export const useUserStore = create<States & Actions>((set, get) => ({
+export const userStore = create<States & Actions>((set, get) => ({
   user: null,
   users: null,
   userDetails: null,

@@ -1,11 +1,11 @@
 "use client";
 
-import { useUIStore } from "@/store/UIStore";
+import { UIStore } from "@/store/UIStore";
 import { AlignJustify, Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
 
 export const TopMenu = () => {
-  const { isDark, toggleDarkMode, setSidebarCollapsed } = useUIStore();
+  const { isDark, toggleDarkMode, setSidebarCollapsed } = UIStore();
   const [loaded, setLoaded] = useState<boolean>(false);
 
   useEffect(() => {

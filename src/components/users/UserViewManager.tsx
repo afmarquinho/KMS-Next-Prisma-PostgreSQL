@@ -1,12 +1,12 @@
 "use client";
 
-import { useUserStore } from "@/store";
+import { userStore } from "@/store";
 import { UsersTable } from "./UserTable";
 import { UserForm } from "./UserForm";
 
 
 export const UserViewManager = () => {
-  const { currentView } = useUserStore();
+  const { currentView } = userStore();
 
   const views = {
     list: <UsersTable />,

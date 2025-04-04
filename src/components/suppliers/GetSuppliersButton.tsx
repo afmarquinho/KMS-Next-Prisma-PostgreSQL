@@ -1,7 +1,7 @@
 "use client";
 
 import { useSuppliers } from "@/hooks/useSuppliers";
-import { useSupplierStore } from "@/store";
+import { supplierStore } from "@/store";
 import { RefreshCcwIcon, ShoppingCartIcon, SlidersHorizontalIcon } from "lucide-react"
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -10,7 +10,7 @@ import { LoadingSpinner } from "../UI";
 export const GetSuppliersButton = () => {
 const { getAllSuppliers } = useSuppliers();
 
-  const { setSuppliers, suppliers } = useSupplierStore();
+  const { setSuppliers, suppliers } = supplierStore();
     const [loading, setLoading] = useState<boolean>(false);
 
   const handleGetSuppliers = async () => {

@@ -9,11 +9,11 @@ import { LoadingSpinner } from "../UI";
 import { useState } from "react";
 import { useProcurement } from "@/hooks/useProcurement";
 import { toast } from "react-toastify";
-import { useProcurementStore } from "@/store/procurementStore";
+import { procurementStore } from "@/store/procurementStore";
 
 export const GetProcurementButton = () => {
   const { getAllProcurements } = useProcurement();
-  const { procurements, setProcurements } = useProcurementStore();
+  const { procurements, setProcurements } = procurementStore();
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleGetCustomers = async () => {

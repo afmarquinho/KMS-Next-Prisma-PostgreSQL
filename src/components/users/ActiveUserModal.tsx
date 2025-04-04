@@ -1,6 +1,6 @@
 "use client";
 
-import { useUserStore } from "@/store/userStore";
+import { userStore } from "@/store/userStore";
 import { TriangleAlert, UserRoundX, X } from "lucide-react";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -9,7 +9,7 @@ import { useUsers } from "@/hooks";
 
 export const ActiveUserModal = () => {
   const { userDetails, toggleActiveUserModal, updateUsers, setUserDetails } =
-    useUserStore();
+    userStore();
   const { activeUser } = useUsers();
   const [loading, setLoading] = useState<boolean>();
 

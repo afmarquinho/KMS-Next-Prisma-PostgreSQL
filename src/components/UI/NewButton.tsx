@@ -1,7 +1,7 @@
 "use client";
 
-// import { useCustomerStore, usePurchaseStore, useSupplierStore } from "@/store";
-// import { useUserStore } from "@/store/userStore";
+// import { customerStore, usePurchaseStore, supplierStore } from "@/store";
+// import { userStore } from "@/store/userStore";
 
 import {
   ArchiveRestore,
@@ -23,9 +23,9 @@ const icons = {
 };
 
 export const NewButton = ({ name, module }: Props) => {
-  //   const { toggleUsersModal } = useUserStore();
-  //   const { toggleSupplierModal } = useSupplierStore();
-  //   const { toggleCustomerModal } = useCustomerStore();
+  //   const { toggleUsersModal } = userStore();
+  //   const { toggleSupplierModal } = supplierStore();
+  //   const { toggleCustomerModal } = customerStore();
   //   const { togglePurchaseModal } = usePurchaseStore();
 
   //   const onNew = () => {

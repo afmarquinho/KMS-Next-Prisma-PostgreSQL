@@ -2,7 +2,7 @@
 
 import { LoadingSpinner, MainButton } from "@/components/UI";
 import { useInventory } from "@/hooks";
-import { useInventoryStore } from "@/store";
+import { inventoryStore } from "@/store";
 import { PencilLineIcon, RefreshCwIcon, ShoppingCartIcon } from "lucide-react";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -11,10 +11,9 @@ import Link from "next/link";
 
 export const ProcurementContent = () => {
   const { processedProcurement: procurements, setProcessedProcurements } =
-    useInventoryStore();
+    inventoryStore();
   const [loading, setLoading] = useState<boolean>(false);
   const { getProcessedProcurements } = useInventory();
-
 
   const getProcessed = async () => {
     setLoading(true);
@@ -36,9 +35,10 @@ export const ProcurementContent = () => {
   return (
     <>
       <MainButton
-      variant="secondary"
+        variant="tertiary"
         onClick={getProcessed}
-        className={`text-white`}
+        className={`hover:bg-teal-900 dark:hover:bg-slate-900 hover:text-slate-200`}
+       
         disabled={loading}
       >
         {loading ? (
@@ -59,7 +59,7 @@ export const ProcurementContent = () => {
         )}
       </MainButton>
       {!procurements ? (
-        <div className={`italic font-medium text-base`}>
+        <div className={`italic font-medium text-center text-slate-700`}>
           No hay compras pendientes en el panel
         </div>
       ) : procurements.length < 1 ? (
@@ -102,17 +102,15 @@ export const ProcurementContent = () => {
                     </td>
                     <td className="py-2 px-1">{procurement.Proc_date}</td>
                     <td className="py-2 px-1">{procurement.Proc_dueDate}</td>
-                    <td className="py-2 px-1">{procurement.Proc_totalAmount}</td>
+                    <td className="py-2 px-1">
+                      {procurement.Proc_totalAmount}
+                    </td>
                     <td className="py-2 px-1">
                       <Link
                         href={`/inventory-manager/procurement/${procurement.Proc_id}`}
-                        className="bg-rose-600 w-8 h-8 flex justify-center items-center shadow-md rounded-sm"
+                        className="w-8 h-6 p-1 bg-rose-500 hover:bg-red-700 text-white rounded shadow-md transition-colors duration-300 ease-linear  flex justify-center items-center"
                       >
-                        <PencilLineIcon
-                          size={20}
-                          strokeWidth={1.5}
-                          className="text-white w-5"
-                        />
+                        <PencilLineIcon className="text-white w-5 h-5" />
                       </Link>
                     </td>
                   </tr>

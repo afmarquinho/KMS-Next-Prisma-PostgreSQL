@@ -1,6 +1,6 @@
 "use client";
 
-import { useUserStore } from "@/store";
+import { userStore } from "@/store";
 import { z } from "zod";
 import { LoadingSpinner } from "../UI/LoadingSpinner";
 import { useState } from "react";
@@ -14,7 +14,7 @@ import { toast } from "react-toastify";
 type FormValuesType = z.infer<typeof userSchema>;
 
 export const UserForm = () => {
-  const { user, clearUser, updateUsers } = useUserStore();
+  const { user, clearUser, updateUsers } = userStore();
   const [loading, setLoading] = useState<boolean>(false);
   const { createUser, updateUser } = useUsers();
 

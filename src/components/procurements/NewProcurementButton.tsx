@@ -1,11 +1,11 @@
 "use client";
 
 
-import { useProcurementStore } from "@/store";
+import { procurementStore } from "@/store";
 import { ShoppingBagIcon } from "lucide-react";
 
 export const NewProcurementButton = () => {
-  const { currentView, toggleCurrentView, procurement } = useProcurementStore();
+  const { currentView, toggleCurrentView, procurement } = procurementStore();
 
   const handleView = () => {
     toggleCurrentView("form");

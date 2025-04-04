@@ -13,10 +13,14 @@ import { notFound } from "next/navigation";
 //   params: Awaited<{ id: string }>;
 // }
 
-const InventoryItemsManagementPage = async ({ params }: { params: { id: string } }) => {
-  const idInt = parseInt(params.id, 10);
-
-
+const InventoryItemsManagementPage = async ({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) => {
+  const { id } = await params;
+  const idInt = parseInt(id, 10);
+  if (isNaN(idInt)) return notFound();
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/inventory/processed-procurements/${idInt}`,

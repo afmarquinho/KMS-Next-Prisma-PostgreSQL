@@ -1,11 +1,11 @@
 "use client";
 
-import { useSupplierStore } from "@/store";
+import { supplierStore } from "@/store";
 import { SuppliersTable } from "./SuppliersTable";
 import { SupplierForm } from "./SupplierForm";
 
 const SupplierViewManager = () => {
-  const { currentView } = useSupplierStore();
+  const { currentView } = supplierStore();
 
   const views = {
     list: <SuppliersTable />,

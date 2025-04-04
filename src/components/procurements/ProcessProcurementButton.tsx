@@ -1,14 +1,14 @@
 "use client";
 
-import { useItemStore, useProcurementStore } from "@/store";
+import { itemStore, procurementStore } from "@/store";
 import { LockIcon } from "lucide-react";
 import { Button } from "../UI/Button";
 
 export const ProcessProcurementButton = () => {
   const { toggleProcessProcurementModal, setProId, procurementDetails } =
-    useProcurementStore();
+    procurementStore();
 
-  const { items } = useItemStore();
+  const { items } = itemStore();
 
   const handleProcessProcurement = () => {
     if (!procurementDetails) return;

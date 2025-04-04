@@ -1,11 +1,11 @@
 "use client";
 
-import { useCustomerStore } from "@/store";
+import { customerStore } from "@/store";
 import { CustomersTable } from "./CustomersTable";
 import { CustomerForm } from "./CustomerForm";
 
 export const CustomerViewManager = () => {
-  const { currentView } = useCustomerStore();
+  const { currentView } = customerStore();
 
   const views = {
     list: <CustomersTable />,

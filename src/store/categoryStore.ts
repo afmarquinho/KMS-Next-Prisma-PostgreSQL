@@ -26,7 +26,7 @@ type Actions = {
 };
 
 // Crear el store
-export const useCategoryStore = create<States & Actions>((set, get) => ({
+export const categoryStore = create<States & Actions>((set, get) => ({
   categories: null,
   category: null,
   newCategoryModalOpen: false,

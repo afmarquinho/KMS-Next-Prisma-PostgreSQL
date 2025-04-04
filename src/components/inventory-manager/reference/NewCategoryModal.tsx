@@ -2,7 +2,7 @@
 
 import { LoadingSpinner } from "@/components/UI";
 import { useCategories } from "@/hooks/useCategories";
-import { useCategoryStore } from "@/store";
+import { categoryStore } from "@/store";
 import categorySchema from "@/validations/categorySchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SaveIcon, XIcon } from "lucide-react";
@@ -15,7 +15,7 @@ type FormValuesType = z.infer<typeof categorySchema>;
 
 export const NewCategoryModal = () => {
   const { category, clearCategory, toggleNewCategoryModal, updateCategories } =
-    useCategoryStore();
+    categoryStore();
   const { createCategory, updateCategory } = useCategories();
 
   const [loading, setLoading] = useState<boolean>(false);

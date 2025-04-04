@@ -2,13 +2,13 @@
 
 import { LoadingSpinner } from "@/components/UI";
 import { useSuppliers } from "@/hooks/useSuppliers";
-import { useSupplierStore } from "@/store";
+import { supplierStore } from "@/store";
 import { EllipsisIcon } from "lucide-react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
 export const GetSupplierListButton = () => {
-  const { setSupplierList } = useSupplierStore();
+  const { setSupplierList } = supplierStore();
   const { getSupplierList } = useSuppliers();
   const [loading, setLoading] = useState<boolean>(false);
 

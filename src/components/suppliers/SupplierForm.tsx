@@ -1,6 +1,6 @@
 "use client";
 
-import { useSupplierStore } from "@/store";
+import { supplierStore } from "@/store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -12,7 +12,7 @@ import { useSuppliers } from "@/hooks/useSuppliers";
 import { toast } from "react-toastify";
 
 export const SupplierForm = () => {
-  const { supplier, clearSupplier, updateSuppliers } = useSupplierStore();
+  const { supplier, clearSupplier, updateSuppliers } = supplierStore();
 
   const [loading, setLoading] = useState<boolean>(false);
 

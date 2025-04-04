@@ -1,7 +1,7 @@
 "use client";
 
 import { useCategories } from "@/hooks/useCategories";
-import { useCategoryStore } from "@/store";
+import { categoryStore } from "@/store";
 import { PencilIcon, TrashIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -22,7 +22,7 @@ export const CategoryContent = () => {
     toggleNewCategoryModal,
     setCategory,
     setDeleteCategoryModal, deleteCategoryModalOpen
-  } = useCategoryStore();
+  } = categoryStore();
 
   const handleEdit = (category: Category) => {
     setCategory(category);
@@ -116,15 +116,15 @@ export const CategoryContent = () => {
                     <td className="p-1">{category.Cat_name}</td>
                     <td className="p-1">
                       <button
-                        className="text-white rounded-full bg-blue-800 dark:bg-blue-900 w-7 h-7 p-1 flex items-center justify-center"
+                        className={`w-8 h-6 p-1 bg-blue-500 hover:bg-blue-700 text-white rounded  shadow-md transition-colors duration-300 ease-linear  flex justify-center items-center`}
                         onClick={() => handleEdit(category)}
                       >
-                        <PencilIcon className={`w-4`} />
+                        <PencilIcon className={`w-5 h-5`} />
                       </button>
                     </td>
                     <td className="p-1">
                       <button
-                        className="text-white rounded-full bg-rose-600 dark:bg-rose-900 w-7 h-7 p-1 flex items-center justify-center"
+                        className="w-8 h-6 p-1 bg-rose-500 hover:bg-red-700 text-white rounded shadow-md transition-colors duration-300 ease-linear  flex justify-center items-center"
                         onClick={() =>
                           setDeleteCategoryModal({
                             isOpen: true,
@@ -132,7 +132,7 @@ export const CategoryContent = () => {
                           })
                         }
                       >
-                        <TrashIcon className={`w-4`} />
+                        <TrashIcon className={`w-5 h-5`} />
                       </button>
                     </td>
                   </tr>

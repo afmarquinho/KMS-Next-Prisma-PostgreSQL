@@ -2,15 +2,15 @@
 
 import { ItemCard } from "./items/ItemCard";
 import { DeleteProcurementButton } from "./DeleteProcurementButton";
-import { useItemStore, useProcurementStore } from "@/store";
+import { itemStore, procurementStore } from "@/store";
 import { ProcessProcurementButton } from "./ProcessProcurementButton";
 import { DeleteItemModal } from "./items/DeleteItemModal";
 import { DeleteProcurementModal } from "./DeleteProcurementModal";
 import { ProcessProcurementModal } from "./ProcessProcurementModal";
 
 export const ItemsGrid = () => {
-  const { items, deleteItemModalOpen } = useItemStore();
-  const { procurementDetails, deleteProcurementModalOpen, processProcurementModalOpen} = useProcurementStore();
+  const { items, deleteItemModalOpen } = itemStore();
+  const { procurementDetails, deleteProcurementModalOpen, processProcurementModalOpen} = procurementStore();
 
   if (!items || !procurementDetails) return;
   return (

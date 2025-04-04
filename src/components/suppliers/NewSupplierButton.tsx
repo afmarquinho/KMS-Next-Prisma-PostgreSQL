@@ -1,10 +1,10 @@
 "use client";
 
-import { useSupplierStore } from "@/store";
+import { supplierStore } from "@/store";
 import { BaggageClaimIcon } from "lucide-react";
 
 export const NewSupplierButton = () => {
-  const { toggleCurrentView, currentView, supplier } = useSupplierStore();
+  const { toggleCurrentView, currentView, supplier } = supplierStore();
 
   const handleView = () => {
     toggleCurrentView("form");

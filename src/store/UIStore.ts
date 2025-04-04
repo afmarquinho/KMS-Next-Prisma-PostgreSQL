@@ -11,7 +11,7 @@ type Actions = {
   setSidebarCollapsed: () => void;
 };
 
-export const useUIStore = create(
+export const UIStore = create(
   persist<States & Actions>(
     (set, get) => ({
       isDark: false,

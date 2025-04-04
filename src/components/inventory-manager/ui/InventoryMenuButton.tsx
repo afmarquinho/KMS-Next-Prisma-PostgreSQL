@@ -1,4 +1,4 @@
-import { useInventoryStore } from "@/store";
+import { inventoryStore } from "@/store";
 import { ArchiveIcon, PackageOpenIcon, TruckIcon } from "lucide-react";
 
 type Props = {
@@ -19,7 +19,7 @@ export const InventoryMenuButton = ({ label }: Props) => {
     procurementModalOpen,
     inventoryModalOpen,
     referenceModalOpen
-  } = useInventoryStore();
+  } = inventoryStore();
 
   // Configuración de modales y estados
   const modalConfig = {

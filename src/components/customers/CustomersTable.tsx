@@ -2,7 +2,7 @@
 
 import { Customer } from "@prisma/client";
 import { FilePenLineIcon, SearchIcon } from "lucide-react";
-import { useCustomerStore } from "@/store";
+import { customerStore } from "@/store";
 import { GetCustomersButton } from "./GetCustomersButton";
 import { useCustomers } from "@/hooks";
 import { toast } from "react-toastify";
@@ -15,7 +15,7 @@ export const CustomersTable = () => {
     setDetailManager,
     setLoadingdetails,
     setCustomerDetails,
-  } = useCustomerStore();
+  } = customerStore();
 
   const { getCustomerById } = useCustomers();
 
@@ -91,7 +91,7 @@ export const CustomersTable = () => {
                 <td className={`py-2 px-1`}>
                   {/* //*Watch button */}
                   <button
-                    className={`bg-gradient-to-b from-rose-500 to-rose-700 hover:from-red-800 hover:to-red-800 transition-colors duration-300 ease-linear rounded-full w-8 h-6 p-1 flex justify-center items-center shadow`}
+                    className="w-8 h-6 p-1 bg-rose-500 hover:bg-red-700 text-white rounded shadow-md transition-colors duration-300 ease-linear  flex justify-center items-center"
                     onClick={() => handleView(customer.Cust_id)}
                   >
                     <SearchIcon className={`text-white w-5`} />
@@ -100,7 +100,7 @@ export const CustomersTable = () => {
                 <td className={`py-2 px-1`}>
                   {/* //*Edit button */}
                   <button
-                    className={`bg-gradient-to-b from-indigo-500 to-indigo-700 hover:from-blue-800 hover:to-blue-800 transition-colors duration-300 ease-linear w-8 h-6 p-1 flex justify-center items-center shadow-md rounded`}
+                    className={`w-8 h-6 p-1 bg-blue-500 hover:bg-blue-700 text-white rounded  shadow-md transition-colors duration-300 ease-linear  flex justify-center items-center`}
                     onClick={() => handleEdit(customer)}
                   >
                     <FilePenLineIcon className={`text-white w-5`} />

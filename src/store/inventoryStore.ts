@@ -38,7 +38,7 @@ type Actions = {
 };
 
 // Crear el store
-export const useInventoryStore = create<States & Actions>((set, get) => ({
+export const inventoryStore = create<States & Actions>((set, get) => ({
   // Estados iniciales
   processedProcurement: null,
 

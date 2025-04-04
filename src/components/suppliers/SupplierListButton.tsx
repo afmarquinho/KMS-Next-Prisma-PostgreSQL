@@ -1,10 +1,10 @@
 "use client";
 
-import { useSupplierStore } from "@/store";
+import { supplierStore } from "@/store";
 import { ListCheckIcon } from "lucide-react";
 
 export const SupplierListButton = () => {
-  const { currentView, toggleCurrentView, clearSupplier } = useSupplierStore();
+  const { currentView, toggleCurrentView, clearSupplier } = supplierStore();
 
   const handleView = () => {
     toggleCurrentView("list");

@@ -3,12 +3,12 @@
 import { RefreshCcw, SlidersHorizontalIcon, UserSearchIcon } from "lucide-react";
 import { useState } from "react";
 import { LoadingSpinner } from "../UI/LoadingSpinner";
-import { useUserStore } from "@/store";
+import { userStore } from "@/store";
 import { useUsers } from "@/hooks";
 import { toast } from "react-toastify";
 
 export const GetUsersButton = () => {
-  const { users, setUsers } = useUserStore();
+  const { users, setUsers } = userStore();
   const [loading, setLoading] = useState<boolean>(false);
   const { getAllUsers } = useUsers();
 

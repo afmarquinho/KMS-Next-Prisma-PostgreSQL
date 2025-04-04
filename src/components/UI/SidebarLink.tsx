@@ -1,6 +1,6 @@
 "use client";
 
-import { useUIStore } from "@/store/UIStore";
+import { UIStore } from "@/store/UIStore";
 import { LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -20,7 +20,7 @@ export const SidebarLink = ({
 }: Props) => {
   const pathname = usePathname();
   const isActive = pathname === href || pathname.startsWith(href);
-  const { isSidebarCollapsed } = useUIStore();
+  const { isSidebarCollapsed } = UIStore();
 
   return (
     <Link

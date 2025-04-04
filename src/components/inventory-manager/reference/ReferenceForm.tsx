@@ -4,7 +4,7 @@ import { GetCategoryListButton } from "@/components/procurements";
 import { LoadingSpinner } from "@/components/UI";
 import { useReferences } from "@/hooks";
 import { measurementUnits } from "@/seed/data";
-import { useCategoryStore, useReferenceStore } from "@/store";
+import { categoryStore, referenceStore } from "@/store";
 import { productSchema } from "@/validations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
@@ -15,10 +15,10 @@ import { z } from "zod";
 type FormValuesType = z.infer<typeof productSchema>;
 
 export const ReferenceForm = () => {
-  const { categories } = useCategoryStore();
+  const { categories } = categoryStore();
   const [loading, setLoading] = useState<boolean>(false);
   const { createNewReference } = useReferences();
-  const { updateReferenceList } = useReferenceStore();
+  const { updateReferenceList } = referenceStore();
 
   const {
     register,

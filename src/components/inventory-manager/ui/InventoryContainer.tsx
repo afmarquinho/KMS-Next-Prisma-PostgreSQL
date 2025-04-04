@@ -1,6 +1,6 @@
 "use client";
 
-import { useInventoryStore } from "@/store";
+import { inventoryStore } from "@/store";
 import { InventoryContent } from "../inventory/InventoryContent";
 import { ProcurementContent } from "../procurement/ProcurementContent";
 import { ReferenceContent } from "../inventory/ReferenceContent";
@@ -11,7 +11,7 @@ export const InventoryContainer = () => {
     procurementModalOpen,
     inventoryModalOpen,
     referenceModalOpen
-  } = useInventoryStore();
+  } = inventoryStore();
 
   return (
     <>

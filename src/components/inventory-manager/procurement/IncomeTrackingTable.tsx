@@ -1,7 +1,7 @@
 "use client";
 
 import { InvItemType } from "@/interface";
-import { useInventoryStore } from "@/store";
+import { inventoryStore } from "@/store";
 import { LogInIcon } from "lucide-react";
 import { useState } from "react";
 import { AddProductModal } from "./AddProductModal";
@@ -12,7 +12,7 @@ type Props = {
 
 export const IncomeTrackingTable = ({ items }: Props) => {
   
-  const { productModalOpen, toggleProductModal } = useInventoryStore();
+  const { productModalOpen, toggleProductModal } = inventoryStore();
   const [itemQtyRemaining, setItemQtyRemaining] = useState<number>(0);
 
   const [product, setProduct] = useState<InvItemType | null>(null);

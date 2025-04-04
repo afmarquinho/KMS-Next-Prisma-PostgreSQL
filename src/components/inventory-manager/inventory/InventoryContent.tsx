@@ -9,14 +9,14 @@ import {
   GetCategoryListButton,
   GetSupplierListButton,
 } from "@/components/procurements";
-import { useCategoryStore, useInventoryStore, useSupplierStore } from "@/store";
+import { categoryStore, inventoryStore, supplierStore } from "@/store";
 import { Pagination } from "./Pagination";
 import { InventoryListTable } from "./InventoryListTable";
 
 export const InventoryContent = () => {
   const { fetchProducts } = useInventory();
-  const { categories } = useCategoryStore();
-  const { supplierList } = useSupplierStore();
+  const { categories } = categoryStore();
+  const { supplierList } = supplierStore();
   const {
     inventoryList,
     setInventoryList,
@@ -28,7 +28,7 @@ export const InventoryContent = () => {
     setPageSize,
     hasSearched,
     setHasSearched,
-  } = useInventoryStore();
+  } = inventoryStore();
 
   const [loading, setLoading] = useState<boolean>(false);
 

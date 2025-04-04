@@ -9,11 +9,11 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { LoadingSpinner } from "../UI/LoadingSpinner";
 import { useCustomers } from "@/hooks";
-import { useCustomerStore } from "@/store";
+import { customerStore } from "@/store";
 
 export const GetCustomersButton = () => {
   const { getAllCustomers } = useCustomers();
-  const { setCustomers, customers } = useCustomerStore();
+  const { setCustomers, customers } = customerStore();
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleGetCustomers = async () => {

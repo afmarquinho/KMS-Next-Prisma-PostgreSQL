@@ -10,7 +10,7 @@ type Actions = {
 };
 
 // Crear el store
-export const useProductStore = create<States & Actions>((set) => ({
+export const productStore = create<States & Actions>((set) => ({
   productList: null,
 
   setProductList: (productList) => {

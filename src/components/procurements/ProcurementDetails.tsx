@@ -1,6 +1,6 @@
 "use client";
 
-import { useProcurementStore } from "@/store/procurementStore";
+import { procurementStore } from "@/store/procurementStore";
 import { LoadingSpinner2, SectionTitle } from "../UI";
 import { formatISOToDate, formatToCurrency } from "@/utils";
 import { LockIcon, LockOpenIcon } from "lucide-react";
@@ -8,11 +8,11 @@ import { AddItemButton } from "./items/AddItemButton";
 import { BackButtonProcurement } from "./BackButtonProcurement";
 import { ItemsGrid } from "./ItemsGrid";
 import { ItemForm } from "./items/ItemForm";
-import { useItemStore } from "@/store";
+import { itemStore } from "@/store";
 
 export const ProcurementDetails = () => {
-  const { procurementDetails, loadingDetails } = useProcurementStore();
-  const { itemModalOpen } = useItemStore();
+  const { procurementDetails, loadingDetails } = procurementStore();
+  const { itemModalOpen } = itemStore();
 
   if (loadingDetails) {
     return (

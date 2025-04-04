@@ -1,10 +1,10 @@
 "use client";
 
-import { useUserStore } from "@/store";
+import { userStore } from "@/store";
 import { UsersRound } from "lucide-react";
 
 export const UserListButton = () => {
-  const { toggleCurrentView, currentView, clearUser } = useUserStore();
+  const { toggleCurrentView, currentView, clearUser } = userStore();
 
   const handleView = () => {
     toggleCurrentView("list");

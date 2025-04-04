@@ -1,14 +1,14 @@
 "use client";
 
 import { Power, PowerOff, ShieldMinus, User } from "lucide-react";
-import { useUserStore } from "@/store/userStore";
+import { userStore } from "@/store/userStore";
 import { BackButtonUser } from "./BackButtonUser";
 import { ActiveUserModal } from "./ActiveUserModal";
 
 
 //TODO: ACTULIZAR CONTRASEÑA INCLUIDO EL HASHEO
 export const UserDetails = () => {
-  const { userDetails, toggleActiveUserModal, activeUserModal } = useUserStore();
+  const { userDetails, toggleActiveUserModal, activeUserModal } = userStore();
 
   if (!userDetails) {
     return (

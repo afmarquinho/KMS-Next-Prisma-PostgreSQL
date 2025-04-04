@@ -1,6 +1,6 @@
 "use client";
 
-import { useSupplierStore } from "@/store";
+import { supplierStore } from "@/store";
 import { PowerIcon, PowerOffIcon } from "lucide-react";
 import { LoadingSpinner2 } from "../UI";
 import { BackButtonSupplier } from "./BackButtonSupplier";
@@ -12,7 +12,7 @@ export const SupplierDetails = () => {
     loadingDetails,
     isActiveModalOpen,
     toggleActiveModal,
-  } = useSupplierStore();
+  } = supplierStore();
 
   if (loadingDetails) {
     return (

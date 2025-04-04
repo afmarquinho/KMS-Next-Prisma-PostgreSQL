@@ -10,7 +10,7 @@ type Actions = {
   updateReferenceList: (action: 'add' | 'update', reference: referenceListType) => void;
 };
 
-export const useReferenceStore = create<States & Actions>((set, get) => ({
+export const referenceStore = create<States & Actions>((set, get) => ({
   referenceList: [],
 
   setReferenceList: (referenceList) => {

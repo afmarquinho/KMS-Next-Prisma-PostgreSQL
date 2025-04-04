@@ -1,11 +1,11 @@
 "use client";
 
 import { Button } from "@/components/UI/Button";
-import { useItemStore } from "@/store";
+import { itemStore } from "@/store";
 import { PlusIcon } from "lucide-react";
 
 export const AddItemButton = () => {
-  const { toggleItemModal, clearItem } = useItemStore();
+  const { toggleItemModal, clearItem } = itemStore();
 
   const handleAddItem = () => {
     toggleItemModal();

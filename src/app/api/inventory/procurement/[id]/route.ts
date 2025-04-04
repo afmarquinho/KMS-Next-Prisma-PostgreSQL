@@ -36,29 +36,30 @@ export async function GET(req: NextRequest) {
         Item: {
           select: {
             Item_id: true,
-            
-            
             Item_qtyOrdered: true,
             Item_location: true,
             Item_qtyReceived: true,
-            
             Item_status: true,
-            Category: {
+            Product: {
               select: {
-                Cat_id: true,
-                Cat_name: true,
+                Category: {
+                  select: {
+                    Cat_id: true,
+                    Cat_name: true,
+                  },
+                },
               },
             },
           },
         },
         ProcurementNote: {
           orderBy: {
-            Note_createdAt: "desc",
+            createdAt: "desc",
           },
           select: {
             Note_id: true,
             Note_content: true,
-            Note_createdAt: true,
+            createdAt: true,
             User: {
               select: {
                 User_name: true,

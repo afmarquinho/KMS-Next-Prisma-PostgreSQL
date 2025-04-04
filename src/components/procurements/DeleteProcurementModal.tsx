@@ -4,7 +4,7 @@ import { TrashIcon, TriangleAlert, X } from "lucide-react";
 import { useState } from "react";
 import { LoadingSpinner } from "../UI/LoadingSpinner";
 import { toast } from "react-toastify";
-import { useProcurementStore } from "@/store";
+import { procurementStore } from "@/store";
 import { useProcurement } from "@/hooks/useProcurement";
 
 export const DeleteProcurementModal = () => {
@@ -14,7 +14,7 @@ export const DeleteProcurementModal = () => {
     clearProId,
     setDetailManager,
     updateProcurements, procurementDetails
-  } = useProcurementStore();
+  } = procurementStore();
   const { deleteProcurement } = useProcurement();
   const [loading, setLoading] = useState<boolean>(false);
 

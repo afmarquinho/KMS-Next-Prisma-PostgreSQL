@@ -1,7 +1,7 @@
 "use client";
 
 import { useCustomers } from "@/hooks";
-import { useCustomerStore } from "@/store";
+import { customerStore } from "@/store";
 import customerSchema from "@/validations/customerSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
@@ -13,7 +13,7 @@ import { LoadingSpinner } from "../UI";
 type FormValuesType = z.infer<typeof customerSchema>;
 
 export const CustomerForm = () => {
-  const { customer, updateCustomers, clearCustomer } = useCustomerStore();
+  const { customer, updateCustomers, clearCustomer } = customerStore();
   const {createCustomer, updateCustomer} = useCustomers()
   
   const [loading, setLoading] = useState<boolean>(false);

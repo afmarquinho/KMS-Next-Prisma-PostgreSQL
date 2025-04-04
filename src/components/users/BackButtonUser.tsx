@@ -1,10 +1,10 @@
 "use client";
 
-import { useUserStore } from "@/store";
+import { userStore } from "@/store";
 import { Undo2Icon } from "lucide-react";
 
 export const BackButtonUser = () => {
-  const { clearUserDetails } = useUserStore();
+  const { clearUserDetails } = userStore();
 
   const closeUserView = () => {
     clearUserDetails();

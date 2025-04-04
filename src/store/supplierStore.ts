@@ -36,7 +36,7 @@ type Actions = {
   cleanSupplierList: () => void; //* Limpia el estado del supplierList.
 };
 
-export const useSupplierStore = create<States & Actions>((set, get) => ({
+export const supplierStore = create<States & Actions>((set, get) => ({
   suppliers: null,
   supplier: null,
   currentView: "list",

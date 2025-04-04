@@ -1,11 +1,11 @@
 "use client";
-import { useCustomerStore } from "@/store";
+import { customerStore } from "@/store";
 import { BackButtonCustomer } from "./BackButtonCustomer";
 import { ShoppingCartIcon } from "lucide-react";
 import { LoadingSpinner2 } from "../UI";
 
 export const CustomerDetails = () => {
-  const { customerDetails, loadingDetails } = useCustomerStore();
+  const { customerDetails, loadingDetails } = customerStore();
 
   if (loadingDetails) {
     return <div className={`flex items justify-center md:h-[450px]`}><LoadingSpinner2/></div>;
@@ -74,7 +74,7 @@ export const CustomerDetails = () => {
 
               <tr>
                 <th className={`italic`}>Editado por</th>
-                <td className={`p-3`}>{customerDetails?.Cust_userId}</td>
+                <td className={`p-3`}>{customerDetails?.createdBy}</td>
               </tr>
             </tbody>
           </table>

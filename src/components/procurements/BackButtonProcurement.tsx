@@ -1,9 +1,9 @@
-import { useProcurementStore } from "@/store";
+import { procurementStore } from "@/store";
 import { Undo2Icon } from "lucide-react";
 
 export const BackButtonProcurement = () => {
  
-    const { clearProcurement, setDetailManager } = useProcurementStore();
+    const { clearProcurement, setDetailManager } = procurementStore();
    
      const closeUserView = () => {
        clearProcurement();
