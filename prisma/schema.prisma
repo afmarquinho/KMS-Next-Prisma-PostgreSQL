@@ -112,8 +112,8 @@ model Supplier {
   Supp_active           Boolean  @default(true)
   Supp_registrationDate DateTime @default(now())
 
-  createdBy   Int
-  createdAt          DateTime @default(now())
+  createdBy Int
+  createdAt DateTime @default(now())
 
   User        User          @relation(fields: [createdBy], references: [User_id])
   Procurement Procurement[]
@@ -178,7 +178,7 @@ model Product {
   Prod_procurementEnabled Boolean @default(true) // Habilitado para compras
   Prod_brand              String?
   Prod_unitMeasure        String
-  Prod_rating           Int     @default(0)
+  Prod_rating             Decimal @default(0)
 
   createdBy Int
   createdAt DateTime @default(now())
