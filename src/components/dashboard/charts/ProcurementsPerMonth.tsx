@@ -1,21 +1,21 @@
 "use client";
 
-import { Pie, PieChart, ResponsiveContainer } from "recharts";
+import { Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import { ChartTitle } from "./ChartTitle";
 
 export const purchasesByMonth2024 = [
-  { month: "Enero", total: 12500 },
+  { month: "Enero", total: 1500 },
   { month: "Febrero", total: 9800 },
-  { month: "Marzo", total: 11000 },
+  { month: "Marzo", total: 8000 },
   { month: "Abril", total: 10300 },
   { month: "Mayo", total: 9400 },
   { month: "Junio", total: 8700 },
   { month: "Julio", total: 11200 },
-  { month: "Agosto", total: 10900 },
-  { month: "Septiembre", total: 12000 },
+  { month: "Agosto", total: 9900 },
+  { month: "Septiembre", total: 7000 },
   { month: "Octubre", total: 11800 },
   { month: "Noviembre", total: 12500 },
-  { month: "Diciembre", total: 13100 },
+  { month: "Diciembre", total: 18100 },
 ];
 
 export const ProcurementsPerMonth = () => {
@@ -35,6 +35,7 @@ export const ProcurementsPerMonth = () => {
               fill="#8884d8"
               label
             />
+            <Tooltip/>
           </PieChart>
         </ResponsiveContainer>
       </div>

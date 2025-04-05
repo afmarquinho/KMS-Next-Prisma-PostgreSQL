@@ -1,6 +1,7 @@
 import { InventoryByCategory } from "./InventoryByCategory";
 import MostRatedProducts from "./MostRatedProducts";
 import { ProcurementsPerMonth, } from "./ProcurementsPerMonth";
+import { ProcurementsPerQuarter } from "./ProcurementsPerQuarter";
 import { ProcurementsPerYear } from "./ProcurementsPerYear";
 
 export const ChartGrid = () => {
@@ -23,7 +24,10 @@ export const ChartGrid = () => {
         <ProcurementsPerMonth/>
       </div>
 
-      <div className={`bg-white dark:bg-slate-900 rounded shadow-md w-full h-`}>
+      <div className={`bg-white dark:bg-slate-900 rounded shadow-md w-full h-80 flex flex-col`}>
+        <ProcurementsPerQuarter/>
+      </div>
+      <div className={`bg-white dark:bg-slate-900 rounded shadow-md w-full h-80 flex flex-col`}>
         <ProcurementsPerYear/>
       </div>
 
