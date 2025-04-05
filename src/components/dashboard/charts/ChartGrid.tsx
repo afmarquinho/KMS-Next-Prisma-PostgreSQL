@@ -1,5 +1,5 @@
 import { InventoryByCategory } from "./InventoryByCategory";
-import MostRatedProducts from "./MostRatedProducts";
+import { MostRatedProducts } from "./MostRatedProducts";
 import { ProcurementsPerMonth, } from "./ProcurementsPerMonth";
 import { ProcurementsPerQuarter } from "./ProcurementsPerQuarter";
 import { ProcurementsPerYear } from "./ProcurementsPerYear";
