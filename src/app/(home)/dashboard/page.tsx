@@ -1,5 +1,5 @@
-
 import { CardGrid } from "@/components";
+import { ChartGrid } from "@/components/dashboard";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,7 +9,10 @@ export const metadata: Metadata = {
 
 const DashboardPage = () => {
   return (
-   <CardGrid/>
+    <>
+      <CardGrid />
+      <ChartGrid />
+    </>
   );
 };
 export default DashboardPage;
