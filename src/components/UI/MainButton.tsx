@@ -1,3 +1,4 @@
+
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   showIcon?: boolean;
@@ -15,9 +16,9 @@ export const MainButton: React.FC<ButtonProps> = ({
 
   const variants = {
     primary: "bg-indigo-900 dark:bg-teal-700 text-slate-200",
-    secondary: "bg-teal-600 dark:bg-slate-900 border-2 text-white dark:text-slate-200", //Color teal
-    tertiary:
-      "bg-white dark:bg-transparent text-slate-800 dark:text-slate-200",
+    secondary:
+      "bg-teal-600 dark:bg-slate-900 border-2 text-white dark:text-slate-200", //Color teal
+    tertiary: "bg-white dark:bg-transparent text-slate-800 dark:text-slate-200 hover:bg-teal-900 dark:hover:bg-slate-900 hover:text-slate-200",
   };
 
   return (

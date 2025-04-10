@@ -5,6 +5,13 @@ export async function GET() {
   try {
     const users = await prisma.user.findMany({
       orderBy: { User_surname: "asc" },
+      include:{
+        Departments:{
+          select:{
+            Dep_name: true,
+          }
+        }
+      }
     });
 
     return NextResponse.json(
@@ -27,7 +34,7 @@ export async function GET() {
       {
         ok: false,
         data: null,
-        message: error instanceof Error ? error.message : "Error desconocido.",
+        message: "Error desconocido.",
       },
       { status: 500 }
     );
@@ -122,6 +129,7 @@ export async function POST(req: NextRequest) {
         User_address,
         User_depId,
       },
+      
     });
 
     return NextResponse.json(

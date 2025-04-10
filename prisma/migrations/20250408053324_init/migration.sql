@@ -37,6 +37,7 @@ CREATE TABLE "Customer" (
     "Cust_habeasData" BOOLEAN NOT NULL DEFAULT true,
     "Cust_registrationDate" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "createdBy" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Customer_pkey" PRIMARY KEY ("Cust_id")
 );
@@ -54,6 +55,7 @@ CREATE TABLE "Supplier" (
     "Supp_active" BOOLEAN NOT NULL DEFAULT true,
     "Supp_registrationDate" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "createdBy" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Supplier_pkey" PRIMARY KEY ("Supp_id")
 );
@@ -78,6 +80,7 @@ CREATE TABLE "Procurement" (
     "Proc_close" BOOLEAN NOT NULL DEFAULT false,
     "Proc_processed" BOOLEAN NOT NULL DEFAULT false,
     "createdBy" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "Proc_suppId" INTEGER NOT NULL,
 
     CONSTRAINT "Procurement_pkey" PRIMARY KEY ("Proc_id")
@@ -109,6 +112,7 @@ CREATE TABLE "Product" (
     "Prod_procurementEnabled" BOOLEAN NOT NULL DEFAULT true,
     "Prod_brand" TEXT,
     "Prod_unitMeasure" TEXT NOT NULL,
+    "Prod_rating" DECIMAL(65,30) NOT NULL DEFAULT 0,
     "createdBy" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -151,7 +155,7 @@ CREATE TABLE "ProvisionRequests" (
     "Prov_quantity" INTEGER NOT NULL,
     "Prov_status" TEXT NOT NULL DEFAULT 'pending',
     "Prov_desc" TEXT NOT NULL,
-    "Prov_requestedBy" INTEGER NOT NULL,
+    "createdBy" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "ProvisionRequests_pkey" PRIMARY KEY ("Prov_id")
@@ -165,11 +169,11 @@ CREATE TABLE "StockMovement" (
     "Mov_reason" TEXT NOT NULL,
     "Mov_prodId" INTEGER NOT NULL,
     "Mov_dest" TEXT NOT NULL DEFAULT 'bodega',
-    "Mov_userId" INTEGER NOT NULL,
+    "createdBy" INTEGER NOT NULL,
     "Mov_procId" INTEGER,
     "Mov_saleId" INTEGER,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "InventoryInv_id" INTEGER,
+    "Mov_invId" INTEGER NOT NULL,
 
     CONSTRAINT "StockMovement_pkey" PRIMARY KEY ("Mov_id")
 );
@@ -362,7 +366,7 @@ ALTER TABLE "ProcurementNote" ADD CONSTRAINT "ProcurementNote_Note_procId_fkey" 
 ALTER TABLE "ProvisionRequests" ADD CONSTRAINT "ProvisionRequests_Prov_prodId_fkey" FOREIGN KEY ("Prov_prodId") REFERENCES "Product"("Prod_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "ProvisionRequests" ADD CONSTRAINT "ProvisionRequests_Prov_requestedBy_fkey" FOREIGN KEY ("Prov_requestedBy") REFERENCES "User"("User_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "ProvisionRequests" ADD CONSTRAINT "ProvisionRequests_createdBy_fkey" FOREIGN KEY ("createdBy") REFERENCES "User"("User_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "StockMovement" ADD CONSTRAINT "StockMovement_Mov_prodId_fkey" FOREIGN KEY ("Mov_prodId") REFERENCES "Product"("Prod_id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -374,10 +378,10 @@ ALTER TABLE "StockMovement" ADD CONSTRAINT "StockMovement_Mov_procId_fkey" FOREI
 ALTER TABLE "StockMovement" ADD CONSTRAINT "StockMovement_Mov_saleId_fkey" FOREIGN KEY ("Mov_saleId") REFERENCES "Sale"("Sale_id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "StockMovement" ADD CONSTRAINT "StockMovement_Mov_userId_fkey" FOREIGN KEY ("Mov_userId") REFERENCES "User"("User_id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "StockMovement" ADD CONSTRAINT "StockMovement_createdBy_fkey" FOREIGN KEY ("createdBy") REFERENCES "User"("User_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "StockMovement" ADD CONSTRAINT "StockMovement_InventoryInv_id_fkey" FOREIGN KEY ("InventoryInv_id") REFERENCES "Inventory"("Inv_id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "StockMovement" ADD CONSTRAINT "StockMovement_Mov_invId_fkey" FOREIGN KEY ("Mov_invId") REFERENCES "Inventory"("Inv_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "InventoryRequests" ADD CONSTRAINT "InventoryRequests_Req_depId_fkey" FOREIGN KEY ("Req_depId") REFERENCES "Departments"("Dep_id") ON DELETE RESTRICT ON UPDATE CASCADE;

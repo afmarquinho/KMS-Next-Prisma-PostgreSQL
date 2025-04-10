@@ -1,21 +1,20 @@
-import { CurrentView } from "@/interface";
-import { User } from "@prisma/client";
+import { CurrentView, UserType } from "@/interface";
 import { create } from "zustand";
 
 type States = {
-  user: User | null; //* Usuario para visualizar o llenar el formulario para editar.
-  users: User[] | null; //*Almacena todos los usuarios que vienen que la bd para visulizar en la página principal.
-  userDetails: User | null; //* Estado para visualizar un usuario en detalle.
+  user: UserType | null; //* Usuario para visualizar o llenar el formulario para editar.
+  users: UserType[] | null; //*Almacena todos los usuarios que vienen que la bd para visulizar en la página principal.
+  userDetails: UserType | null; //* Estado para visualizar un usuario en detalle.
   currentView: CurrentView; //* El tipo de vista actual, puede ser 'list' o 'form'.
   activeUserModal: boolean; //* Modal para activar o desactivar usuario.
 };
 
 type Actions = {
-  setUser: (user: User) => void; //* Llena el usuario.
+  setUser: (user: UserType) => void; //* Llena el usuario.
   clearUser: () => void; //* Vacía el usuario.
-  setUsers: (users: User[] | null) => void; //* Llena los usuarios.
-  updateUsers: (action: string, user: User) => void; //* Actualiza (crea o edita) el array de usuarios.
-  setUserDetails: (userDetails: User) => void; //* Estado para mostrar el usuario en detalle.
+  setUsers: (users: UserType[] | null) => void; //* Llena los usuarios.
+  updateUsers: (action: string, user: UserType) => void; //* Actualiza (crea o edita) el array de usuarios.
+  setUserDetails: (userDetails: UserType) => void; //* Estado para mostrar el usuario en detalle.
   clearUserDetails: () => void; //* Estado para limpiar el detalle del usuario.
 
   toggleCurrentView: (view: CurrentView) => void; //* Alterna entre 'list' y 'form'.

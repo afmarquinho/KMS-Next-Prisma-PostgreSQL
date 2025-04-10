@@ -1,3 +1,0 @@
--- AlterTable
-ALTER TABLE "Product" ALTER COLUMN "Prod_rating" SET DEFAULT 0,
-ALTER COLUMN "Prod_rating" SET DATA TYPE DECIMAL(65,30);

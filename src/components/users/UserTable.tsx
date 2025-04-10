@@ -3,10 +3,10 @@
 import { userStore } from "@/store/userStore";
 import { FilePenLineIcon, SearchIcon } from "lucide-react";
 
-import { User } from "@prisma/client";
 // import { useEffect } from "react";
 // import { UserModal } from "./UserModal";
 import { GetUsersButton } from "./GetUsersButton";
+import { UserType } from "@/interface";
 
 // import { userStore } from "../../utils/userStore";
 // import { EditUserModal } from "./EditUserModal";
@@ -18,12 +18,12 @@ export const UsersTable = () => {
   //   const { users, editUserModalOpen, setEditUserModal, setUser, cleanUser } =
   //     userStore();
 
-  const handleEdit = (user: User) => {
+  const handleEdit = (user: UserType) => {
     setUser(user);
     toggleCurrentView("form");
   };
 
-  const handleViewUser = (user: User) => {
+  const handleViewUser = (user: UserType) => {
     setUserDetails(user);
     // router.push(
     //   `/users/user-details/${user.User_name}-${user.User_code}-${user.User_surname}`
@@ -36,7 +36,7 @@ export const UsersTable = () => {
 
   if (!users || users.length === 0) {
     const message = !users
-      ? 'No hay Usuarios para visualizar, presiona el botón "Mostrar Usuarios".'
+      ? 'No hay Usuarios para visualizar, presiona el botón "Ver todos".'
       : "No hay usuarios en la base de datos.";
 
     return (
@@ -71,7 +71,7 @@ export const UsersTable = () => {
           <tbody className={`px-10`}>
             {users.map((user, i) => (
               <tr
-                key={user.User_code}
+                key={user.User_id}
                 className={`dark:border-slate-600 hover:bg-gray-300 dark:hover:bg-teal-900 py-5 ${
                   i % 2 === 0 && "bg-slate-100 dark:bg-slate-800"
                 }`}

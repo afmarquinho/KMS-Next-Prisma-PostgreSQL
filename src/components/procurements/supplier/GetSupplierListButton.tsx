@@ -31,7 +31,7 @@ export const GetSupplierListButton = () => {
     <button
       type="button"
       onClick={handleGet}
-      className={`bg-gradient-to-b from-slate-300 to-slate-500 hover:from-slate-500 hover:to-slate-500 w-7 h-6 flex justify-center items-center rounded`}
+      className={`bg-gradient-to-b from-slate-300 to-slate-400 hover:to-slate-400 hover:from-slate-400 text-slate-900 rounded p-2 w-10 h-full flex items-center justify-center`}
     >
       {loading ? <LoadingSpinner /> : <EllipsisIcon className={`w-5`} />}
     </button>

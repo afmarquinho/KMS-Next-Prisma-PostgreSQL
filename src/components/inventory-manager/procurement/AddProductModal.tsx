@@ -93,66 +93,95 @@ export const AddProductModal = ({
       onClick={handleCancel}
     >
       <div
-        className={`bg-white dark:bg-slate-600 p-5 w-11/12 max-w-[300px] shadow`}
+        className={`bg-white dark:bg-slate-600 w-11/12 max-w-[300px] shadow rounded overflow-hidden`}
         onClick={(e) => e.stopPropagation()}
       >
-        <h3 className={`italic font-bold text-center mb-2`}>
+        <h3
+          className={`font-semibold text-center bg-green-600 text-white py-3 px-2`}
+        >
           Ingresar: <span>{product?.Product.Prod_name}</span> al Inventario
         </h3>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className={`p-5`}>
           <p>
             Referencia:{" "}
             <span className={`font-medium`}>{product?.Product.Prod_ref}</span>
           </p>
 
-          <label className={`flex gap-2 justify-start items-center mb-2`}>
+          {errors.Inv_qty && (
+            <div className={`text-xs text-red-600 my-0 font-medium`}>
+              {errors.Inv_qty.message}
+            </div>
+          )}
+          <label
+            className={`flex gap-2 justify-start items-center mb-2 w-full`}
+          >
             <span className={`w-20 italic`}>Cantidad:</span>
-            {errors.Inv_qty && (
-              <div className={`text-xs text-red-600 my-0 font-medium`}>
-                {errors.Inv_qty.message}
-              </div>
-            )}
             <input
               type="number"
-              className={`bg-slate-300 dark:bg-slate-800 p-2 focus:outline-none text-base rounded h-8 flex-1 max-w-40`}
+              className={`bg-slate-300 dark:bg-slate-800 p-2 focus:outline-none text-base rounded h-8 flex-1 max-w-40 w-full ${errors.Inv_qty ? "border-2 border-red-500": ""}`}
+              required
               {...register("Inv_qty", { valueAsNumber: true })}
             />
           </label>
 
-          <label className={`flex gap-2 justify-start items-center mb-2`}>
+          {errors.Inv_batch && (
+            <div className={`text-xs text-red-600 my-0 font-medium`}>
+              {errors.Inv_batch.message}
+            </div>
+          )}
+          <label
+            className={`flex gap-2 justify-start items-center mb-2 w-full`}
+          >
             <span className={`w-20 italic`}>Lote:</span>
-            {errors.Inv_batch && (
-              <div className={`text-xs text-red-600 my-0 font-medium`}>
-                {errors.Inv_batch.message}
-              </div>
-            )}
             <input
               type="text"
-              className={`bg-slate-300 dark:bg-slate-800 p-2 focus:outline-none text-base rounded h-8 flex-1 max-w-40 uppercase`}
+              className={`bg-slate-300 dark:bg-slate-800 p-2 focus:outline-none text-base rounded h-8 flex-1 max-w-40 uppercase  ${errors.Inv_batch ? "border-2 border-red-500": ""}`}
               {...register("Inv_batch")}
             />
           </label>
 
+          {errors.Inv_batchDueDate && (
+            <div className={`text-xs text-red-600 my-0 font-medium`}>
+              {errors.Inv_batchDueDate.message}
+            </div>
+          )}
           <label className={`flex gap-2 justify-start items-center mb-2`}>
             <span className={`w-20 italic`}>Fecha vencimiento lote:</span>
-            {errors.Inv_batchDueDate && (
-              <div className={`text-xs text-red-600 my-0 font-medium`}>
-                {errors.Inv_batchDueDate.message}
-              </div>
-            )}
             <input
               type="date"
-              className={`bg-slate-300 dark:bg-slate-800 p-2 focus:outline-none rounded h-8 flex-1 max-w-40 uppercase`}
+              className={`bg-slate-300 dark:bg-slate-800 p-2 focus:outline-none rounded h-8 flex-1 max-w-40 uppercase ${errors.Inv_batchDueDate ? "border-2 border-red-500": ""}`}
               {...register("Inv_batchDueDate", { valueAsDate: true })}
+              required
             />
           </label>
+          <label className={`flex gap-2 justify-start items-center mb-2 `}>
+            <span className={`w-20 italic`}>Razón:</span>
+            <select
+              className={`outline-none bg-slate-300 dark:bg-slate-800 h-8 w-40 rounded`}
+              {...register("Mov_reason")}
+            >
+              <option value="compra">-- Seleccione --</option>
+              <option value="compra">Compra</option>
+              <option value="reposición">Reposición</option>
+              <option value="devolución">Devolucón</option>
+              <option value="ajuste">Ajuste</option>
+            </select>
+          </label>
 
-          <div className={`flex justify-end gap-4 mt-4`}>
-            <button type="button" onClick={handleCancel}>
+          <div className={`flex justify-between gap-4 mt-4`}>
+            <button
+              type="button"
+              onClick={handleCancel}
+              className={`bg-rose-600 w-24 h-8 text-white rounded `}
+            >
               <BanIcon className="w-5 h-5 inline-block mr-1" />
               Cancelar
             </button>
-            <button type="submit" disabled={loading}>
+            <button
+              type="submit"
+              disabled={loading}
+              className={`bg-green-600 w-24 h-8 text-white rounded flex justify-center items-center`}
+            >
               {loading ? (
                 <LoadingSpinner />
               ) : (

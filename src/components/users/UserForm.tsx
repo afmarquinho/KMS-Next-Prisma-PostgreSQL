@@ -1,6 +1,6 @@
 "use client";
 
-import { userStore } from "@/store";
+import { departmentStore, userStore } from "@/store";
 import { z } from "zod";
 import { LoadingSpinner } from "../UI/LoadingSpinner";
 import { useState } from "react";
@@ -8,8 +8,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { userSchema } from "@/validations";
 import { useUsers } from "@/hooks";
-import { EllipsisIcon } from "lucide-react";
 import { toast } from "react-toastify";
+import { GetDepartmentListButton } from "./GetDepartmentListButton";
 
 type FormValuesType = z.infer<typeof userSchema>;
 
@@ -17,6 +17,7 @@ export const UserForm = () => {
   const { user, clearUser, updateUsers } = userStore();
   const [loading, setLoading] = useState<boolean>(false);
   const { createUser, updateUser } = useUsers();
+  const { departments } = departmentStore();
 
   const {
     register,
@@ -209,30 +210,34 @@ export const UserForm = () => {
           </div>
 
           <div className={`flex flex-col md:flex-row w-full gap-4`}>
-            <label className={`flex flex-col w-full md:w-1/2`}>
-              Departamento/Área
+            <div className={`flex flex-col w-full md:w-1/2`}>
+              <label>Departamento/Área</label>
               {errors.User_depId && (
                 <div className={`text-xs text-red-600 my-0 font-medium`}>
                   {errors.User_depId.message}
                 </div>
               )}
               <div className={`flex gap-2`}>
-                <button
-                  className={`bg-gradient-to-b from-slate-300 to-slate-400 hover:to-slate-400 hover:from-slate-400 text-slate-900 rounded p-1 w-10 h-10 flex items-center justify-center`}
-                >
-                  <EllipsisIcon />
-                </button>
+                <GetDepartmentListButton />
 
-                <input
-                  type="number"
+                <select
                   className={`bg-slate-300 dark:bg-slate-700 p-2 focus:outline-none text-base rounded-md flex-1`}
                   {...register("User_depId", { valueAsNumber: true })}
-                  defaultValue={1}
-                  readOnly
-                  // readOnly={loading}
-                />
+                  defaultValue={user ? user.User_depId : ""}
+                >
+                  <option value={`${user ? user.User_depId : ""}`}>
+                    {user ? user.Departments.Dep_name : "-- Seleccione --"}
+                  </option>
+
+                  <option value="">-- Seleccione --</option>
+                  {departments?.map((dep) => (
+                    <option key={dep.Dep_id} value={dep.Dep_id}>
+                      {dep.Dep_name}
+                    </option>
+                  ))}
+                </select>
               </div>
-            </label>
+            </div>
             <label className={`flex flex-col w-full md:w-1/2`}>
               Email
               {errors.User_email && (
@@ -285,6 +290,7 @@ export const UserForm = () => {
                 {...register("User_passwordConfirm")}
                 defaultValue={user ? user.User_password : ""}
                 readOnly={user !== null}
+                autoComplete="off"
               />
             </label>
           </div>

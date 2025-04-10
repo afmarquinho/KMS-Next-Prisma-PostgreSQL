@@ -6,11 +6,11 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (
   req: NextRequest,
-  { params }: { params: Promise <{ id: string }> }
+  { params }: { params: Promise<{ id: string }> }
 ) => {
   try {
     const { id } = await params;
-    
+
     const productId = parseInt(id, 10);
 
     if (isNaN(productId)) {
@@ -38,8 +38,7 @@ export const POST = async (
       );
     }
 
-    console.log("Product id", productId);
-    console.log("Inventory", body);
+
 
     // TODO: Obtener userId dinámicamente
     const createdBy: number = 3;
@@ -75,7 +74,7 @@ export const POST = async (
 
     const result = await prisma.$transaction(async (tx) => {
       // Crear producto en el inventario
-      await tx.inventory.create({
+      const invId = await tx.inventory.create({
         data: {
           Inv_prodId: productId,
           Inv_stock: body.Inv_stock,
@@ -83,6 +82,9 @@ export const POST = async (
           Inv_batch: body.Inv_batch,
           Inv_batchDueDate: body.Inv_batchDueDate,
           createdBy,
+        },
+        select: {
+          Inv_id: true,
         },
       });
 
@@ -95,6 +97,7 @@ export const POST = async (
           Mov_prodId: productId,
           createdBy,
           Mov_procId: item.Item_procId,
+          Mov_invId: invId.Inv_id
         },
       });
 

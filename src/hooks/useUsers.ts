@@ -3,6 +3,7 @@ import { UserPost } from "@/interface";
 import { User } from "@prisma/client";
 import axios from "axios";
 
+
 const API = axios.create({ baseURL: "/api/users" });
 
 export const useUsers = () => {
@@ -73,7 +74,7 @@ export const useUsers = () => {
       return { ok: false, data: null, message: errorMessage };
     }
   };
-  
+
   const activeUser = async (userDetails: User) => {
     try {
       const { data } = await API.put(`/${userDetails.User_id}`, {

@@ -113,8 +113,9 @@ export const ProcurementForm = () => {
                 {errors.Proc_suppId.message}
               </div>
             )}
-            <div className={`flex gap-1`}>
+            <div className={`flex gap-2`}>
               <GetSupplierListButton />
+
               <select
                 className="bg-slate-300 dark:bg-slate-700 p-2 focus:outline-none text-base rounded flex-1"
                 {...register("Proc_suppId", { valueAsNumber: true })}

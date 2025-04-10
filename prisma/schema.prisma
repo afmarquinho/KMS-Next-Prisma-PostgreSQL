@@ -254,13 +254,13 @@ model StockMovement {
   Mov_procId Int? // ID relacionado (e.g., Sale_id o Purchase_id)
   Mov_saleId Int? // ID relacionado (e.g., Sale_id o Purchase_id)
   createdAt  DateTime @default(now())
+  Mov_invId Int
 
   Product         Product      @relation(fields: [Mov_prodId], references: [Prod_id])
   Procurement     Procurement? @relation(fields: [Mov_procId], references: [Proc_id])
   Sale            Sale?        @relation(fields: [Mov_saleId], references: [Sale_id])
   User            User         @relation(fields: [createdBy], references: [User_id])
-  Inventory       Inventory?   @relation(fields: [InventoryInv_id], references: [Inv_id])
-  InventoryInv_id Int?
+  Inventory       Inventory   @relation(fields: [Mov_invId], references: [Inv_id])
 
   @@index([Mov_prodId, Mov_dest, Mov_type])
 }

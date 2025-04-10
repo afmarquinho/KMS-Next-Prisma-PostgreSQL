@@ -5,7 +5,7 @@ import {
   ShoppingCartIcon,
   SlidersHorizontalIcon,
 } from "lucide-react";
-import { LoadingSpinner } from "../UI";
+import { LoadingSpinner, MainButton } from "../UI";
 import { useState } from "react";
 import { useProcurement } from "@/hooks/useProcurement";
 import { toast } from "react-toastify";
@@ -39,8 +39,9 @@ export const GetProcurementButton = () => {
       >
         <SlidersHorizontalIcon className={`w-5`} />
       </button>
-      <button
-        className={`bg-white dark:bg-transparent hover:bg-teal-900 hover:dark:bg-slate-900 border-white dark:border-slate-300 hover:text-slate-200 w-28 md:w-32 md:px-0 h-10 flex justify-center items-center gap-1 text-xs shadow-md p-2 border-2 transition-all duration-300 rounded`}
+
+      <MainButton
+        variant="tertiary"
         onClick={handleGetCustomers}
         disabled={loading || procurements?.length === 0}
       >
@@ -62,7 +63,7 @@ export const GetProcurementButton = () => {
               : "Ver todos"}
           </>
         )}
-      </button>
+      </MainButton>
     </div>
   );
 };
